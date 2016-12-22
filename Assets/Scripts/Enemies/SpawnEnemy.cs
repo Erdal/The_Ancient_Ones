@@ -47,8 +47,24 @@ public class SpawnEnemy : MonoBehaviour
                 lastSpawnTime = Time.time; //Your about to spawn an emeny now so make it equell the current time
                 GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemyPrefab); //creating new enewmy for this wave
                 newEnemy.GetComponent<MoveEnemies>().waypoints = waypoints;
+                Animator anim = newEnemy.transform.GetChild(0).GetComponent<Animator>();
+                anim.SetBool("Walk", true);
                 enemiesSpawned++;
             }
+            //You check the number of enemies on screen. If there are none and it was the last enemy in the wave you spawn the next wave
+            if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemies") == null)
+            {
+                gameManager.Wave++; //Increase wave
+                //gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f); //Give 10 of gold left as reward
+                enemiesSpawned = 0; //Set back to 0
+                lastSpawnTime = Time.time; //Set to current time
+            }
+        }
+        else //Upon beating the last wave this runs the game won animation.
+        {
+            //gameManager.gameOver = true;
+            //GameObject gameOverText = GameObject.FindGameObjectWithTag("GameWon");
+            //gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
         }
     }
 }

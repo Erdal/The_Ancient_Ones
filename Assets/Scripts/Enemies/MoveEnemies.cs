@@ -32,6 +32,7 @@ public class MoveEnemies : MonoBehaviour
     void Start()
     {
         lastWaypointSwitchTime = Time.time; //Initializes lastWaypointSwitchTime to the current time.
+        RotateIntoMoveDirection();
     }
 
     // Update is called once per frame
@@ -64,7 +65,7 @@ public class MoveEnemies : MonoBehaviour
                 AudioSource audioSource = gameObject.GetComponent<AudioSource>();
                 AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
                 //This gets the GameManagerBehavior and subtracts one from its Health.
-                GamePlayController gameManager = GameObject.Find("GameManager").GetComponent<GamePlayController>();
+                GamePlayController gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>();
                 //gameManager.Health -= 1;
             }
         }
