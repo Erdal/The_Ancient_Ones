@@ -4,10 +4,9 @@ using UnityEngine.UI;
 
 public class GamePlayController : MonoBehaviour
 {
-    public Text waveLabel; //Stores a reference to the wave readout at the top right corner of the screen
+    public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
     public GameObject[] nextWaveLabels; //Stores the two GameObjects that when combined, create an animation you’ll show at the start of a new wave.
     public bool gameOver = false; //store whether the player has lost the game.
-
     //public Text healthLabel; //Use for lives
 
     public Text goldLabel;
@@ -29,12 +28,15 @@ public class GamePlayController : MonoBehaviour
         get { return wave; }
         set
         {
+            Debug.Log("0");
             wave = value; //Set value
-            if (!gameOver) //Is game over or not?
+            if (!gameOver) //If game isnt over
             {
+                Debug.Log("1");
                 //Set off the animation for all the wave labels
                 for (int i = 0; i < nextWaveLabels.Length; i++)
                 {
+                    Debug.Log(i + "ggh");
                     nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
                 }
             }

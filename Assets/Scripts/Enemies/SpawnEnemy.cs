@@ -46,10 +46,10 @@ public class SpawnEnemy : MonoBehaviour
                 //If necessary, spawn an enemy by instantiating a copy of enemyPrefab. You also increase the enemiesSpawned count.
                 lastSpawnTime = Time.time; //Your about to spawn an emeny now so make it equell the current time
                 GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemyPrefab); //creating new enewmy for this wave
-                newEnemy.GetComponent<MoveEnemies>().waypoints = waypoints;
-                Animator anim = newEnemy.transform.GetChild(0).GetComponent<Animator>();
-                anim.SetBool("Walk", true);
-                enemiesSpawned++;
+                newEnemy.GetComponent<MoveEnemies>().waypoints = waypoints; //Sets the correct waypoint to follow for new enemy
+                Animator anim = newEnemy.transform.GetChild(0).GetComponent<Animator>(); //store animator of the sprite of the new enemy
+                anim.SetBool("Walk", true); //Set walk to true so enemy begins to walk
+                enemiesSpawned++; //Update how many enemys have been spawned
             }
             //You check the number of enemies on screen. If there are none and it was the last enemy in the wave you spawn the next wave
             if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemies") == null)
