@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GamePlayController : MonoBehaviour
 {
     public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
-    public GameObject[] nextWaveLabels; //Stores the two GameObjects that when combined, create an animation you’ll show at the start of a new wave.
+    public Text nextWaveLabel; //Stores a reference to the next wave label at the top of the screen
     public bool gameOver = false; //store whether the player has lost the game.
     //public Text healthLabel; //Use for lives
 
@@ -28,20 +28,21 @@ public class GamePlayController : MonoBehaviour
         get { return wave; }
         set
         {
-            Debug.Log("0");
             wave = value; //Set value
             if (!gameOver) //If game isnt over
             {
-                Debug.Log("1");
-                //Set off the animation for all the wave labels
-                for (int i = 0; i < nextWaveLabels.Length; i++)
-                {
-                    Debug.Log(i + "ggh");
-                    nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
-                }
+                StartCoroutine(NextWaveCoroutine());
+                nextWaveLabel.gameObject.SetActive(true);
+                waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
             }
-            waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
         }
+    }
+
+    IEnumerator NextWaveCoroutine()
+    {
+        nextWaveLabel.gameObject.SetActive(true); //Activate label
+        yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(.7f)); //wait
+        nextWaveLabel.gameObject.SetActive(false); //Deactivate label
     }
 
     // Use this for initialization
