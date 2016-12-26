@@ -17,7 +17,7 @@ public class SpawnEnemy : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public GameObject enemyPrefab;
+        public GameObject enemyPrefab; //Lets the user 
         public float spawnInterval = 2; //The time between enemies in the wave in seconds
         public int maxEnemies = 20; //quantity of enemies spawning in this wave
     }
@@ -60,11 +60,9 @@ public class SpawnEnemy : MonoBehaviour
                 lastSpawnTime = Time.time; //Set to current time
             }
         }
-        else //Upon beating the last wave this runs the game won animation.
+        else
         {
-            //gameManager.gameOver = true;
-            //GameObject gameOverText = GameObject.FindGameObjectWithTag("GameWon");
-            //gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+            //TODO: Do something here for when the user wins!
         }
     }
 }
