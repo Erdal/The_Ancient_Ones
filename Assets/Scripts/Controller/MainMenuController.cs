@@ -2,15 +2,17 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class MainMenuController : MonoBehaviour {
-
+public class MainMenuController : MonoBehaviour
+{
 	// Use this for initialization
-	void Start () {
+	void Start()
+    {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update()
+    {
 	
 	}
 
