@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnEnemy : MonoBehaviour
 {
     public GameObject[] waypoints; //Waypoint array
-    public GameObject enemyPrefab; //reference to the Enemy prefab
+    public GameObject[] enemyPrefab; //array of references to the Enemy prefab
 
     public Wave[] waves; //All the waves we want
     public int timeBetweenWaves = 5; //How much time inbetween waves
