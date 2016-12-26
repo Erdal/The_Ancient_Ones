@@ -8,7 +8,10 @@ public class MoveEnemies : MonoBehaviour
 
     private int currentWaypoint = 0; //Tracks which waypoint the enemy is currently walking away from
     private float lastWaypointSwitchTime; //Stores the time when the enemy passed over it
-    public float speed = 1.0f; //Enemys speed
+    private float speed; //Speed of unit
+    private float health; //Health of unit
+    private float armour; //Armour of unit
+    private BasicStats basicStats; //We will use this to hold something of class basicStats
 
     //Rotates the enemy so that it always looks forward
     private void RotateIntoMoveDirection()
@@ -28,9 +31,18 @@ public class MoveEnemies : MonoBehaviour
         sprite.transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
     }
 
+    void StartStats()
+    {
+        basicStats = gameObject.GetComponent("BasicStats") as BasicStats; //We get the BasicStats script from this unit and attach it to our varable
+        speed = basicStats.speed; //Set speed
+        health = basicStats.health; //Set health
+        armour = basicStats.armour; // Set armour
+    }
+
     // Use this for initialization
     void Start()
     {
+        StartStats();;
         lastWaypointSwitchTime = Time.time; //Initializes lastWaypointSwitchTime to the current time.
         RotateIntoMoveDirection();
     }
@@ -62,10 +74,9 @@ public class MoveEnemies : MonoBehaviour
                 //The enemy reached the last waypoint, so this destroys it and triggers a sound effect.
                 Destroy(gameObject);
 
-                AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-                AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
-                //This gets the GameManagerBehavior and subtracts one from its Health.
-                GamePlayController gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>();
+                AudioSource audioSource = gameObject.GetComponent<AudioSource>(); //Get audio of object
+                AudioSource.PlayClipAtPoint(audioSource.clip, transform.position); //Play death sound
+                GamePlayController gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //This gets the GamePlayController
                 //gameManager.Health -= 1;
             }
         }
