@@ -1,30 +1,30 @@
 fileFormatVersion: 2
 guid: a6dda3d396c59ae41a412d0967fc18db
-timeCreated: 1482749018
+timeCreated: 1482781564
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Flappy Bird Sprites_0
     21300002: Flappy Bird Sprites_1
     21300004: BlueBirdOne
-    21300006: Flappy Bird Sprites_3
-    21300008: Flappy Bird Sprites_4
+    21300006: RedBirdOne
+    21300008: GreenBirdOne
     21300010: Flappy Bird Sprites_5
     21300012: Flappy Bird Sprites_6
     21300014: Flappy Bird Sprites_7
     21300016: BlueBirdTwo
-    21300018: Flappy Bird Sprites_9
-    21300020: Flappy Bird Sprites_10
+    21300018: RedBirdTwo
+    21300020: GreenBirdTwo
     21300022: Flappy Bird Sprites_11
     21300024: BlueBirdThree
-    21300026: Flappy Bird Sprites_13
-    21300028: Flappy Bird Sprites_14
+    21300026: RedBirdThree
+    21300028: GreenBirdThree
     21300030: Flappy Bird Sprites_15
     21300032: Flappy Bird Sprites_16
     21300034: Flappy Bird Sprites_17
     21300036: BlueBirdDeath
-    21300038: Flappy Bird Sprites_19
-    21300040: Flappy Bird Sprites_20
+    21300038: RedBirdDeath
+    21300040: GreenBirdDeath
     21300042: Flappy Bird Sprites_21
     21300044: Flappy Bird Sprites_22
     21300046: Flappy Bird Sprites_23
@@ -97,7 +97,7 @@ TextureImporter:
         width: 90
         height: 621
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 43.302185, y: 249.3227}
@@ -120,7 +120,7 @@ TextureImporter:
         width: 91
         height: 621
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 43.68004, y: 249.3227}
@@ -155,7 +155,7 @@ TextureImporter:
         - {x: 49.892426, y: 8.188721}
         - {x: 34.892426, y: 30.18872}
         - {x: 15.892426, y: 36.18872}
-    - name: Flappy Bird Sprites_3
+    - name: RedBirdOne
       rect:
         serializedVersion: 2
         x: 324
@@ -172,26 +172,24 @@ TextureImporter:
         - {x: 48.439392, y: -35.81128}
         - {x: 48.439392, y: 8.188721}
         - {x: 26.439392, y: 36.18872}
-    - name: Flappy Bird Sprites_4
+    - name: GreenBirdOne
       rect:
         serializedVersion: 2
         x: 438
-        y: 1005
+        y: 1008
         width: 103
         height: 76
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -26.646759, y: 36.12213}
-        - {x: -47.64676, y: 17.122131}
-        - {x: -47.64676, y: -19.877869}
-        - {x: -30.646759, y: -35.87787}
-        - {x: 18.353241, y: -35.87787}
-        - {x: 47.35324, y: -27.877869}
-        - {x: 49.35324, y: -21.877869}
-        - {x: 49.35324, y: 3.1221313}
-        - {x: 24.353241, y: 36.12213}
+      - - {x: -23.646759, y: 35.922485}
+        - {x: -47.64676, y: 15.922485}
+        - {x: -47.64676, y: -35.077515}
+        - {x: 48.35324, y: -35.077515}
+        - {x: 49.35324, y: -33.077515}
+        - {x: 49.35324, y: -0.07751465}
+        - {x: 25.353241, y: 35.922485}
     - name: Flappy Bird Sprites_5
       rect:
         serializedVersion: 2
@@ -200,7 +198,7 @@ TextureImporter:
         width: 25
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: Flappy Bird Sprites_6
@@ -211,7 +209,7 @@ TextureImporter:
         width: 40
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -12.808105, y: -19.012756}
@@ -233,7 +231,7 @@ TextureImporter:
         width: 102
         height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 33.42755, y: 36.489075}
@@ -264,7 +262,7 @@ TextureImporter:
         - {x: 50.09207, y: -23.55426}
         - {x: 50.09207, y: 32.44574}
         - {x: 29.092072, y: 36.44574}
-    - name: Flappy Bird Sprites_9
+    - name: RedBirdTwo
       rect:
         serializedVersion: 2
         x: 317
@@ -272,7 +270,7 @@ TextureImporter:
         width: 107
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -29.594818, y: 36.44574}
@@ -283,7 +281,7 @@ TextureImporter:
         - {x: 51.40518, y: -35.55426}
         - {x: 51.40518, y: 17.44574}
         - {x: 31.405182, y: 36.44574}
-    - name: Flappy Bird Sprites_10
+    - name: GreenBirdTwo
       rect:
         serializedVersion: 2
         x: 432
@@ -291,7 +289,7 @@ TextureImporter:
         width: 106
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -49.747498, y: 36.312683}
@@ -310,7 +308,7 @@ TextureImporter:
         width: 43
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -4.1030273, y: 21.181396}
@@ -337,7 +335,7 @@ TextureImporter:
         - {x: -49.90793, y: -34.664062}
         - {x: 50.09207, y: -34.664062}
         - {x: 50.09207, y: 36.335938}
-    - name: Flappy Bird Sprites_13
+    - name: RedBirdThree
       rect:
         serializedVersion: 2
         x: 317
@@ -345,7 +343,7 @@ TextureImporter:
         width: 107
         height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 22.405182, y: 36.335938}
@@ -359,7 +357,7 @@ TextureImporter:
         - {x: 51.40518, y: -21.664062}
         - {x: 51.40518, y: 17.335938}
         - {x: 47.40518, y: 28.335938}
-    - name: Flappy Bird Sprites_14
+    - name: GreenBirdThree
       rect:
         serializedVersion: 2
         x: 431
@@ -367,7 +365,7 @@ TextureImporter:
         width: 108
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -28.680939, y: 36.70282}
@@ -387,7 +385,7 @@ TextureImporter:
         width: 113
         height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -52.81903, y: 21.904297}
@@ -404,7 +402,7 @@ TextureImporter:
         width: 48
         height: 66
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 2.6973267, y: 31.102112}
@@ -431,7 +429,7 @@ TextureImporter:
         width: 113
         height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -36.593872, y: 21.904297}
@@ -460,7 +458,7 @@ TextureImporter:
         - {x: 49.72516, y: -19.507751}
         - {x: 49.72516, y: 16.492249}
         - {x: 46.72516, y: 29.492249}
-    - name: Flappy Bird Sprites_19
+    - name: RedBirdDeath
       rect:
         serializedVersion: 2
         x: 314
@@ -468,7 +466,7 @@ TextureImporter:
         width: 106
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -47.895172, y: 36.49225}
@@ -476,7 +474,7 @@ TextureImporter:
         - {x: -49.895172, y: -35.50775}
         - {x: 50.104828, y: -35.50775}
         - {x: 50.104828, y: 36.49225}
-    - name: Flappy Bird Sprites_20
+    - name: GreenBirdDeath
       rect:
         serializedVersion: 2
         x: 429
@@ -484,7 +482,7 @@ TextureImporter:
         width: 106
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -28.547852, y: 36.35913}
@@ -503,7 +501,7 @@ TextureImporter:
         width: 497
         height: 251
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 222.90381, y: -113.430725}
@@ -540,7 +538,7 @@ TextureImporter:
         width: 168
         height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -78.17412, y: 48.272583}
@@ -556,7 +554,7 @@ TextureImporter:
         width: 166
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 78.64813, y: 46.272583}
@@ -576,7 +574,7 @@ TextureImporter:
         width: 103
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 24.658615, y: 48.756165}
@@ -598,7 +596,7 @@ TextureImporter:
         width: 104
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -29.52826, y: 48.756165}
@@ -618,7 +616,7 @@ TextureImporter:
         width: 104
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -19.215149, y: 49.322693}
@@ -637,7 +635,7 @@ TextureImporter:
         width: 86
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -39.000916, y: 41.157257}
@@ -653,7 +651,7 @@ TextureImporter:
         width: 65
         height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -30.35321, y: 33.824524}
@@ -668,7 +666,7 @@ TextureImporter:
         width: 721
         height: 240
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -336.464, y: 113.32588}
@@ -683,7 +681,7 @@ TextureImporter:
         width: 208
         height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -96.697815, y: 33.91568}
@@ -698,7 +696,7 @@ TextureImporter:
         width: 254
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 94.46263, y: 72.93892}
@@ -720,7 +718,7 @@ TextureImporter:
         width: 259
         height: 155
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 97.12854, y: 72.572014}
@@ -742,7 +740,7 @@ TextureImporter:
         width: 109
         height: 108
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -37.026894, y: 50.501823}

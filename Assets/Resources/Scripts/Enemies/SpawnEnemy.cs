@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class SpawnEnemy : MonoBehaviour
 {
     public GameObject[] waypoints; //Waypoint array
-    public GameObject[] enemyPrefab; //array of references to the Enemy prefab
     public int timeBetweenWaves = 5; //How much time inbetween waves
 
+    private EnemyPrefabs enemyPrefabs; //To connect to the EnemyPrefabs class that stores our enemy prefabs list
     private GamePlayController gameManager;
 
     private float lastSpawnTime; //When last spawned
@@ -19,17 +19,19 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         lastSpawnTime = Time.time; //Current time
-        gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>();
-        AddWaves(5);
+        enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>(); //Connecting the enemyPrefabs to the GamePlayController component
+        gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+        AddWaves(5, 500); //We want 5 random waves
     }
 
     int pick; //Used to store the enemy prefab of next wave
-    void AddWaves(int numberOfWaves)
+    void AddWaves(int numberOfWaves, int dangerRating)
     {
+        //Go through and build all the waves
         for(int i = 0; i < numberOfWaves; i++)
         {
-            pick = Random.Range(0, waves.Count); //Which enemy prefab is picked
-            waves.Add(new Waves(enemyPrefab[pick], 2, 5)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units
+            pick = Random.Range(0, enemyPrefabs.enemyPrefabList.Count); //Which enemy prefab is picked
+            waves.Add(new Waves(enemyPrefabs.enemyPrefabList[pick], 2, 5, dangerRating)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units
         }
     }
 
