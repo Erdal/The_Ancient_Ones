@@ -19,7 +19,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         lastSpawnTime = Time.time; //Current time
-        enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>(); //Connecting the enemyPrefabs to the GamePlayController component
+		enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>();
         gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
         AddWaves(5, 500); //We want 5 random waves
     }
@@ -31,13 +31,14 @@ public class SpawnEnemy : MonoBehaviour
         for(int i = 0; i < numberOfWaves; i++)
         {
             pick = Random.Range(0, enemyPrefabs.enemyPrefabList.Count); //Which enemy prefab is picked
-            waves.Add(new Waves(enemyPrefabs.enemyPrefabList[pick], 2, 5, dangerRating)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units
+			waves.Add(new Waves(enemyPrefabs.enemyPrefabList[pick], 2, 5, dangerRating)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units, danger rating
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("5");
         int currentWave = gameManager.Wave; //Get the index of the current wave
         if (currentWave < waves.Count) //Check if last wave
         {

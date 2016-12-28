@@ -12,16 +12,16 @@ public class Waves : MonoBehaviour
     private int speedCost = 10; //Cost of speed
     private int armourCost = 5; //Cost of armour
 
-    public Waves(GameObject EnemyPrefab, float SpawnInterval, int MaxEnemies, int DangerPoints)
+	public Waves(GameObject EnemyPrefab, float SpawnInterval, int MaxEnemies, int DangerPoints)
     {
         enemyPrefab = EnemyPrefab;
         spawnInterval = SpawnInterval;
         maxEnemies = MaxEnemies;
         dangerPoints = DangerPoints;
-        ChangingStats();
+        //ChangingStats();
     }
 
-    void ChangingStats()
+	void ChangingStats(int MaxEnemies, int DangerPoints)
     {
         //enemyPrefab.GetComponent<BasicStats>().health = 195;
     }
