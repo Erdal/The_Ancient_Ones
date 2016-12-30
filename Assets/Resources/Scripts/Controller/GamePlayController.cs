@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class GamePlayController : MonoBehaviour
 {
-    public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
+	public GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here
+	public Button optionOneButton; ////Store our OptionOneButton in here from our TowerUpgradePanel
+
+	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
     public Text nextWaveLabel; //Stores a reference to the next wave label at the top of the screen
     public bool gameOver = false; //store whether the player has lost the game.
     //public Text healthLabel; //Use for lives

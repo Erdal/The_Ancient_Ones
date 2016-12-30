@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: a6dda3d396c59ae41a412d0967fc18db
-timeCreated: 1482781564
+timeCreated: 1483084982
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Flappy Bird Sprites_0
-    21300002: Flappy Bird Sprites_1
+    21300000: OrangePipe
+    21300002: GreenPipe
     21300004: BlueBirdOne
     21300006: RedBirdOne
     21300008: GreenBirdOne
@@ -89,7 +89,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
   spriteSheet:
     sprites:
-    - name: Flappy Bird Sprites_0
+    - name: OrangePipe
       rect:
         serializedVersion: 2
         x: 18
@@ -112,7 +112,7 @@ TextureImporter:
         - {x: 40.302185, y: -288.6773}
         - {x: 40.302185, y: 248.3227}
         - {x: 42.302185, y: 248.3227}
-    - name: Flappy Bird Sprites_1
+    - name: GreenPipe
       rect:
         serializedVersion: 2
         x: 110
