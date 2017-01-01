@@ -13,7 +13,7 @@ public class PlaceTower : MonoBehaviour
 	//Called when object is clicked
 	void OnMouseDown()
 	{
-		gameManager.chosenObjectsName = gameObject.name;
+		gameManager.chosenObjectsName = gameObject.name; //Save the name of the newly selected BuildSpot
 		towerUpgradePanel.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
 		towerUpgradePanel.SetActive (true); //Turn panel on
 		optionOneButton.onClick.AddListener(() => {OptionOne();}); //Add a onclick method to this button for the OptionOne method
@@ -29,7 +29,7 @@ public class PlaceTower : MonoBehaviour
 			chosenTower.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Set the towers position to the same position of the building spot (This gameObject)
 			chosenTower.transform.rotation = GameObject.Find(gameManager.chosenObjectsName).transform.rotation; //Set the towers rotation to the same rotation of the building spot (This gameObject)
 			Destroy (GameObject.Find(gameManager.chosenObjectsName)); //Destroy this gameObject so that the building spot no longer exists
-			gameManager.Blood = gameManager.Blood - 200;
+			gameManager.Blood = gameManager.Blood - 200; //Take away 200 blood for building this tower
 		}
 	}
 		

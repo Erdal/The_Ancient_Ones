@@ -84,7 +84,7 @@ public class MoveEnemies : MonoBehaviour
 
     //This code calculates the length of road not yet traveled by the enemy. 
     //It does so using Distance, which calculates the difference between two Vector3 instances.
-    public float distanceToGoal()
+    public float DistanceToGoal()
     {
         float distance = 0;
         distance += Vector3.Distance(gameObject.transform.position, waypoints[currentWaypoint + 1].transform.position);
