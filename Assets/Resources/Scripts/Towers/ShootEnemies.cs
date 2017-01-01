@@ -12,6 +12,7 @@ public class ShootEnemies : MonoBehaviour
 		SetCompoinents (); //Set our varable compoinents
 	}
 
+	//Set our varable compoinents
 	void SetCompoinents()
 	{
 		enemiesInRange = new List<GameObject>();
@@ -20,43 +21,49 @@ public class ShootEnemies : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
 	{
-		GameObject target = null; //Store the game object we wish to target in here
+		GameObject target = null; //Store the game object we wish to target in here, make it start as null
 
-		float minimalEnemyDistance = float.MaxValue;
+		float minimalEnemyDistance = float.MaxValue; //Start with maxium distance in the minimalEnemyDistance
+		//Iterate over all enemies in range
 		foreach (GameObject enemies in enemiesInRange) 
-		{ Debug.Log ("2");
-			float distanceToGoal = enemies.GetComponent<MoveEnemies> ().DistanceToGoal ();
+		{
+			float distanceToGoal = enemies.GetComponent<MoveEnemies> ().DistanceToGoal (); //Get distance to goal
+			//Make an enemy new target if its distance to the last way point is smaller then the current minium
 			if (distanceToGoal < minimalEnemyDistance) 
-			{ Debug.Log ("3");
-				target = enemies;
-				minimalEnemyDistance = distanceToGoal;
+			{
+				target = enemies; //New target set
+				minimalEnemyDistance = distanceToGoal; //New minimalEnemyDistance set
 			}
 		}
 	}
 
+	//Remove the nemy from enemiesInRange
 	void OnEnemyDestroy(GameObject enemy)
 	{
-		enemiesInRange.Remove (enemy);
-		Debug.Log ("4");
+		enemiesInRange.Remove (enemy); //Remove targeted enemy from list
 	}
 
+	//When GameObject enters triggered
 	void OnTriggerEnter2D(Collider2D other)
-	{Debug.Log ("5");
-		if (other.gameObject.tag == "Enemies") 
-		{Debug.Log ("6");
-			enemiesInRange.Add (other.gameObject);
-			EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate> ();
-			del.enemyDelegate += OnEnemyDestroy;
+	{
+		//If GameObject is one of the enemies
+		if (other.gameObject.tag == "Enemies")
+		{
+			enemiesInRange.Add (other.gameObject); //Add to list
+			EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate> (); //Store the EnemyDestructionDelegate in del
+			del.enemyDelegate += OnEnemyDestroy; //Add OnEnemyDestroy so that when enemy is killed out method is called, insuring that we are not targeting a destroyied object
 		}
 	}
 
+	//When GameObject exit our trigger range
 	void OnTriggerExit2D(Collider2D other)
-	{Debug.Log ("7");
+	{
+		//If GameObject is one of the enemies
 		if (other.gameObject.tag.Equals ("Enemies")) 
-		{Debug.Log ("8");
-			enemiesInRange.Remove (other.gameObject);
-			EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate> ();
-			del.enemyDelegate -= OnEnemyDestroy;
+		{
+			enemiesInRange.Remove (other.gameObject); //Remove from list
+			EnemyDestructionDelegate del = other.gameObject.GetComponent<EnemyDestructionDelegate> (); //Store the EnemyDestructionDelegate in del
+			del.enemyDelegate -= OnEnemyDestroy; //Remove OnEnemyDestroy, it is no longer needed
 		}
 	}
 }
