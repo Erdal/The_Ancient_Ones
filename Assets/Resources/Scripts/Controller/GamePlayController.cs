@@ -7,21 +7,24 @@ public class GamePlayController : MonoBehaviour
 	public GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here
 	public Button optionOneButton; ////Store our OptionOneButton in here from our TowerUpgradePanel
 
+	[HideInInspector] //Hide from unity inspector
+	public string chosenObjectsName; //Here we store the name of the BuildingSpot or tower we wish to upgrade
+
 	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
     public Text nextWaveLabel; //Stores a reference to the next wave label at the top of the screen
     public bool gameOver = false; //store whether the player has lost the game.
     //public Text healthLabel; //Use for lives
 
-    public Text goldLabel;
+    public Text bloodLabel;
 
-    private int gold; //store the current gold total
-    public int Gold
+    private int blood; //store the current gold total
+    public int Blood
     {
-        get { return gold; } //Get gold amount
-        set //Set gold amount
+		get { return blood; } //Get blood amount
+		set //Set blood amount
         {
-            gold = value;
-            goldLabel.GetComponent<Text>().text = "GOLD: " + gold; //Set the gold label
+			blood = value;
+			bloodLabel.GetComponent<Text>().text = "BLOOD: " + blood; //Set the blood label
         }
     }
 
@@ -35,7 +38,6 @@ public class GamePlayController : MonoBehaviour
             if (!gameOver) //If game isnt over
             {
                 StartCoroutine(NextWaveCoroutine());
-                nextWaveLabel.gameObject.SetActive(true);
                 waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
             }
         }
@@ -51,7 +53,7 @@ public class GamePlayController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Gold = 1000;
+		Blood = 800;
         //Health = 5;
         Wave = 0;
     }

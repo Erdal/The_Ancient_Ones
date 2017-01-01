@@ -19,7 +19,6 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         lastSpawnTime = Time.time; //Current time
-		//enemyPrefabs = gameObject.GetComponent<EnemyPrefabs>();
 		enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>();
         gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
         AddWaves(5, 500); //We want 5 random waves
