@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasicStats : MonoBehaviour
+public class BasicStatsEnemies : MonoBehaviour
 {
     public float health; //Enemy health
     public float speed; //Enemy speed

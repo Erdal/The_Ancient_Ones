@@ -11,7 +11,7 @@ public class MoveEnemies : MonoBehaviour
     private float speed; //Speed of unit
     private float health; //Health of unit
     private float armour; //Armour of unit
-    private BasicStats basicStats; //We will use this to hold something of class basicStats
+    private BasicStatsEnemies basicStats; //We will use this to hold something of class basicStats
 
     //Rotates the enemy so that it always looks forward
     private void RotateIntoMoveDirection()
@@ -33,7 +33,7 @@ public class MoveEnemies : MonoBehaviour
 
     void StartStats()
     {
-        basicStats = gameObject.GetComponent("BasicStats") as BasicStats; //We get the BasicStats script from this unit and attach it to our varable
+		basicStats = gameObject.GetComponent("BasicStatsEnemies") as BasicStatsEnemies; //We get the BasicStats script from this unit and attach it to our varable
         speed = basicStats.speed; //Set speed
         health = basicStats.health; //Set health
         armour = basicStats.armour; // Set armour

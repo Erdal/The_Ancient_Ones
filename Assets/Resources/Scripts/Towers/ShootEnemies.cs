@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class ShootEnemies : MonoBehaviour 
 {
 	public List<GameObject> enemiesInRange; //Store all enemies that are in range
+	private float lastShotTime; //Here we store the time in whihc the last shot was fired
+	private float fireRate; //Here we will store how long it take to fire the next bullet
 
 	// Use this for initialization
 	void Start() 
@@ -15,7 +17,9 @@ public class ShootEnemies : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		enemiesInRange = new List<GameObject>();
+		enemiesInRange = new List<GameObject>(); //Setting up the list
+		lastShotTime = Time.time; //Set to the current time
+		fireRate = 60/this.gameObject.GetComponent<BasicStatsTowers>().attackSpeed; //Calculate fire rate by divinding 60 by the attack speed of the tower to determin how many bullets this tower can fire per minute
 	}
 	
 	// Update is called once per frame
@@ -35,6 +39,20 @@ public class ShootEnemies : MonoBehaviour
 				minimalEnemyDistance = distanceToGoal; //New minimalEnemyDistance set
 			}
 		}
+
+		if (target != null) 
+		{
+			if (Time.time - lastShotTime >= fireRate) 
+			{
+				
+				lastShotTime = Time.time;
+			}
+		}
+	}
+
+	void TowerAttack(Collider2D target)
+	{
+		GameObject bulletPrefab = (Resources.Load("Prefabs/Towers/Attachments/Bullet1") as GameObject)
 	}
 
 	//Remove the nemy from enemiesInRange
