@@ -40,19 +40,36 @@ public class ShootEnemies : MonoBehaviour
 			}
 		}
 
+		//If target is not null
 		if (target != null) 
 		{
+			//If we are ready to attack
 			if (Time.time - lastShotTime >= fireRate) 
 			{
-				
-				lastShotTime = Time.time;
+				TowerAttack (target.GetComponent<Collider2D>()); //Call attack method and send through target collider2d
+				lastShotTime = Time.time; //Reset lastShotTime to now since we have attacked again
 			}
 		}
 	}
 
+	//Our tower attack
 	void TowerAttack(Collider2D target)
 	{
-		GameObject bulletPrefab = (Resources.Load("Prefabs/Towers/Attachments/Bullet1") as GameObject)
+		GameObject bulletPrefab = (Resources.Load ("Prefabs/Towers/Attachments/Bullet1") as GameObject); //Prefab of our bullet
+		//TODO: for testing purposes change the bullet prefab to the larger bullets on larger levels of tower
+		Vector3 startPostition = this.gameObject.transform.position; //Set the position of this object, since the attack will start from here
+		Vector3 targetPostition = target.transform.position; //Set the position of our target object, this is where the attack needs to go
+		startPostition.z = bulletPrefab.transform.position.z; //Set z position to bulletPrefab, which we set inside of inspector
+		targetPostition.z = bulletPrefab.transform.position.z; //Set z position to bulletPrefab, which we set inside of inspector
+
+		GameObject newBullet = (GameObject)Instantiate (bulletPrefab); //Create a copy of our prefab
+		newBullet.transform.position = startPostition; //Set starting position
+		BulletActions bulletActions = newBullet.GetComponent<BulletActions>(); //Store BullActions component inside of bulletActions
+		bulletActions.target = target.gameObject; //Set target for BulletActions Script
+		bulletActions.startPosition = startPostition; //Set startPostition for BulletActions Script
+		bulletActions.targetPosition = targetPostition; //Set targetPosition for BulletActions Script
+		AudioSource audioSource = this.gameObject.GetComponent<AudioSource> (); //Store the AudioSource component of this object
+		audioSource.PlayOneShot (audioSource.clip); //Play the sound of our object
 	}
 
 	//Remove the nemy from enemiesInRange
