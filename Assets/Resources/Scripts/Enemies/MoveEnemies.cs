@@ -77,7 +77,7 @@ public class MoveEnemies : MonoBehaviour
                 AudioSource audioSource = gameObject.GetComponent<AudioSource>(); //Get audio of object
                 AudioSource.PlayClipAtPoint(audioSource.clip, transform.position); //Play death sound
                 GamePlayController gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //This gets the GamePlayController
-                //gameManager.Health -= 1;
+				gameManager.Lives -= 1;
             }
         }
     }
