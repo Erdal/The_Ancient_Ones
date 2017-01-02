@@ -26,7 +26,7 @@ public class ShootEnemies : MonoBehaviour
 	void Update() 
 	{
 		GameObject target = null; //Store the game object we wish to target in here, make it start as null
-
+		fireRate = 60/this.gameObject.GetComponent<BasicStatsTowers>().attackSpeed; //Calculate fire rate by divinding 60 by the attack speed of the tower to determin how many bullets this tower can fire per minute
 		float minimalEnemyDistance = float.MaxValue; //Start with maxium distance in the minimalEnemyDistance
 		//Iterate over all enemies in range
 		foreach (GameObject enemies in enemiesInRange) 

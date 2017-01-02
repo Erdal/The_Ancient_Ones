@@ -9,6 +9,7 @@ public class PlaceTower : MonoBehaviour
 	private GameObject buildTowerPanel; //Store our BuildTowerPanel in here from the GamePlayController
 	private Button towerOneButton; //Store our towerOneButton in here from the GamePlayController
 	GameObject chosenTower; //Used to store the tower the user chooses
+	BasicStatsTowers basicStatsTowers; //Store the BasicStatsTowers script here to access towers stats
 
 	//Called when object is clicked
 	void OnMouseDown()
@@ -27,9 +28,15 @@ public class PlaceTower : MonoBehaviour
 		if(gameManager.Blood >= 200 && chosenTower == null && gameManager.chosenObjectsName == gameObject.name)
 		{
 			buildTowerPanel.SetActive (false); //Turn panel off, this is for testing purposes
-			chosenTower = Instantiate((Resources.Load("Prefabs/Towers/TowerOne") as GameObject)); //Load TowerOne prefab into chosenTower
-			chosenTower.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Set the towers position to the same position of the building spot (This gameObject)
-			chosenTower.transform.rotation = GameObject.Find(gameManager.chosenObjectsName).transform.rotation; //Set the towers rotation to the same rotation of the building spot (This gameObject)
+			chosenTower = (Resources.Load("Prefabs/Towers/TowerOne") as GameObject); //Load TowerOne prefab into chosenTower
+			GameObject tempChosenTower = Instantiate(chosenTower); //Use this to create our tower so we dont make perminent changes to our prefabs during runtime
+			tempChosenTower.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Set the towers position to the same position of the building spot (This gameObject)
+			tempChosenTower.transform.rotation = GameObject.Find(gameManager.chosenObjectsName).transform.rotation; //Set the towers rotation to the same rotation of the building spot (This gameObject)
+			basicStatsTowers = tempChosenTower.GetComponent<BasicStatsTowers>(); //Grab the BasicStatsTowers of this object and store it
+			basicStatsTowers.towerLevel = 1; //Change level of twoer to 1
+			basicStatsTowers.damage = 10; //Tower has an attack of 10
+			basicStatsTowers.attackSpeed = 10; //Tower has an attack speed of 10
+			basicStatsTowers.currentTowerValue = 200; //Towers current value
 			Destroy (GameObject.Find(gameManager.chosenObjectsName)); //Destroy this gameObject so that the building spot no longer exists
 			gameManager.Blood = gameManager.Blood - 200; //Take away 200 blood for building this tower
 		}

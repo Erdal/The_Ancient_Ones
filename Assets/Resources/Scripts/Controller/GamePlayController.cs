@@ -23,8 +23,8 @@ public class GamePlayController : MonoBehaviour
 	public Text bloodLabel;//Stores a reference to the blood label label in the center top part of the screen
     public bool gameOver = false; //store whether the player has lost the game.
 
-    private int blood; //store the current blood total
-    public int Blood
+	private float blood; //store the current blood total
+	public float Blood
     {
 		get { return blood; }  //Return value
 		set
@@ -74,7 +74,7 @@ public class GamePlayController : MonoBehaviour
     }
 
 	//Complete our game status message to the player
-	IEnumerator GameStatusCoroutine(string message)
+	public IEnumerator GameStatusCoroutine(string message)
     {
 		gameStatusLabel.text = message; //Change label text
         gameStatusLabel.gameObject.SetActive(true); //Activate label
@@ -91,7 +91,7 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		Blood = 800;
+		Blood = 80000;
 		Lives = 10;
 		Wave = 0;
 	}
