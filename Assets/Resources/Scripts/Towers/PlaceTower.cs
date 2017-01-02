@@ -6,17 +6,19 @@ public class PlaceTower : MonoBehaviour
 {
 	GamePlayController gameManager; //Stores our GamePlayController
 
-	private GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here from the GamePlayController
-	private Button optionOneButton; //Store our OptionOneButton in here from the GamePlayController
+	private GameObject buildTowerPanel; //Store our BuildTowerPanel in here from the GamePlayController
+	private Button towerOneButton; //Store our towerOneButton in here from the GamePlayController
 	GameObject chosenTower; //Used to store the tower the user chooses
 
 	//Called when object is clicked
 	void OnMouseDown()
 	{
 		gameManager.chosenObjectsName = gameObject.name; //Save the name of the newly selected BuildSpot
-		towerUpgradePanel.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
-		towerUpgradePanel.SetActive (true); //Turn panel on
-		optionOneButton.onClick.AddListener(() => {OptionOne();}); //Add a onclick method to this button for the OptionOne method
+		buildTowerPanel.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
+		gameManager.towerUpgradePanel.SetActive(false); //Turn off the towerUpgradePanel if just incase it is open anywhere else
+		buildTowerPanel.SetActive (true); //Turn panel on
+		towerOneButton.onClick.AddListener(() => {OptionOne();}); //Add a onclick method to this button for the OptionOne method
+		towerOneButton.GetComponentInChildren<Text>().text = "Tower One"; //Set text
 	}
 
 	//Tower option one
@@ -24,7 +26,7 @@ public class PlaceTower : MonoBehaviour
 	{
 		if(gameManager.Blood >= 200 && chosenTower == null && gameManager.chosenObjectsName == gameObject.name)
 		{
-			towerUpgradePanel.SetActive (false); //Turn panel off, this is for testing purposes
+			buildTowerPanel.SetActive (false); //Turn panel off, this is for testing purposes
 			chosenTower = Instantiate((Resources.Load("Prefabs/Towers/TowerOne") as GameObject)); //Load TowerOne prefab into chosenTower
 			chosenTower.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Set the towers position to the same position of the building spot (This gameObject)
 			chosenTower.transform.rotation = GameObject.Find(gameManager.chosenObjectsName).transform.rotation; //Set the towers rotation to the same rotation of the building spot (This gameObject)
@@ -44,8 +46,8 @@ public class PlaceTower : MonoBehaviour
 	void SetCompoinents()
 	{
 		gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
-		towerUpgradePanel = gameManager.towerUpgradePanel; //Sets towerUpgradePanel to the towerUpgradePanel in GamePlayController, which is connected to the TowerUpgradePanel in scene
-		optionOneButton = gameManager.optionOneButton; //Sets optionOneButton to the optionOneButton in GamePlayController, which is connected to the OptionOneButton in scene
+		buildTowerPanel = gameManager.buildTowerPanel; //Sets towerUpgradePanel to the towerUpgradePanel in GamePlayController, which is connected to the TowerUpgradePanel in scene
+		towerOneButton = gameManager.towerOneButton; //Sets optionOneButton to the optionOneButton in GamePlayController, which is connected to the OptionOneButton in scene
 	}
 	
 	// Update is called once per frame

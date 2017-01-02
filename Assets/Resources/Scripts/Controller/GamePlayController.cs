@@ -5,7 +5,12 @@ using UnityEngine.UI;
 public class GamePlayController : MonoBehaviour
 {
 	public GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here
-	public Button optionOneButton; ////Store our OptionOneButton in here from our TowerUpgradePanel
+	public Button upgradeButton; //Store our UpgradeButton in here from our TowerUpgradePanel
+	public Button fuseButton; //Store our FuseButton in here from our TowerUpgradePanel
+	public Button sellButton; //Store our SellButton in here from our TowerUpgradePanel
+
+	public GameObject buildTowerPanel; //Store our BuildTowerPanel in here
+	public Button towerOneButton; //Store our TowerOneButton in here from our BuildTowerPanel
 
 	[HideInInspector] //Hide from unity inspector
 	public string chosenObjectsName; //Here we store the name of the BuildingSpot or tower we wish to upgrade
@@ -80,10 +85,16 @@ public class GamePlayController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		SetCompoinents (); //Set our varable compoinents
+    }
+
+	//Set our varable compoinents
+	void SetCompoinents()
+	{
 		Blood = 800;
 		Lives = 10;
-        Wave = 0;
-    }
+		Wave = 0;
+	}
 	
 	// Update is called once per frame
 	void Update()
