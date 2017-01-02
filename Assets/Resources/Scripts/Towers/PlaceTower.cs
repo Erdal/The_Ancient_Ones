@@ -22,6 +22,17 @@ public class PlaceTower : MonoBehaviour
 		towerOneButton.GetComponentInChildren<Text>().text = "Tower One"; //Set text
 	}
 
+	void OnMouseUp()
+	{
+		StartCoroutine (TurnOffPanel ());
+	}
+
+	IEnumerator TurnOffPanel()
+	{
+		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(5f)); //wait
+		buildTowerPanel.SetActive(false);
+	}
+
 	//Tower option one
 	void OptionOne()
 	{

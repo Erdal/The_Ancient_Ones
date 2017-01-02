@@ -21,6 +21,17 @@ public class UpgradeTower : MonoBehaviour
 		towerUpgradePanel.SetActive (true); //Turn panel on
 	}
 
+	void OnMouseUp()
+	{
+		StartCoroutine (TurnOffPanel ());
+	}
+
+	IEnumerator TurnOffPanel()
+	{
+		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(5f)); //wait
+		towerUpgradePanel.SetActive(false);
+	}
+
 	void UpgradeThisTower()
 	{
 		if (gameManager.Blood >= basicStatsTowers.costOfUpgrade) 
