@@ -9,9 +9,11 @@ public class GamePlayController : MonoBehaviour
 
 	[HideInInspector] //Hide from unity inspector
 	public string chosenObjectsName; //Here we store the name of the BuildingSpot or tower we wish to upgrade
+	[HideInInspector] //Hide from unity inspector
+	public int maxWaves;
 
 	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
-    public Text nextWaveLabel; //Stores a reference to the next wave label at the top of the screen
+	public Text gameStatusLabel; //Stores a reference to the game status label in the center of the screen
     public bool gameOver = false; //store whether the player has lost the game.
     //public Text healthLabel; //Use for lives
 
@@ -34,20 +36,30 @@ public class GamePlayController : MonoBehaviour
         get { return wave; }
         set
         {
+			Debug.Log (wave);
+			Debug.Log (maxWaves);
             wave = value; //Set value
-            if (!gameOver) //If game isnt over
-            {
-                StartCoroutine(NextWaveCoroutine());
-                waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
-            }
+			//If game isnt over
+			if (!gameOver && (wave + 1) < maxWaves) 
+			{
+				StartCoroutine (GameStatusCoroutine ("NEXT WAVE"));
+				waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
+			} 
+			else if ((wave + 1) == maxWaves) //If last wave
+			{
+				StartCoroutine(GameStatusCoroutine ("LAST WAVE"));
+				waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
+			}
         }
     }
 
-    IEnumerator NextWaveCoroutine()
+	//Complete our game status message to the player
+	IEnumerator GameStatusCoroutine(string message)
     {
-        nextWaveLabel.gameObject.SetActive(true); //Activate label
-        yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(.7f)); //wait
-        nextWaveLabel.gameObject.SetActive(false); //Deactivate label
+		gameStatusLabel.text = message;
+        gameStatusLabel.gameObject.SetActive(true); //Activate label
+        yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(1f)); //wait
+        gameStatusLabel.gameObject.SetActive(false); //Deactivate label
     }
 
     // Use this for initialization

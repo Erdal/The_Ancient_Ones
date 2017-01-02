@@ -58,7 +58,7 @@ public class ShootEnemies : MonoBehaviour
 	//Our tower attack
 	void TowerAttack(Collider2D target)
 	{
-		GameObject bulletPrefab = (Resources.Load ("Prefabs/Towers/Attachments/Bullet1") as GameObject); //Prefab of our bullet
+		GameObject bulletPrefab = (Resources.Load ("Prefabs/Towers/Attachments/Bullet3") as GameObject); //Prefab of our bullet
 		//TODO: for testing purposes change the bullet prefab to the larger bullets on larger levels of tower
 		Vector3 startPostition = this.gameObject.transform.position; //Set the position of this object, since the attack will start from here
 		Vector3 targetPostition = target.transform.position; //Set the position of our target object, this is where the attack needs to go

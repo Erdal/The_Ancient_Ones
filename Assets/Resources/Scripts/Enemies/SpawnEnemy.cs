@@ -27,6 +27,7 @@ public class SpawnEnemy : MonoBehaviour
     int pick; //Used to store the enemy prefab of next wave
     void AddWaves(int numberOfWaves, int dangerRating)
     {
+		gameManager.maxWaves = numberOfWaves;
         //Go through and build all the waves
         for(int i = 0; i < numberOfWaves; i++)
         {
