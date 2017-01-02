@@ -49,6 +49,9 @@ public class ShootEnemies : MonoBehaviour
 				TowerAttack (target.GetComponent<Collider2D>()); //Call attack method and send through target collider2d
 				lastShotTime = Time.time; //Reset lastShotTime to now since we have attacked again
 			}
+
+			Vector3 direction = gameObject.transform.position - target.transform.position;
+			gameObject.transform.rotation = Quaternion.AngleAxis (Mathf.Atan2 (direction.y, direction.x) * 180 / Mathf.PI, new Vector3 (0, 0, 1));
 		}
 	}
 
@@ -68,6 +71,7 @@ public class ShootEnemies : MonoBehaviour
 		bulletActions.target = target.gameObject; //Set target for BulletActions Script
 		bulletActions.startPosition = startPostition; //Set startPostition for BulletActions Script
 		bulletActions.targetPosition = targetPostition; //Set targetPosition for BulletActions Script
+		bulletActions.basicStatsTowers = this.gameObject.GetComponent<BasicStatsTowers>();
 		AudioSource audioSource = this.gameObject.GetComponent<AudioSource> (); //Store the AudioSource component of this object
 		audioSource.PlayOneShot (audioSource.clip); //Play the sound of our object
 	}

@@ -10,7 +10,8 @@ public class BulletActions : MonoBehaviour
 	private float distance; //Store the distance left to travel
 	private float startTime; //Store the time our bullet started to move
 	private GamePlayController gameManager; //Stores our GamePlayController
-	private BasicStatsTowers basicStatsTowers; //Store the BasicStatsTowers script here to access towers stats
+	[HideInInspector] //Hide from unity inspector
+	public BasicStatsTowers basicStatsTowers; //Store the BasicStatsTowers script here to access towers stats, this will be given by the object that creates this bullet
 
 	// Use this for initialization
 	void Start() 
@@ -22,7 +23,6 @@ public class BulletActions : MonoBehaviour
 	void SetCompoinents()
 	{
 		gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
-		basicStatsTowers = this.gameObject.GetComponent<BasicStatsTowers>(); //Acces to our towers stats script
 		startTime = Time.time; //Set start time to current time since this starts right away
 		distance = Vector3.Distance (startPosition, targetPosition); //Set our distance to what is between our two varables
 	}
@@ -36,7 +36,16 @@ public class BulletActions : MonoBehaviour
 		{
 			if (target != null) 
 			{
-				
+				HealthBar healthBar = target.transform.FindChild ("HealthBar").gameObject.GetComponent<HealthBar> ();
+				healthBar.currentHealth -= Mathf.Max (basicStatsTowers.damage, 0);
+
+				if (healthBar.currentHealth <= 0) 
+				{
+					Destroy (target);
+					AudioSource audioSource = target.GetComponent<AudioSource> ();
+					AudioSource.PlayClipAtPoint (audioSource.clip, transform.position);
+					gameManager.Blood += 50;
+				}
 			}
 			Destroy (this.gameObject);
 		}
