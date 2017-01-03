@@ -14,7 +14,6 @@ public class BasicStatsTowers : MonoBehaviour
 
 	public void UpdateTowerCost()
 	{
-		Debug.Log ("WOW");
 		costOfUpgrade = currentTowerValue + 100; //Set new cost of upgrade
 		currentTowerValue = currentTowerValue + costOfUpgrade; //Set new value of current tower
 		towerLevel++; //Increase tower level

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,23 +9,39 @@ public class SpawnEnemy : MonoBehaviour
     public int timeBetweenWaves = 5; //How much time inbetween waves
 
     private EnemyPrefabs enemyPrefabs; //To connect to the EnemyPrefabs class that stores our enemy prefabs list
-    private GamePlayController gameManager;
+    private GamePlayController gameManager; //Store GamePlayController script in here
 
     private float lastSpawnTime; //When last spawned
     private int enemiesSpawned = 0; //How many enemys spawned
+
+	private GameObject gameStatusPanel;
+	private Button worldMapButton;
+	private Text winLossLabel;
+
 
     List<Waves> waves = new List<Waves>();//Store all the waves we want
 
     // Use this for initialization
     void Start()
     {
-        lastSpawnTime = Time.time; //Current time
-		enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>();
-        gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+		SetCompoinents ();
         AddWaves(5, 500); //We want 5 random waves
     }
 
+	//Set our varable compoinents
+	void SetCompoinents()
+	{
+		lastSpawnTime = Time.time; //Current time
+		enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>();  //Connecting the enemyPrefabs to the EnemyPrefabs component
+		gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+
+		gameStatusPanel = gameManager.gameStatusPanel; //Store our GameStatusPanel here
+		worldMapButton = gameManager.worldMapButton; //Store WorldMapButton in here
+		winLossLabel = gameManager.winLossLabel; //Store WinLossLabel in here
+	}
+
     int pick; //Used to store the enemy prefab of next wave
+	GameObject tempEnemyPrefab; //So we dont effect the actuelly prefab we will use this to create our enemys
     void AddWaves(int numberOfWaves, int dangerRating)
     {
 		gameManager.maxWaves = numberOfWaves;
@@ -32,20 +49,19 @@ public class SpawnEnemy : MonoBehaviour
         for(int i = 0; i < numberOfWaves; i++)
         {
             pick = Random.Range(0, enemyPrefabs.enemyPrefabList.Count); //Which enemy prefab is picked
-			waves.Add(new Waves(enemyPrefabs.enemyPrefabList[pick], 2, 5, dangerRating)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units, danger rating
+			tempEnemyPrefab = enemyPrefabs.enemyPrefabList[pick]; //Make our temp a compy of our chosen prefab
+			waves.Add(new Waves(tempEnemyPrefab, 2, 5, dangerRating)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units, danger rating
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("5");
         int currentWave = gameManager.Wave; //Get the index of the current wave
         if (currentWave < waves.Count) //Check if last wave
         {
-            //calculate how much time passed since the last enemy spawn and whether it’s time to spawn an enemy. 
-            float timeInterval = Time.time - lastSpawnTime;
-            float spawnInterval = waves[currentWave]._spawnInterval;
+			float timeInterval = Time.time - lastSpawnTime; //calculate how much time passed since the last enemy spawn 
+            float spawnInterval = waves[currentWave]._spawnInterval; //Store spawn interbal time
             //Here you consider two cases. If it’s the first enemy in the wave, you check whether timeInterval is bigger than timeBetweenWaves.
             //Otherwise, you check whether timeInterval is bigger than this wave’s spawnInterval. 
             //In either case, you make sure you haven’t spawned all the enemies for this wave.
@@ -69,7 +85,8 @@ public class SpawnEnemy : MonoBehaviour
         }
         else
         {
-            //TODO: Do something here for when the user wins!
+			gameStatusPanel.SetActive (true);
+            //TODO: Finish this off
         }
     }
 }

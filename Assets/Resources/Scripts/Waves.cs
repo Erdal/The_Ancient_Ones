@@ -6,11 +6,13 @@ public class Waves : MonoBehaviour
     protected GameObject enemyPrefab; //Here we store the enemy prefab for this wave
     protected float spawnInterval; //The time between enemies in the wave in seconds
     protected int maxEnemies; //quantity of enemies spawning in this wave
-    protected int dangerPoints;
+    protected int dangerPoints; //Danger points of wave
 
     private int healthCost = 1; //Cost of health
     private int speedCost = 10; //Cost of speed
     private int armourCost = 5; //Cost of armour
+	private int bloodValue; //Store the blood value of this unit
+	private int xpBloodValue; //Store the xp blood value of this unit
 
 	public Waves(GameObject EnemyPrefab, float SpawnInterval, int MaxEnemies, int DangerPoints)
     {
@@ -18,12 +20,11 @@ public class Waves : MonoBehaviour
         spawnInterval = SpawnInterval;
         maxEnemies = MaxEnemies;
         dangerPoints = DangerPoints;
-        //ChangingStats();
     }
 
-	void ChangingStats(int MaxEnemies, int DangerPoints)
+	void ChangingStats()
     {
-        //enemyPrefab.GetComponent<BasicStats>().health = 195;
+		//enemyPrefab.GetComponent<BasicStatsEnemies>().health = 195;
     }
 
     //Getter and Setter

@@ -38,6 +38,7 @@ public class UpgradeTower : MonoBehaviour
 		{
 			basicStatsTowers.UpdateTowerCost();
 			gameManager.Blood -= basicStatsTowers.costOfUpgrade;
+			towerUpgradePanel.SetActive (false);
 		} 
 		else 
 		{

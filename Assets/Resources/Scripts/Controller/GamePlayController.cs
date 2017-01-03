@@ -1,21 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GamePlayController : MonoBehaviour
 {
+	//Tower Upgrade Panel Components
 	public GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here
 	public Button upgradeButton; //Store our UpgradeButton in here from our TowerUpgradePanel
 	public Button fuseButton; //Store our FuseButton in here from our TowerUpgradePanel
 	public Button sellButton; //Store our SellButton in here from our TowerUpgradePanel
 
+	//Build Tower Panel Components
 	public GameObject buildTowerPanel; //Store our BuildTowerPanel in here
 	public Button towerOneButton; //Store our TowerOneButton in here from our BuildTowerPanel
+
+
+	//Game Status Panel Components
+	public GameObject gameStatusPanel; //Store our GameStatusPanel in here
+	public Button worldMapButton; //Store our WorldMapButton in here from our GameStatusPanel
+	public Text winLossLabel; //Store our WinLossLabel in here from our GameStatusPanel
 
 	[HideInInspector] //Hide from unity inspector
 	public string chosenObjectsName; //Here we store the name of the BuildingSpot or tower we wish to upgrade
 	[HideInInspector] //Hide from unity inspector
 	public int maxWaves; //Stores the number of waves that the user is currently trying to beat
+	[HideInInspector] //Hide from unity inspector
+	public int currentNumberOfTowers = 0; //Used to help name tower clones so that they can be called differently
 
 	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
 	public Text gameStatusLabel; //Stores a reference to the game status label in the center of the screen
@@ -94,6 +105,11 @@ public class GamePlayController : MonoBehaviour
 		Blood = 80000;
 		Lives = 10;
 		Wave = 0;
+	}
+
+	public void WorldMapScene()
+	{
+		SceneManager.LoadScene ("World_Map");
 	}
 	
 	// Update is called once per frame

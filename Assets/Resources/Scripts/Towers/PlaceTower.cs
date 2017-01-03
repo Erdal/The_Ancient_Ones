@@ -43,8 +43,10 @@ public class PlaceTower : MonoBehaviour
 			GameObject tempChosenTower = Instantiate(chosenTower); //Use this to create our tower so we dont make perminent changes to our prefabs during runtime
 			tempChosenTower.transform.position = GameObject.Find(gameManager.chosenObjectsName).transform.position; //Set the towers position to the same position of the building spot (This gameObject)
 			tempChosenTower.transform.rotation = GameObject.Find(gameManager.chosenObjectsName).transform.rotation; //Set the towers rotation to the same rotation of the building spot (This gameObject)
+			tempChosenTower.name = "Tower " + gameManager.currentNumberOfTowers; //Create new name for tower
+			gameManager.currentNumberOfTowers++; //Increase teh current number of towers
 			basicStatsTowers = tempChosenTower.GetComponent<BasicStatsTowers>(); //Grab the BasicStatsTowers of this object and store it
-			basicStatsTowers.towerLevel = 1; //Change level of twoer to 1
+			basicStatsTowers.towerLevel = 1; //Change level of tower to 1
 			basicStatsTowers.damage = 10; //Tower has an attack of 10
 			basicStatsTowers.attackSpeed = 10; //Tower has an attack speed of 10
 			basicStatsTowers.currentTowerValue = 200; //Towers current value
