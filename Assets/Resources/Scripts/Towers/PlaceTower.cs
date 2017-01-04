@@ -30,7 +30,7 @@ public class PlaceTower : MonoBehaviour
 			buildTowerPanel.SetActive (false); //Turn panel off, this is for testing purposes
 			chosenTower = (Resources.Load("Prefabs/Towers/TowerOne") as GameObject); //Load TowerOne prefab into chosenTower
 			GameObject tempChosenTower = Instantiate(chosenTower); //Use this to create our tower so we dont make perminent changes to our prefabs during runtime
-			GameObject useingObject = GameObject.Find(gameManager.chosenObjectsName);
+			GameObject useingObject = GameObject.Find(gameManager.chosenObjectsName); //Store object we want to use for changing our new towers spot in scene
 			tempChosenTower.transform.position = new Vector3 (useingObject.transform.position.x, useingObject.transform.position.y, 1); //Set the towers position to the same position of the building spot (This gameObject)
 			tempChosenTower.transform.rotation = GameObject.Find(gameManager.chosenObjectsName).transform.rotation; //Set the towers rotation to the same rotation of the building spot (This gameObject)
 			tempChosenTower.name = "Tower_" + gameManager.currentNumberOfTowers; //Create new name for tower
