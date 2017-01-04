@@ -12,7 +12,7 @@ public class BasicStatsTowers : MonoBehaviour
 	public float currentTowerValue; //Store current money spent on tower
 	public float costOfUpgrade; //Store the price of next tower upgrade
 
-	public void UpdateTowerCost()
+	public void UpgradeTower()
 	{
 		costOfUpgrade = currentTowerValue + 100; //Set new cost of upgrade
 		currentTowerValue = currentTowerValue + costOfUpgrade; //Set new value of current tower
