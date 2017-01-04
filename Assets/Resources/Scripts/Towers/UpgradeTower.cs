@@ -29,7 +29,7 @@ public class UpgradeTower : MonoBehaviour
 			gameManager.Blood -= basicStatsTowers.costOfUpgrade;
 			towerUpgradePanel.SetActive (false);
 		} 
-		else 
+		else if(gameManager.Blood < basicStatsTowers.costOfUpgrade && gameManager.chosenObjectsName == upgradeThisTowerOnCLick)
 		{
 			StartCoroutine (gameManager.GameStatusCoroutine ("Cant Upgrade"));
 		}

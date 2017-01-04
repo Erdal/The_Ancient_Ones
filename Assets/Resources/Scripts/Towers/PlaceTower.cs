@@ -41,6 +41,7 @@ public class PlaceTower : MonoBehaviour
 			basicStatsTowers.attackSpeed = 10; //Tower has an attack speed of 10
 			basicStatsTowers.currentTowerValue = 200; //Towers current value
 			gameManager.Blood = gameManager.Blood - 200; //Take away 200 blood for building this tower
+			gameObject.GetComponent<SpriteRenderer>().sprite = null;
 			switchToUpgradeScript();
 		}
 	}
