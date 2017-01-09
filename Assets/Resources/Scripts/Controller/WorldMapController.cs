@@ -17,11 +17,10 @@ public class WorldMapController : MonoBehaviour
 	{
 		gameManagerController = GameObject.Find ("GameManagerController"); //Store the GameManagerController in here
 	}
-	
-	// Update is called once per frame
-	void Update() 
+
+	public void UpgradeScene()
 	{
-	
+		SceneManager.LoadScene ("Upgrade_Scene"); //Go to scene
 	}
 
 	public void Region1Map1()

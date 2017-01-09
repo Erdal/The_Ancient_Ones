@@ -16,8 +16,9 @@ public class MainMenuController : MonoBehaviour
 	
 	}
 
+	//Go to the World_Map scene
     public void WorldMap()
     {
-        SceneManager.LoadScene("World_Map");
+        SceneManager.LoadScene("World_Map"); //Go to scene
     }
 }
