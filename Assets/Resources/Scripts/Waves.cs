@@ -22,8 +22,9 @@ public class Waves : MonoBehaviour
         dangerPoints = DangerPoints;
     }
 
-	void ChangingStats()
+	void ChangingEnemyStats()
     {
+		int pointForThisUnit = dangerPoints / maxEnemies;
 		//enemyPrefab.GetComponent<BasicStatsEnemies>().health = 195;
     }
 

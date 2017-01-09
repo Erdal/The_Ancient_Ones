@@ -12,6 +12,28 @@ public class EnemyPrefabs : MonoBehaviour
 		
     }
 
+	public void ChangePrefabStats(string nameOfPrefab, float health, float speed, float armour)
+	{
+		int i = 0;
+		while (enemyPrefabList [i].name != nameOfPrefab) 
+		{
+			i++;
+		}
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().health = health;
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().speed = speed;
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().armour = armour;
+	}
+
+	public void ChangeAllPrefabsStats(string nameOfPrefab, float health, float speed, float armour)
+	{
+		for (int i = 0; i < enemyPrefabList.Count; i++) 
+		{
+			enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().health = health;
+			enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().speed = speed;
+			enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().armour = armour;
+		}
+	}
+
 	//This method allows us to change our enemyPrefabList into what ever we need
 	public void ChooseEnemyList(int choice)
 	{
@@ -32,7 +54,7 @@ public class EnemyPrefabs : MonoBehaviour
     public void AllEnemies()
     {
         enemyPrefabList.Clear();
-		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/Cave_Man") as GameObject));
+		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/CaveMan") as GameObject));
 		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/BugOne") as GameObject));
 		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/BugTwo") as GameObject));
 		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/BlueBird") as GameObject));
@@ -43,7 +65,7 @@ public class EnemyPrefabs : MonoBehaviour
 	public void RegionOneList()
 	{
 		enemyPrefabList.Clear();
-		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/Cave_Man") as GameObject));
+		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/CaveMan") as GameObject));
 		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/BugOne") as GameObject));
 		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/BugTwo") as GameObject));
 		enemyPrefabList.Add((Resources.Load("Prefabs/Enemies/BlueBird") as GameObject));

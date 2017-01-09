@@ -67,7 +67,6 @@ public class SpawnEnemy : MonoBehaviour
             //In either case, you make sure you haven’t spawned all the enemies for this wave.
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave]._maxEnemies)
             {
-                //If necessary, spawn an enemy by instantiating a copy of enemyPrefab. You also increase the enemiesSpawned count.
                 lastSpawnTime = Time.time; //Your about to spawn an emeny now so make it equell the current time
                 GameObject newEnemy = (GameObject)Instantiate(waves[currentWave]._enemyPrefab); //creating new enewmy for this wave
                 newEnemy.GetComponent<MoveEnemies>().waypoints = waypoints; //Sets the correct waypoint to follow for new enemy
