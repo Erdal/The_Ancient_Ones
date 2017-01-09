@@ -9,7 +9,7 @@ public class BulletActions : MonoBehaviour
 
 	private float distance; //Store the distance left to travel
 	private float startTime; //Store the time our bullet started to move
-	private GamePlayController gameManager; //Stores our GamePlayController
+	private GamePlayController gamePlayManager; //Stores our GamePlayController
 	[HideInInspector] //Hide from unity inspector
 	public BasicStatsTowers basicStatsTowers; //Store the BasicStatsTowers script here to access towers stats, this will be given by the object that creates this bullet
 
@@ -22,7 +22,7 @@ public class BulletActions : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
+		gamePlayManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
 		startTime = Time.time; //Set start time to current time since this starts right away
 		distance = Vector3.Distance (startPosition, targetPosition); //Set our distance to what is between our two varables
 	}
@@ -44,7 +44,7 @@ public class BulletActions : MonoBehaviour
 					Destroy (target);
 					AudioSource audioSource = target.GetComponent<AudioSource> ();
 					AudioSource.PlayClipAtPoint (audioSource.clip, transform.position);
-					gameManager.Blood += 50;
+					gamePlayManager.Blood += 50;
 				}
 			}
 			Destroy (this.gameObject);

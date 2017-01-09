@@ -9,7 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     public int timeBetweenWaves = 5; //How much time inbetween waves
 
     private EnemyPrefabs enemyPrefabs; //To connect to the EnemyPrefabs class that stores our enemy prefabs list
-    private GamePlayController gameManager; //Store GamePlayController script in here
+	private GamePlayController gamePlayManager; //Store GamePlayController script in here
 
     private float lastSpawnTime; //When last spawned
     private int enemiesSpawned = 0; //How many enemys spawned
@@ -32,19 +32,19 @@ public class SpawnEnemy : MonoBehaviour
 	void SetCompoinents()
 	{
 		lastSpawnTime = Time.time; //Current time
-		enemyPrefabs = GameObject.Find("GamePlayController").GetComponent<EnemyPrefabs>();  //Connecting the enemyPrefabs to the EnemyPrefabs component
-		gameManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+		enemyPrefabs = GameObject.Find("GameManagerController").GetComponent<EnemyPrefabs>();  //Connecting the enemyPrefabs to the EnemyPrefabs component
+		gamePlayManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
 
-		gameStatusPanel = gameManager.gameStatusPanel; //Store our GameStatusPanel here
-		worldMapButton = gameManager.worldMapButton; //Store WorldMapButton in here
-		winLossLabel = gameManager.winLossLabel; //Store WinLossLabel in here
+		gameStatusPanel = gamePlayManager.gameStatusPanel; //Store our GameStatusPanel here
+		worldMapButton = gamePlayManager.worldMapButton; //Store WorldMapButton in here
+		winLossLabel = gamePlayManager.winLossLabel; //Store WinLossLabel in here
 	}
 
     int pick; //Used to store the enemy prefab of next wave
 	GameObject tempEnemyPrefab; //So we dont effect the actuelly prefab we will use this to create our enemys
     void AddWaves(int numberOfWaves, int dangerRating)
     {
-		gameManager.maxWaves = numberOfWaves;
+		gamePlayManager.maxWaves = numberOfWaves;
         //Go through and build all the waves
         for(int i = 0; i < numberOfWaves; i++)
         {
@@ -57,7 +57,7 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int currentWave = gameManager.Wave; //Get the index of the current wave
+        int currentWave = gamePlayManager.Wave; //Get the index of the current wave
         if (currentWave < waves.Count) //Check if last wave
         {
 			float timeInterval = Time.time - lastSpawnTime; //calculate how much time passed since the last enemy spawn 
@@ -78,7 +78,7 @@ public class SpawnEnemy : MonoBehaviour
             //You check the number of enemies on screen. If there are none and it was the last enemy in the wave you spawn the next wave
             if (enemiesSpawned == waves[currentWave]._maxEnemies && GameObject.FindGameObjectWithTag("Enemies") == null)
             {
-                gameManager.Wave++; //Increase wave
+                gamePlayManager.Wave++; //Increase wave
                 enemiesSpawned = 0; //Set back to 0
                 lastSpawnTime = Time.time; //Set to current time
             }
