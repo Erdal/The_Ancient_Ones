@@ -14,11 +14,11 @@ public class RegionConditions : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		
+		enemyPrefabs = gameObject.GetComponent<EnemyPrefabs> (); //Store the EnemtPrefabs script from this object into this varable
 	}
 
     public void RegionOne()
     {
-		//.GetComponent<BasicStatsEnemies>().health = 195;
+		enemyPrefabs.ChooseEnemyList (2); //Set region one enemy list
     }
 }
