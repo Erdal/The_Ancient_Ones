@@ -64,7 +64,6 @@ public class SpawnEnemy : MonoBehaviour
             float spawnInterval = waves[currentWave]._spawnInterval; //Store spawn interbal time
             //Here you consider two cases. If it’s the first enemy in the wave, you check whether timeInterval is bigger than timeBetweenWaves.
             //Otherwise, you check whether timeInterval is bigger than this wave’s spawnInterval. 
-            //In either case, you make sure you haven’t spawned all the enemies for this wave.
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || timeInterval > spawnInterval) && enemiesSpawned < waves[currentWave]._maxEnemies)
             {
                 lastSpawnTime = Time.time; //Your about to spawn an emeny now so make it equell the current time

@@ -11,8 +11,6 @@ public class Waves : MonoBehaviour
     private int healthCost = 1; //Cost of health
     private int speedCost = 10; //Cost of speed
     private int armourCost = 5; //Cost of armour
-	private int bloodValue; //Store the blood value of this unit
-	private int xpBloodValue; //Store the xp blood value of this unit
 
 	public Waves(GameObject EnemyPrefab, float SpawnInterval, int MaxEnemies, int DangerPoints)
     {

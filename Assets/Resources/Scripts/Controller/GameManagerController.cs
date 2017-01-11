@@ -8,7 +8,7 @@ public class GameManagerController : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-	
+		
 	}
 	                                                                                                                                                                                                                                                                                       
 	void Awake()

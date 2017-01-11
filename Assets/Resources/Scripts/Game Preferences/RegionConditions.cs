@@ -20,6 +20,6 @@ public class RegionConditions : MonoBehaviour
     public void RegionOne()
     {
 		enemyPrefabs.ChooseEnemyList (2); //Set region one enemy list
-		enemyPrefabs.ChangeAllPrefabsStats("GreenBird", 25, 3, 0);
+		enemyPrefabs.ChangeAllPrefabsStats(25, 3, 0); //Changing all prefabs stats
     }
 }

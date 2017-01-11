@@ -12,26 +12,36 @@ public class EnemyPrefabs : MonoBehaviour
 		
     }
 
+	//Change a specific prefab
 	public void ChangePrefabStats(string nameOfPrefab, float health, float speed, float armour)
 	{
-		int i = 0;
+		int i = 0; //Counter
+		//Check if correct prefab has been found, if not increase i and contiue to check
 		while (enemyPrefabList [i].name != nameOfPrefab) 
 		{
-			i++;
+			i++; //Increase by 1
 		}
-		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().health = health;
-		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().speed = speed;
-		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().armour = armour;
+
+		SetStatsPrefab (i, health, speed, armour);
 	}
 
-	public void ChangeAllPrefabsStats(string nameOfPrefab, float health, float speed, float armour)
+	//Change all prefabs
+	public void ChangeAllPrefabsStats(float health, float speed, float armour)
 	{
 		for (int i = 0; i < enemyPrefabList.Count; i++) 
 		{
-			enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().health = health;
-			enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().speed = speed;
-			enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().armour = armour;
+			SetStatsPrefab (i, health, speed, armour);
 		}
+	}
+
+	//Sets stats for prefab
+	private void SetStatsPrefab(int i, float health, float speed, float armour)
+	{
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().health = health;
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().speed = speed;
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().armour = armour;
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().bloodValue = health + speed + armour;
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().xpBloodValue = (health / 10) + speed + (armour / 5);
 	}
 
 	//This method allows us to change our enemyPrefabList into what ever we need
