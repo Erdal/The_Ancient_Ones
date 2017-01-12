@@ -11,7 +11,7 @@ public static class GamePreferences
 	//
 	public static string BasicDamageIncrease = "BasicDamageIncrease";
 	public static string BasicAttackSpeedIncrease = "BasicAttackSpeedIncrease";
-	public static string BasicRangeInscrease = "BasicRangeInscrease";
+	public static string BasicRangeIncrease = "BasicRangeIncrease";
 	public static string BloodIncrease = "BloodIncrease";
 	public static string BloodXpIncrease = "BloodXpIncrease";
 
@@ -53,14 +53,14 @@ public static class GamePreferences
 		return PlayerPrefs.GetInt (GamePreferences.BasicAttackSpeedIncrease);
 	}
 
-	public static void SetBasicRangeInscrease(int level)
+	public static void SetBasicRangeIncrease(int level)
 	{
-		PlayerPrefs.SetInt (GamePreferences.BasicRangeInscrease, level);
+		PlayerPrefs.SetInt (GamePreferences.BasicRangeIncrease, level);
 	}
 
-	public static int GetBasicRangeInscrease()
+	public static int GetBasicRangeIncrease()
 	{
-		return PlayerPrefs.GetInt (GamePreferences.BasicRangeInscrease);
+		return PlayerPrefs.GetInt (GamePreferences.BasicRangeIncrease);
 	}
 
 	public static void SetBloodIncrease(int level)

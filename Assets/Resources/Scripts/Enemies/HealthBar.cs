@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour 
 {
-	public float maxHealth; //Store teh max health of this object
+	public float maxHealth; //Store the max health of this object
 	public float currentHealth; //Store the value of the health as it currently is
 	public float originalScale; //Store the original size of our health bar
 
