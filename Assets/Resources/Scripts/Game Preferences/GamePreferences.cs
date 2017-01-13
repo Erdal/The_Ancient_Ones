@@ -9,6 +9,12 @@ public static class GamePreferences
 	//
 	public static string BoolMusic = "BoolMusic";
 
+	//Level
+	public static string PlayerLevel = "PlayerLevel";
+	public static string UnspentTons = "UnspentTons";
+	public static string SpentTons = "SpentTons";
+	public static string BloodTonsBought = "BloodTonsBought";
+
 	//Upgrades
 	//
 	public static string BasicDamageIncrease = "BasicDamageIncrease";
@@ -35,6 +41,60 @@ public static class GamePreferences
 	public static int GetBoolMusic()
 	{
 		return PlayerPrefs.GetInt (GamePreferences.BoolMusic);
+	}
+
+	//Level
+	//
+	public static void SetPlayerLevel(int yesNo)
+	{
+		if (yesNo == 1) 
+		{
+			int tempCurrentLevel = GetPlayerLevel ();
+			PlayerPrefs.SetInt (GamePreferences.PlayerLevel, tempCurrentLevel + 1);
+		}
+		else if (yesNo == 0) 
+		{
+			PlayerPrefs.SetInt (GamePreferences.PlayerLevel, 0);
+		} 
+	}
+	public static int GetPlayerLevel()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.PlayerLevel);
+	}
+
+	public static void SetUnspentTons()
+	{
+		int tempCurrentLevel = GetPlayerLevel ();
+		int tempBloodTons = GetBloodTonsBought ();
+		int tempSpentPoints = GetSpentTons ();
+		PlayerPrefs.SetInt (GamePreferences.UnspentTons, ((tempCurrentLevel * 5) + tempBloodTons) - tempSpentPoints);
+	}
+
+	public static int GetUnspentTons()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.UnspentTons);
+	}
+
+	public static void SetSpentTons(int currentSpentPoints)
+	{
+		PlayerPrefs.SetInt (GamePreferences.SpentTons, currentSpentPoints);
+	}
+
+	public static int GetSpentTons()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.SpentTons);
+	}
+
+	//Never re-set
+	public static void SetBloodTonsBought(int additionalPoints)
+	{
+		int tempCurrentBloodTons = GetBloodTonsBought ();
+		PlayerPrefs.SetInt (GamePreferences.BloodTonsBought, tempCurrentBloodTons + additionalPoints);
+	}
+
+	public static int GetBloodTonsBought()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.BloodTonsBought);
 	}
 
 	//Upgrade Getters and Setters
@@ -118,6 +178,13 @@ public static class GamePreferences
 	{
 		//Player Prefered Settings
 		SetBoolMusic(1);
+
+		//Level
+		//
+		SetPlayerLevel(0);
+		SetBloodTonsBought (0);
+		SetUnspentTons();
+		SetSpentTons (0);
 
 		//Upgrades
 		//

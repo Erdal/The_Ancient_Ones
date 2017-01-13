@@ -45,8 +45,6 @@ public class UpgradeController : MonoBehaviour
 
 	public void OnHoverObjectDescription(string objectName)
 	{
-		MethodInfo methodInfoSet = prefTypeHoverDescription.GetMethod ("Set" + objectName + "Description"); //Get this method by name
-		methodInfoSet.Invoke (null, null); //Call our method
 		MethodInfo methodInfoGet = prefTypeHoverDescription.GetMethod ("Get" + objectName + "Description"); //Get this method by name
 
 		onHoverText.text = methodInfoGet.Invoke (null, null).ToString();

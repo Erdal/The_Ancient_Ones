@@ -8,7 +8,13 @@ public class GameManagerController : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-		
+		SetCompoinents ();
+	}
+
+	//Set our varable compoinents
+	void SetCompoinents()
+	{
+		HoverDescriptions.SetAllDescription ();
 	}
 	                                                                                                                                                                                                                                                                                       
 	void Awake()

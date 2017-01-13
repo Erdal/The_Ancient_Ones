@@ -3,16 +3,59 @@ using System.Collections;
 
 public static class HoverDescriptions
 {
-	//Upgrade Descriptions
+	//All Purpose Descriptions
 	//
+	public static string WorldMapButtonDescription = "WorldMapButtonDescription";
+
+	//Upgrade_Scene Descriptions
+	//
+	//Basics
+	public static string UnspentTonsLabelDescription = "UnspentPointsLabelDescription";
+	public static string BloodGainedLabelDescription = "BloodGainedLabelDescription";
+	//Upgrades
 	public static string BasicDamageIncreaseDescription = "BasicDamageIncreaseDescription";
 	public static string BasicAttackSpeedIncreaseDescription = "BasicAttackSpeedIncreaseDescription";
 	public static string BasicRangeIncreaseDescription = "BasicRangeIncreaseDescription";
 	public static string BloodIncreaseDescription = "BloodIncreaseDescription";
 	public static string BloodXpIncreaseDescription = "BloodXpIncreaseDescription";
 
-	//Upgrade Descriptions Getters and Setters
+	//All Purpose Descriptions Getters and Setters
 	//
+	public static void SetWorldMapButtonDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.WorldMapButtonDescription, "The World Map button takes you back to the world map as you could have guessed");
+	}
+
+	public static string GetWorldMapButtonDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.WorldMapButtonDescription);
+	}
+
+	//Upgrade_Scene Descriptions Getters and Setters
+	//
+	//Basics
+	public static void SetUnspentTonsLabelDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.UnspentTonsLabelDescription, "You current have " + GamePreferences.GetUnspentTons () + " tons of blood to spend on upgrades, choose carfully");
+	}
+
+	public static string GetUnspentTonsLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.UnspentTonsLabelDescription);
+	}
+
+	public static void SetBloodGainedLabelDescription()
+	{
+		int tempCalculater = (GamePreferences.GetUnspentTons() * 5);
+		PlayerPrefs.SetString (HoverDescriptions.BloodGainedLabelDescription, "You gain 5 points of blood for every unspent ton of blood you have at the begining of any map you play, with your current unspent points you will start with " + tempCalculater + " at the beggining of your next game!");
+	}
+
+	public static string GetBloodGainedLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.BloodGainedLabelDescription);
+	}
+
+	//Upgrades
 	public static void SetBasicDamageIncreaseDescription()
 	{
 		int effect = GamePreferences.GetBasicDamageIncrease () * 5;
@@ -66,5 +109,25 @@ public static class HoverDescriptions
 	public static string GetBloodXpIncreaseDescription()
 	{
 		return PlayerPrefs.GetString (HoverDescriptions.BloodXpIncreaseDescription);
+	}
+
+	//Set all descriptions
+	public static void SetAllDescription()
+	{
+		//All Purpose Descriptions
+		//
+		SetWorldMapButtonDescription ();
+
+		//Upgrade_Scene Descriptions
+		//
+		//Basics
+		SetUnspentTonsLabelDescription();
+		SetBloodGainedLabelDescription ();
+		//Upgrades
+		SetBasicDamageIncreaseDescription();
+		SetBasicAttackSpeedIncreaseDescription();
+		SetBasicRangeIncreaseDescription();
+		SetBloodIncreaseDescription ();
+		SetBloodXpIncreaseDescription ();
 	}
 }
