@@ -113,6 +113,7 @@ public static class GamePreferences
 		return PlayerPrefs.GetFloat (GamePreferences.RegionScore1_1);
 	}
 
+	//Reset all preferences
 	public static void ResetGame()
 	{
 		//Player Prefered Settings

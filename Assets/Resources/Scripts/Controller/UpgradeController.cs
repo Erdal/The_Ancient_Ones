@@ -7,7 +7,11 @@ using UnityEngine.UI;
 
 public class UpgradeController : MonoBehaviour 
 {
-	Type prefType; //Used to store the class we wish to connect to using MethodInfo class
+	public GameObject onHoverPanel; //Store our OnHoverPanel here
+	public Text onHoverText; //Store our OnHoverText from our OnHoverPanel here
+	
+	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
+	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
 	string[] NamesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease"}; //Used to store the names of our upgrades
 	
 	// Use this for initialization
@@ -18,7 +22,8 @@ public class UpgradeController : MonoBehaviour
 
 	void SetCompoinents()
 	{
-		prefType = typeof(GamePreferences); //Get type of class
+		prefTypeGamePreferences = typeof(GamePreferences); //Get type of class GamePreferences
+		prefTypeHoverDescription = typeof(HoverDescriptions); //Get type of class HoverDescriptions
 		UpgradeLevelLables(); //Set all our level tags so player knows what level each upgrade is at
 	}
 
@@ -27,8 +32,7 @@ public class UpgradeController : MonoBehaviour
 	{
 		foreach (string name in NamesOfUpgrades) 
 		{
-			Debug.Log (name);
-			MethodInfo methodInfoGet = prefType.GetMethod ("Get" + name); //Get this method by name
+			MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + name); //Get this method by name
 			GameObject.Find(name).transform.FindChild("LevelLabel").GetComponent<Text>().text = methodInfoGet.Invoke (null, null).ToString();
 		}
 	}
@@ -37,6 +41,21 @@ public class UpgradeController : MonoBehaviour
 	public void WorldMap()
 	{
 		SceneManager.LoadScene("World_Map"); //Go to scene
+	}
+
+	public void OnHoverObjectDescription(string objectName)
+	{
+		MethodInfo methodInfoSet = prefTypeHoverDescription.GetMethod ("Set" + objectName + "Description"); //Get this method by name
+		methodInfoSet.Invoke (null, null); //Call our method
+		MethodInfo methodInfoGet = prefTypeHoverDescription.GetMethod ("Get" + objectName + "Description"); //Get this method by name
+
+		onHoverText.text = methodInfoGet.Invoke (null, null).ToString();
+		onHoverPanel.gameObject.SetActive (true);
+	}
+
+	public void OffHoverObjectDescription()
+	{
+		onHoverPanel.gameObject.SetActive (false);
 	}
 
 	//Increase level of selected upgrade
@@ -53,7 +72,7 @@ public class UpgradeController : MonoBehaviour
 
 	void IncreaseDecreaseLevel(string objectName, bool isPositive)
 	{
-		MethodInfo methodInfoGet = prefType.GetMethod ("Get" + objectName); //Get this method by name
+		MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + objectName); //Get this method by name
 
 		var tempValueHolder = methodInfoGet.Invoke (null, null); //Call method and chuck the return value into tempValueHolder
 		int tempValue = Convert.ToInt32(tempValueHolder); //Convert tempValueHolder into a int and place in tempValue
@@ -72,7 +91,7 @@ public class UpgradeController : MonoBehaviour
 			parameters = new object[]{ };
 		}
 
-		MethodInfo methodInfoSet = prefType.GetMethod ("Set" + objectName); //Get this method by name
+		MethodInfo methodInfoSet = prefTypeGamePreferences.GetMethod ("Set" + objectName); //Get this method by name
 		methodInfoSet.Invoke (null, parameters); //Call method and send parameter with it
 		GameObject.Find(objectName).transform.FindChild("LevelLabel").GetComponent<Text>().text = methodInfoGet.Invoke (null, null).ToString();
 	}
