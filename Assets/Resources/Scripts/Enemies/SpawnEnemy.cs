@@ -14,9 +14,10 @@ public class SpawnEnemy : MonoBehaviour
     private float lastSpawnTime; //When last spawned
     private int enemiesSpawned = 0; //How many enemys spawned
 
-	private GameObject gameStatusPanel;
-	private Button worldMapButton;
-	private Text winLossLabel;
+	//GameStatusPanel panel stuff
+	private GameObject gameStatusPanel; //store the GameStatusPanel
+	private Button worldMapButton; //Store its button
+	private Text winLossLabel; //Store its label
 
 
     List<Waves> waves = new List<Waves>();//Store all the waves we want

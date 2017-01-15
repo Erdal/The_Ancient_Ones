@@ -44,7 +44,7 @@ public class BulletActions : MonoBehaviour
 					Destroy (target);
 					AudioSource audioSource = target.GetComponent<AudioSource> ();
 					AudioSource.PlayClipAtPoint (audioSource.clip, transform.position);
-					gamePlayManager.Blood += 50;
+					gamePlayManager.Blood += target.GetComponent<BasicStatsEnemies>().bloodValue;
 				}
 			}
 			Destroy (this.gameObject);

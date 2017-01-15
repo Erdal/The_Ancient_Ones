@@ -57,7 +57,8 @@ public class GamePlayController : MonoBehaviour
 			if (lives <= 0)
 			{
 				gameOver = true; //Game is over
-				StartCoroutine (GameStatusCoroutine ("GAME OVER"));
+				winLossLabel.text = "GAME OVER"; //Change text to game over text
+				gameStatusPanel.SetActive (true); //Activate our GameStatusPanel panel
 				Time.timeScale = 0; //Freeze time
 			}
 		}
@@ -102,7 +103,7 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		Blood = 80000;
+		Blood = 4000;
 		Lives = 10;
 		Wave = 0;
 	}
@@ -110,6 +111,7 @@ public class GamePlayController : MonoBehaviour
 	public void WorldMapScene()
 	{
 		SceneManager.LoadScene ("World_Map");
+		Time.timeScale = 1; //Unfreeze Time
 	}
 	
 	// Update is called once per frame

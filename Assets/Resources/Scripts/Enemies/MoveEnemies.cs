@@ -44,7 +44,7 @@ public class MoveEnemies : MonoBehaviour
     {
         StartStats();;
         lastWaypointSwitchTime = Time.time; //Initializes lastWaypointSwitchTime to the current time.
-        RotateIntoMoveDirection();
+		RotateIntoMoveDirection(); //Rotates the enemy so that it always looks forward
     }
 
     // Update is called once per frame
@@ -87,7 +87,7 @@ public class MoveEnemies : MonoBehaviour
     public float DistanceToGoal()
     {
         float distance = 0;
-        distance += Vector3.Distance(gameObject.transform.position, waypoints[currentWaypoint + 1].transform.position);
+		distance += Vector3.Distance(gameObject.transform.position, waypoints[currentWaypoint + 1].transform.position); //Calculates the difference between two Vector3 instances.
         for (int i = currentWaypoint + 1; i < waypoints.Length - 1; i++)
         {
             Vector3 startPosition = waypoints[i].transform.position;

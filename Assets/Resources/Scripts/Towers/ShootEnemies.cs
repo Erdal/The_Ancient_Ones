@@ -18,7 +18,7 @@ public class ShootEnemies : MonoBehaviour
 	void SetCompoinents()
 	{
 		enemiesInRange = new List<GameObject>(); //Setting up the list
-		lastShotTime = Time.time; //Set to the current time
+		lastShotTime = 0; //Set to the current time
 		fireRate = 60/this.gameObject.GetComponent<BasicStatsTowers>().attackSpeed; //Calculate fire rate by divinding 60 by the attack speed of the tower to determin how many bullets this tower can fire per minute
 	}
 	
