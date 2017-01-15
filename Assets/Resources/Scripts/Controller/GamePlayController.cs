@@ -31,10 +31,11 @@ public class GamePlayController : MonoBehaviour
 	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
 	public Text gameStatusLabel; //Stores a reference to the game status label in the center of the screen
 	public Text livesLabel; //Stores a reference to the health label label in the right corner of the screen
-	public Text bloodLabel;//Stores a reference to the blood label label in the center top part of the screen
+	public Text bloodLabel;//Stores a reference to the bloodlabel label in the center top part of the screen
+	public Text xpBloodLabel; //Stores a reference to the xpbloodlabel label
     public bool gameOver = false; //store whether the player has lost the game.
 
-	private float blood; //store the current blood total
+	private float blood; //Store the current blood total
 	public float Blood
     {
 		get { return blood; }  //Return value
@@ -44,6 +45,17 @@ public class GamePlayController : MonoBehaviour
 			bloodLabel.GetComponent<Text>().text = "BLOOD: " + blood; //Set the blood label
         }
     }
+
+	private float xpBlood; //Store the current xp blood total
+	public float XpBlood
+	{
+		get{ return xpBlood; }
+		set
+		{
+			xpBlood = value; //Set value
+			xpBloodLabel.GetComponent<Text>().text = "XP Blood: " + xpBlood;
+		}
+	}
 
 	private int lives; //Store the current amount of lives the user has left
 	public int Lives
@@ -104,6 +116,7 @@ public class GamePlayController : MonoBehaviour
 	void SetCompoinents()
 	{
 		Blood = 4000;
+		XpBlood = 0;
 		Lives = 10;
 		Wave = 0;
 	}

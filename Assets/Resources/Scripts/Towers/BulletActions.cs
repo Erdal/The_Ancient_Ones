@@ -44,7 +44,8 @@ public class BulletActions : MonoBehaviour
 					Destroy (target);
 					AudioSource audioSource = target.GetComponent<AudioSource> ();
 					AudioSource.PlayClipAtPoint (audioSource.clip, transform.position);
-					gamePlayManager.Blood += target.GetComponent<BasicStatsEnemies>().bloodValue;
+					gamePlayManager.Blood += target.GetComponent<BasicStatsEnemies>().bloodValue; //Add the blood value of the target killed to the total blood the player has in match
+					gamePlayManager.XpBlood += target.GetComponent<BasicStatsEnemies> ().xpBloodValue; //Add the xp blood value of the target killed to the total xp blood the player has in match
 				}
 			}
 			Destroy (this.gameObject);
