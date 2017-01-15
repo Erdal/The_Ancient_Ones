@@ -16,6 +16,17 @@ public class GameManagerController : MonoBehaviour
 	{
 		HoverDescriptions.SetAllDescription ();
 	}
+
+	public void UpdateTowerPrefabs(GameObject currentTower)
+	{
+		float tempMethodHolder = GamePreferences.GetBasicDamageIncrease ();
+		currentTower.GetComponent<BasicStatsTowers> ().damage = (((tempMethodHolder * 5) / 100) * 10) + 10;
+		tempMethodHolder = GamePreferences.GetBasicAttackSpeedIncrease();
+		currentTower.GetComponent<BasicStatsTowers> ().attackSpeed = (((tempMethodHolder * 5) / 100) * 10) + 10;
+		tempMethodHolder = GamePreferences.GetBasicRangeIncrease ();
+		currentTower.GetComponent<BasicStatsTowers>().range = (((tempMethodHolder * 5) / 100) * 2) + 2;
+		currentTower.GetComponent<CircleCollider2D> ().radius = currentTower.GetComponent<BasicStatsTowers> ().range;
+	}
 	                                                                                                                                                                                                                                                                                       
 	void Awake()
 	{

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class WorldMapController : MonoBehaviour 
 {
+	[HideInInspector]
 	public GameObject gameManagerController; //Store our gameManagerController here
 	
 	// Use this for initialization

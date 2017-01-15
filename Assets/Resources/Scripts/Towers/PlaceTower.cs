@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PlaceTower : MonoBehaviour 
 {
 	GamePlayController gamePlayManager; //Stores our GamePlayController
+	GameManagerController gameManagerController; //Store our GameManagerController script
 
 	private GameObject buildTowerPanel; //Store our BuildTowerPanel in here from the GamePlayController
 	private Button towerOneButton; //Store our towerOneButton in here from the GamePlayController
@@ -37,8 +38,7 @@ public class PlaceTower : MonoBehaviour
 			gamePlayManager.currentNumberOfTowers++; //Increase teh current number of towers
 			basicStatsTowers = tempChosenTower.GetComponent<BasicStatsTowers>(); //Grab the BasicStatsTowers of this object and store it
 			basicStatsTowers.towerLevel = 1; //Change level of tower to 1
-			basicStatsTowers.damage = 10; //Tower has an attack of 10
-			basicStatsTowers.attackSpeed = 10; //Tower has an attack speed of 10
+			gameManagerController.UpdateTowerPrefabs(tempChosenTower); //Update certain parts of the towers stats according to the current upgrades used
 			basicStatsTowers.currentTowerValue = 200; //Towers current value
 			gamePlayManager.Blood = gamePlayManager.Blood - 200; //Take away 200 blood for building this tower
 			gameObject.GetComponent<SpriteRenderer>().sprite = null;
@@ -65,6 +65,7 @@ public class PlaceTower : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
+		gameManagerController = GameObject.Find ("GameManagerController").GetComponent<GameManagerController> (); //Access to GameManagerController script
 		gamePlayManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
 		buildTowerPanel = gamePlayManager.buildTowerPanel; //Sets towerUpgradePanel to the towerUpgradePanel in GamePlayController, which is connected to the TowerUpgradePanel in scene
 		towerOneButton = gamePlayManager.towerOneButton; //Sets optionOneButton to the optionOneButton in GamePlayController, which is connected to the OptionOneButton in scene

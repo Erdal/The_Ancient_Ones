@@ -7,8 +7,14 @@ using UnityEngine.UI;
 
 public class UpgradeController : MonoBehaviour 
 {
+	//OnHoverPanel
 	public GameObject onHoverPanel; //Store our OnHoverPanel here
 	public Text onHoverText; //Store our OnHoverText from our OnHoverPanel here
+
+	//Stats
+	public GameObject statsTable; //Store our stats table in scene here
+	public Text unspentTonsLabel; //Store out UnspentTonsLabel label from our stats table
+	public Text bloodGainedLabel; //Store our BloodGainedLabel label from our stats table
 	
 	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
@@ -25,6 +31,10 @@ public class UpgradeController : MonoBehaviour
 		prefTypeGamePreferences = typeof(GamePreferences); //Get type of class GamePreferences
 		prefTypeHoverDescription = typeof(HoverDescriptions); //Get type of class HoverDescriptions
 		UpgradeLevelLables(); //Set all our level tags so player knows what level each upgrade is at
+
+		unspentTonsLabel.text = GamePreferences.GetUnspentTons ().ToString ();; //Set our tag to show how many upgrade points are left
+		int tempBloodGained = GamePreferences.GetUnspentTons() * 5;
+		bloodGainedLabel.text = tempBloodGained.ToString();
 	}
 
 	//Set upgrade level tags

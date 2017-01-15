@@ -8,6 +8,7 @@ public class BasicStatsTowers : MonoBehaviour
 	public int towerLevel; //Level of tower
 	public float damage; //Towers damage
 	public float attackSpeed; //Towers attack speed
+	public float range; //Towers attack range
 
 	public float currentTowerValue; //Store current money spent on tower
 	public float costOfUpgrade; //Store the price of next tower upgrade
@@ -19,5 +20,7 @@ public class BasicStatsTowers : MonoBehaviour
 		towerLevel++; //Increase tower level
 		damage = damage * 2; //Double tower damage
 		attackSpeed = attackSpeed * 2; //Double tower attack speed
+		range = range * 1.2f; //Increase range by 50%
+		gameObject.GetComponent<CircleCollider2D>().radius = range; //Sets the circle colliders range
 	}
 }
