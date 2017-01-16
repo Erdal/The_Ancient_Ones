@@ -15,11 +15,13 @@ public class UpgradeController : MonoBehaviour
 	public GameObject statsTable; //Store our stats table in scene here
 	public Text unspentTonsLabel; //Store out UnspentTonsLabel label from our stats table
 	public Text bloodGainedLabel; //Store our BloodGainedLabel label from our stats table
-	public Text CurrentStatusLabel; //Store the CurrentStatusLabel here
+	public Text currentLevelLabel; //Store our CurrentLevelLabel leabel from our stats table
+
+	public Text currentStatusLabel; //Store the CurrentStatusLabel here
 	
 	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
-	string[] NamesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease"}; //Used to store the names of our upgrades
+	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease"}; //Used to store the names of our upgrades
 	
 	// Use this for initialization
 	void Start () 
@@ -36,12 +38,13 @@ public class UpgradeController : MonoBehaviour
 		unspentTonsLabel.text = GamePreferences.GetUnspentTons ().ToString ();; //Set our tag to show how many upgrade points are left
 		int tempBloodGained = GamePreferences.GetUnspentTons() * 5;
 		bloodGainedLabel.text = tempBloodGained.ToString();
+		currentLevelLabel.text = "Level: " + GamePreferences.GetPlayerLevel ().ToString ();
 	}
 
 	//Set upgrade level tags
 	void UpgradeLevelLables()
 	{
-		foreach (string name in NamesOfUpgrades) 
+		foreach (string name in namesOfUpgrades) 
 		{
 			MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + name); //Get this method by name
 			GameObject.Find(name).transform.FindChild("LevelLabel").GetComponent<Text>().text = methodInfoGet.Invoke (null, null).ToString();
@@ -93,10 +96,10 @@ public class UpgradeController : MonoBehaviour
 
 	public IEnumerator StatusCoroutine(string message)
 	{
-		CurrentStatusLabel.text = message; //Change label text
-		CurrentStatusLabel.gameObject.SetActive(true); //Activate label
+		currentStatusLabel.text = message; //Change label text
+		currentStatusLabel.gameObject.SetActive(true); //Activate label
 		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(1f)); //wait
-		CurrentStatusLabel.gameObject.SetActive(false); //Deactivate label
+		currentStatusLabel.gameObject.SetActive(false); //Deactivate label
 	}
 
 	void IncreaseDecreaseLevel(string objectName, bool isPositive)

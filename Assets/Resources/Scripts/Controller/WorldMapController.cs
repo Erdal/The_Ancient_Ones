@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Reflection;
+using System;
 
 public class WorldMapController : MonoBehaviour 
 {
@@ -11,11 +13,13 @@ public class WorldMapController : MonoBehaviour
 	//TopPanel elements
 	public Text upgradeLabel; //Store UpgradeLabel label from the TopPanel
 
-	string[] NamesOfMaps = { "Map1.1Button" };
+	string[] namesOfMaps = { "Map1_1" };
+	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	
 	// Use this for initialization
 	void Start() 
 	{
+		Debug.Log ("n");
 		SetCompoinents (); //Set our varable compoinents
 	}
 
@@ -23,12 +27,19 @@ public class WorldMapController : MonoBehaviour
 	void SetCompoinents()
 	{
 		gameManagerController = GameObject.Find ("GameManagerController"); //Store the GameManagerController in here
+		prefTypeGamePreferences = typeof(GamePreferences); //Get type of class GamePreferences
 		upgradeLabel.text = GamePreferences.GetPlayerLevel().ToString(); //Set the text of this label to be the value of the players current level
+		UpdateMapScores(); //Update all the map scores for the user to see
 	}
 
+	//Update all the map scores for the user to see
 	void UpdateMapScores()
 	{
-		
+		foreach (string map in namesOfMaps) 
+		{
+			MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + map); //Get this method by name
+			GameObject.Find(map).transform.FindChild("HighScore").GetComponent<Text>().text = methodInfoGet.Invoke (null, null).ToString();
+		}
 	}
 
 	//Go to upgrade scene

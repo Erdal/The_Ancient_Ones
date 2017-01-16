@@ -25,11 +25,11 @@ public static class GamePreferences
 
 	//Region/Map Won
 	//
-	public static string BoolRegionMapWon1_1 = "RegionMapWon1_1";
+	public static string BoolMap1_1Won = "BoolMap1_1Won";
 
 	//Region/Map Score
 	//
-	public static string RegionScore1_1 = "RegionScore1_1";
+	public static string Map1_1 = "Map1_1";
 
 	//Player Prefered Settings Getters and Setters
 	//
@@ -160,28 +160,28 @@ public static class GamePreferences
 
 	//Region/Map Won Getters and Setters
 	//
-	public static void SetBoolRegionMapWon1_1(int yesNo)
+	public static void SetBoolMap1_1Won(int yesNo)
 	{
-		PlayerPrefs.SetInt (GamePreferences.BoolRegionMapWon1_1, yesNo);
+		PlayerPrefs.SetInt (GamePreferences.BoolMap1_1Won, yesNo);
 		//TODO: Set new description here when description is created
 	}
 
-	public static int GetBoolRegionMapWon1_1()
+	public static int GetBoolMap1_1Won()
 	{
-		return PlayerPrefs.GetInt (GamePreferences.BoolRegionMapWon1_1);
+		return PlayerPrefs.GetInt (GamePreferences.BoolMap1_1Won);
 	}
 
 	//Region/Map Score Getters and Setters
 	//
-	public static void SetRegionScore1_1(float score)
+	public static void SetMap1_1(float score)
 	{
-		PlayerPrefs.SetFloat (GamePreferences.RegionScore1_1, score);
+		PlayerPrefs.SetFloat (GamePreferences.Map1_1, score);
 		//TODO: Set new description here when description is created
 	}
 
-	public static float GetRegionScore1_1()
+	public static float GetMap1_1()
 	{
-		return PlayerPrefs.GetFloat (GamePreferences.RegionScore1_1);
+		return PlayerPrefs.GetFloat (GamePreferences.Map1_1);
 	}
 
 	//Reset all preferences
@@ -207,10 +207,10 @@ public static class GamePreferences
 
 		//Region/Map Won
 		//
-		SetBoolRegionMapWon1_1(0);
+		SetBoolMap1_1Won(0);
 
 		//Region/Map Score
 		//
-		SetRegionScore1_1(0);
+		SetMap1_1(0);
 	}
 }
