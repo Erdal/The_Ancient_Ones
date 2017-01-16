@@ -15,6 +15,7 @@ public class UpgradeController : MonoBehaviour
 	public GameObject statsTable; //Store our stats table in scene here
 	public Text unspentTonsLabel; //Store out UnspentTonsLabel label from our stats table
 	public Text bloodGainedLabel; //Store our BloodGainedLabel label from our stats table
+	public Text CurrentStatusLabel; //Store the CurrentStatusLabel here
 	
 	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
@@ -75,7 +76,25 @@ public class UpgradeController : MonoBehaviour
 	//Decrease level of selected upgrade
 	public void DecreaseLevel(string objectName)
 	{
-		IncreaseDecreaseLevel (objectName, false); //Decrease level
+		MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + objectName); //Get this method by name
+		var tempValueHolder = methodInfoGet.Invoke (null, null); //Call method and chuck the return value into tempValueHolder
+		if (Convert.ToInt32 (tempValueHolder) > 0) 
+		{
+			IncreaseDecreaseLevel (objectName, false); //Decrease level
+		} 
+		else 
+		{
+			StartCoroutine (StatusCoroutine ("Can't upgrade, Not enough tons of blood"));
+
+		}
+	}
+
+	public IEnumerator StatusCoroutine(string message)
+	{
+		CurrentStatusLabel.text = message; //Change label text
+		CurrentStatusLabel.gameObject.SetActive(true); //Activate label
+		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(1f)); //wait
+		CurrentStatusLabel.gameObject.SetActive(false); //Deactivate label
 	}
 
 	void IncreaseDecreaseLevel(string objectName, bool isPositive)

@@ -10,6 +10,8 @@ public class WorldMapController : MonoBehaviour
 
 	//TopPanel elements
 	public Text upgradeLabel; //Store UpgradeLabel label from the TopPanel
+
+	string[] NamesOfMaps = { "Map1.1Button" };
 	
 	// Use this for initialization
 	void Start() 
@@ -24,11 +26,18 @@ public class WorldMapController : MonoBehaviour
 		upgradeLabel.text = GamePreferences.GetPlayerLevel().ToString(); //Set the text of this label to be the value of the players current level
 	}
 
+	void UpdateMapScores()
+	{
+		
+	}
+
+	//Go to upgrade scene
 	public void UpgradeScene()
 	{
 		SceneManager.LoadScene ("Upgrade_Scene"); //Go to scene
 	}
 
+	//Go to the correct scene for the correct map button being clicked
 	public void RegionMapChoice(string RegionMapName)
 	{
 		gameManagerController.GetComponent<RegionConditions> ().RegionOne (); //Set the region one conditions
