@@ -19,7 +19,6 @@ public class WorldMapController : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-		Debug.Log ("n");
 		SetCompoinents (); //Set our varable compoinents
 	}
 

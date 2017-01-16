@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BasicStatsTowers : MonoBehaviour 
 { 
@@ -20,7 +21,7 @@ public class BasicStatsTowers : MonoBehaviour
 		towerLevel++; //Increase tower level
 		damage = damage * 2; //Double tower damage
 		attackSpeed = attackSpeed * 2; //Double tower attack speed
-		range = range * 1.2f; //Increase range by 50%
+		range = (float)Math.Round((range * 1.2f), 2); //Increase range by 50% and round to 2 decimal places
 		gameObject.GetComponent<CircleCollider2D>().radius = range; //Sets the circle colliders range
 	}
 }

@@ -24,12 +24,14 @@ public class UpgradeTower : MonoBehaviour
 		}
 	}
 
+	//Used to upgrade tower
 	void UpgradeThisTower()
 	{
+		//If user has enough blood and the script is connected to the right tower
 		if (gamePlayManager.Blood >= basicStatsTowers.costOfUpgrade && gamePlayManager.chosenObjectsName == upgradeThisTowerOnCLick) 
 		{
-			basicStatsTowers.UpgradeTower();
 			gamePlayManager.Blood -= basicStatsTowers.costOfUpgrade;
+			basicStatsTowers.UpgradeTower();
 			towerUpgradePanel.SetActive (false);
 		} 
 		else if(gamePlayManager.Blood < basicStatsTowers.costOfUpgrade && gamePlayManager.chosenObjectsName == upgradeThisTowerOnCLick)
