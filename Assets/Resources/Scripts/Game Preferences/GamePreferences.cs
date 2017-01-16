@@ -55,7 +55,8 @@ public static class GamePreferences
 		else if (yesNo == 0) 
 		{
 			PlayerPrefs.SetInt (GamePreferences.PlayerLevel, 0);
-		} 
+		}
+		//TODO: Set new description here when description is created
 	}
 	public static int GetPlayerLevel()
 	{
@@ -68,6 +69,7 @@ public static class GamePreferences
 		int tempBloodTons = GetBloodTonsBought ();
 		int tempSpentPoints = GetSpentTons ();
 		PlayerPrefs.SetInt (GamePreferences.UnspentTons, ((tempCurrentLevel * 5) + tempBloodTons) - tempSpentPoints);
+		HoverDescriptions.SetUnspentTonsLabelDescription(); //Set the new description
 	}
 
 	public static int GetUnspentTons()
@@ -78,6 +80,7 @@ public static class GamePreferences
 	public static void SetSpentTons(int currentSpentPoints)
 	{
 		PlayerPrefs.SetInt (GamePreferences.SpentTons, currentSpentPoints);
+		//TODO: Set new description here when description is created
 	}
 
 	public static int GetSpentTons()
@@ -90,6 +93,7 @@ public static class GamePreferences
 	{
 		int tempCurrentBloodTons = GetBloodTonsBought ();
 		PlayerPrefs.SetInt (GamePreferences.BloodTonsBought, tempCurrentBloodTons + additionalPoints);
+		//TODO: Set new description here when description is created
 	}
 
 	public static int GetBloodTonsBought()
@@ -102,6 +106,7 @@ public static class GamePreferences
 	public static void SetBasicDamageIncrease(int level)
 	{
 		PlayerPrefs.SetInt (GamePreferences.BasicDamageIncrease, level);
+		HoverDescriptions.SetBasicDamageIncreaseDescription (); //Set the new description
 	}
 
 	public static int GetBasicDamageIncrease()
@@ -112,6 +117,7 @@ public static class GamePreferences
 	public static void SetBasicAttackSpeedIncrease(int level)
 	{
 		PlayerPrefs.SetInt (GamePreferences.BasicAttackSpeedIncrease, level);
+		HoverDescriptions.SetBasicAttackSpeedIncreaseDescription (); //Set the new description
 	}
 
 	public static int GetBasicAttackSpeedIncrease()
@@ -122,6 +128,7 @@ public static class GamePreferences
 	public static void SetBasicRangeIncrease(int level)
 	{
 		PlayerPrefs.SetInt (GamePreferences.BasicRangeIncrease, level);
+		HoverDescriptions.SetBasicRangeIncreaseDescription (); //Set the new description
 	}
 
 	public static int GetBasicRangeIncrease()
@@ -132,6 +139,7 @@ public static class GamePreferences
 	public static void SetBloodIncrease(int level)
 	{
 		PlayerPrefs.SetInt (GamePreferences.BloodIncrease, level);
+		HoverDescriptions.SetBloodIncreaseDescription (); //Set the new description
 	}
 
 	public static int GetBloodIncrease()
@@ -142,6 +150,7 @@ public static class GamePreferences
 	public static void SetBloodXpIncrease(int level)
 	{
 		PlayerPrefs.SetInt (GamePreferences.BloodXpIncrease, level);
+		HoverDescriptions.SetBloodXpIncreaseDescription(); //Set the new description
 	}
 
 	public static int GetBloodXpIncrease()
@@ -154,6 +163,7 @@ public static class GamePreferences
 	public static void SetBoolRegionMapWon1_1(int yesNo)
 	{
 		PlayerPrefs.SetInt (GamePreferences.BoolRegionMapWon1_1, yesNo);
+		//TODO: Set new description here when description is created
 	}
 
 	public static int GetBoolRegionMapWon1_1()
@@ -166,6 +176,7 @@ public static class GamePreferences
 	public static void SetRegionScore1_1(float score)
 	{
 		PlayerPrefs.SetFloat (GamePreferences.RegionScore1_1, score);
+		//TODO: Set new description here when description is created
 	}
 
 	public static float GetRegionScore1_1()

@@ -71,20 +71,22 @@ public class UpgradeController : MonoBehaviour
 	public void IncreaseLevel(string objectName)
 	{
 		IncreaseDecreaseLevel (objectName, true); //Increase level
+		OnHoverObjectDescription(objectName); //Show updated hover panel
 	}
 
 	//Decrease level of selected upgrade
 	public void DecreaseLevel(string objectName)
 	{
-		MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + objectName); //Get this method by name
-		var tempValueHolder = methodInfoGet.Invoke (null, null); //Call method and chuck the return value into tempValueHolder
+		MethodInfo methodInfoGetGamePreferences = prefTypeGamePreferences.GetMethod ("Get" + objectName); //Get this method by name
+		var tempValueHolder = methodInfoGetGamePreferences.Invoke (null, null); //Call method and chuck the return value into tempValueHolder
 		if (Convert.ToInt32 (tempValueHolder) > 0) 
 		{
 			IncreaseDecreaseLevel (objectName, false); //Decrease level
+			OnHoverObjectDescription(objectName); //Show updated hover panel
 		} 
 		else 
 		{
-			StartCoroutine (StatusCoroutine ("Can't upgrade, Not enough tons of blood"));
+			StartCoroutine (StatusCoroutine ("Lowest level this upgrade can go, you cant downgrade anymore"));
 
 		}
 	}
