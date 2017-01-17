@@ -17,10 +17,11 @@ public class GameManagerController : MonoBehaviour
 		HoverDescriptions.SetAllDescription ();
 	}
 
+	//Update Tower prefab
 	public void UpdateTowerPrefabs(GameObject currentTower)
 	{
 		float tempMethodHolder = GamePreferences.GetBasicDamageIncrease ();
-		currentTower.GetComponent<BasicStatsTowers> ().damage = (((tempMethodHolder * 5) / 100) * 10) + 10;
+		currentTower.GetComponent<BasicStatsTowers> ().damage = (((tempMethodHolder * 5) / 100) * 10) + 10;  //Set damage
 		tempMethodHolder = GamePreferences.GetBasicAttackSpeedIncrease();
 		currentTower.GetComponent<BasicStatsTowers> ().attackSpeed = (((tempMethodHolder * 5) / 100) * 10) + 10;
 		tempMethodHolder = GamePreferences.GetBasicRangeIncrease ();

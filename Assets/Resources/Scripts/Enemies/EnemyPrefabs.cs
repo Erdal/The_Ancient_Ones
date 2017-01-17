@@ -40,8 +40,8 @@ public class EnemyPrefabs : MonoBehaviour
 		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().health = health;
 		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().speed = speed;
 		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().armour = armour;
-		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().bloodValue = health + speed + armour;
-		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().xpBloodValue = (health / 10) + speed + (armour / 5);
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().bloodValue = (health + speed + armour) * ((GamePreferences.GetBloodIncrease() * 0.05f) + 1);
+		enemyPrefabList [i].GetComponent<BasicStatsEnemies> ().xpBloodValue = ((health / 10) + speed + (armour / 5)) * ((GamePreferences.GetBloodXpIncrease() * 0.05f) + 1);
 	}
 
 	//This method allows us to change our enemyPrefabList into what ever we need

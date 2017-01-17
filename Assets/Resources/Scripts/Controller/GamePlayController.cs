@@ -115,7 +115,7 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		Blood = 4000;
+		Blood = 500;
 		XpBlood = 0;
 		Lives = 10;
 		Wave = 0;
