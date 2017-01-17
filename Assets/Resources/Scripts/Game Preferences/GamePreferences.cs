@@ -11,6 +11,7 @@ public static class GamePreferences
 
 	//Level
 	public static string PlayerLevel = "PlayerLevel";
+	public static string LeftOverExperence = "LeftOverExperence";
 	public static string UnspentTons = "UnspentTons";
 	public static string SpentTons = "SpentTons";
 	public static string BloodTonsBought = "BloodTonsBought";
@@ -45,22 +46,26 @@ public static class GamePreferences
 
 	//Level
 	//
-	public static void SetPlayerLevel(int yesNo)
+	public static void SetPlayerLevel(int level)
 	{
-		if (yesNo == 1) 
-		{
-			int tempCurrentLevel = GetPlayerLevel ();
-			PlayerPrefs.SetInt (GamePreferences.PlayerLevel, tempCurrentLevel + 1);
-		}
-		else if (yesNo == 0) 
-		{
-			PlayerPrefs.SetInt (GamePreferences.PlayerLevel, 0);
-		}
+		PlayerPrefs.SetInt (GamePreferences.PlayerLevel, level);
 		//TODO: Set new description here when description is created
 	}
+
 	public static int GetPlayerLevel()
 	{
 		return PlayerPrefs.GetInt (GamePreferences.PlayerLevel);
+	}
+
+	public static void SetLeftOverExperence(float experence)
+	{
+		PlayerPrefs.SetFloat (GamePreferences.LeftOverExperence, experence);
+		//TODO: Set new description here when description is created
+	}
+
+	public static float GetLeftOverExperence()
+	{
+		return PlayerPrefs.GetFloat (GamePreferences.LeftOverExperence);
 	}
 
 	public static void SetUnspentTons()
@@ -193,7 +198,8 @@ public static class GamePreferences
 		//Level
 		//
 		SetPlayerLevel(0);
-		SetBloodTonsBought (0);
+		SetLeftOverExperence (0);
+		//SetBloodTonsBought (0); // Dont reset this
 		SetUnspentTons();
 		SetSpentTons (0);
 
