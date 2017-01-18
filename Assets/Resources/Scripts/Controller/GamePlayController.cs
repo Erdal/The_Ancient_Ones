@@ -64,7 +64,7 @@ public class GamePlayController : MonoBehaviour
 		set
 		{
 			lives = value; //Set value
-			livesLabel.text = lives.ToString(); //Set lives label to current amount of lives
+			livesLabel.text = "Lives: " + lives.ToString(); //Set lives label to current amount of lives
 			//If lives run out
 			if (lives <= 0)
 			{

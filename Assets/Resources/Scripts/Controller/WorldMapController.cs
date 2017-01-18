@@ -36,7 +36,7 @@ public class WorldMapController : MonoBehaviour
 	{
 		foreach (string map in namesOfMaps) 
 		{
-			MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + map); //Get this method by name
+			MethodInfo methodInfoGet = prefTypeGamePreferences.GetMethod ("Get" + map + "Score"); //Get this method by name
 			GameObject.Find(map).transform.FindChild("HighScore").GetComponent<Text>().text = methodInfoGet.Invoke (null, null).ToString();
 		}
 	}
@@ -51,6 +51,7 @@ public class WorldMapController : MonoBehaviour
 	public void RegionMapChoice(string RegionMapName)
 	{
 		gameManagerController.GetComponent<RegionConditions> ().RegionOne (); //Set the region one conditions
+		gameManagerController.GetComponent<GameManagerController>().nameOfCurrentMap = RegionMapName;
 		SceneManager.LoadScene (RegionMapName + "Scene"); //Go to scene
 	}
 }

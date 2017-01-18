@@ -30,7 +30,7 @@ public static class GamePreferences
 
 	//Region/Map Score
 	//
-	public static string Map1_1 = "Map1_1";
+	public static string Map1_1Score = "Map1_1Score";
 
 	//Player Prefered Settings Getters and Setters
 	//
@@ -178,15 +178,15 @@ public static class GamePreferences
 
 	//Region/Map Score Getters and Setters
 	//
-	public static void SetMap1_1(float score)
+	public static void SetMap1_1Score(float score)
 	{
-		PlayerPrefs.SetFloat (GamePreferences.Map1_1, score);
+		PlayerPrefs.SetFloat (GamePreferences.Map1_1Score, score);
 		//TODO: Set new description here when description is created
 	}
 
-	public static float GetMap1_1()
+	public static float GetMap1_1Score()
 	{
-		return PlayerPrefs.GetFloat (GamePreferences.Map1_1);
+		return PlayerPrefs.GetFloat (GamePreferences.Map1_1Score);
 	}
 
 	//Reset all preferences
@@ -217,6 +217,6 @@ public static class GamePreferences
 
 		//Region/Map Score
 		//
-		SetMap1_1(0);
+		SetMap1_1Score(0);
 	}
 }

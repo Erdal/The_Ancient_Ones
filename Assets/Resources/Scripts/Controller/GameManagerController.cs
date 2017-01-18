@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Reflection;
+using UnityEngine.UI;
 
 public class GameManagerController : MonoBehaviour 
 {
 	public static GameManagerController instance;
+	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 
+	public string nameOfCurrentMap; //Here we streo teh name of the current map being playied by the user
 	float experenceNeededToLevel = 0; //Store experences needed to level up
 
 	// Use this for initialization
@@ -17,6 +22,7 @@ public class GameManagerController : MonoBehaviour
 	void SetCompoinents()
 	{
 		HoverDescriptions.SetAllDescription ();
+		prefTypeGamePreferences = typeof(GamePreferences); //Get type of class GamePreferences
 	}
 
 	//Update Tower prefab
@@ -29,6 +35,21 @@ public class GameManagerController : MonoBehaviour
 		tempMethodHolder = GamePreferences.GetBasicRangeIncrease ();
 		currentTower.GetComponent<BasicStatsTowers>().range = (((tempMethodHolder * 0.05f) + 1) * 2);
 		currentTower.GetComponent<CircleCollider2D> ().radius = currentTower.GetComponent<BasicStatsTowers> ().range;
+	}
+
+	//Check to see if the user has a new highscore
+	public void CheckNewHighScore(float currentScore)
+	{
+		MethodInfo methodInfoGetGamePreferences = prefTypeGamePreferences.GetMethod ("Get" + nameOfCurrentMap + "Score"); //Get this method by name
+		Debug.Log(methodInfoGetGamePreferences.Invoke (null, null).ToString());
+		float tempHighScore = (float)methodInfoGetGamePreferences.Invoke (null, null);
+		if (currentScore > tempHighScore) 
+		{
+			MethodInfo methodInfoSet = prefTypeGamePreferences.GetMethod ("Set" + nameOfCurrentMap + "Score"); //Get this method by name
+			object[] parameters = new object[] {currentScore}; //Our parameters that we plan to send
+			methodInfoSet.Invoke (null, parameters); //Call method and send parameter with it
+		}
+		Debug.Log(methodInfoGetGamePreferences.Invoke (null, null).ToString());
 	}
 
 	//Here we check if the user can level and level them if we can

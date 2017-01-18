@@ -9,7 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     public int timeBetweenWaves = 5; //How much time inbetween waves
 
     private EnemyPrefabs enemyPrefabs; //To connect to the EnemyPrefabs class that stores our enemy prefabs list
-	private GamePlayController gamePlayManager; //Store GamePlayController script in here
+	private GamePlayController gamePlayController; //Store GamePlayController script in here
 
     private float lastSpawnTime; //When last spawned
     private int enemiesSpawned = 0; //How many enemys spawned
@@ -35,18 +35,18 @@ public class SpawnEnemy : MonoBehaviour
 	{
 		lastSpawnTime = Time.time; //Current time
 		enemyPrefabs = GameObject.Find("GameManagerController").GetComponent<EnemyPrefabs>();  //Connecting the enemyPrefabs to the EnemyPrefabs component
-		gamePlayManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+		gamePlayController = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
 
-		gameStatusPanel = gamePlayManager.gameStatusPanel; //Store our GameStatusPanel here
-		worldMapButton = gamePlayManager.worldMapButton; //Store WorldMapButton in here
-		winLossLabel = gamePlayManager.winLossLabel; //Store WinLossLabel in here
+		gameStatusPanel = gamePlayController.gameStatusPanel; //Store our GameStatusPanel here
+		worldMapButton = gamePlayController.worldMapButton; //Store WorldMapButton in here
+		winLossLabel = gamePlayController.winLossLabel; //Store WinLossLabel in here
 	}
 
     int pick; //Used to store the enemy prefab of next wave
 	GameObject tempEnemyPrefab; //So we dont effect the actuelly prefab we will use this to create our enemys
     void AddWaves(int numberOfWaves, int dangerRating)
     {
-		gamePlayManager.maxWaves = numberOfWaves;
+		gamePlayController.maxWaves = numberOfWaves;
         //Go through and build all the waves
         for(int i = 0; i < numberOfWaves; i++)
         {
@@ -58,7 +58,7 @@ public class SpawnEnemy : MonoBehaviour
 
 	void CommitWaves()
 	{
-		int currentWave = gamePlayManager.Wave; //Get the index of the current wave
+		int currentWave = gamePlayController.Wave; //Get the index of the current wave
 		if (currentWave < waves.Count) //Check if last wave
 		{
 			float timeInterval = Time.time - lastSpawnTime; //calculate how much time passed since the last enemy spawn 
@@ -79,7 +79,7 @@ public class SpawnEnemy : MonoBehaviour
 			//You check the number of enemies on screen. If there are none and it was the last enemy in the wave you spawn the next wave
 			else if (enemiesSpawned == waves [currentWave]._maxEnemies && GameObject.FindGameObjectWithTag ("Enemies") == null) 
 			{
-				gamePlayManager.Wave++; //Increase wave
+				gamePlayController.Wave++; //Increase wave
 				enemiesSpawned = 0; //Set back to 0
 				lastSpawnTime = Time.time; //Set to current time
 				StartCoroutine (WaitCommitWaves ());
@@ -93,6 +93,7 @@ public class SpawnEnemy : MonoBehaviour
 		{
 			gameStatusPanel.SetActive (true);
 			GameObject.Find("GameManagerController").GetComponent<GameManagerController>().CheckIfCanLevel(GameObject.Find ("GamePlayController").GetComponent<GamePlayController> ().XpBlood);
+			GameObject.Find ("GameManagerController").GetComponent<GameManagerController> ().CheckNewHighScore(GameObject.Find ("GamePlayController").GetComponent<GamePlayController> ().XpBlood);
 			Time.timeScale = 0;
 			//TODO: Finish this off
 		}
