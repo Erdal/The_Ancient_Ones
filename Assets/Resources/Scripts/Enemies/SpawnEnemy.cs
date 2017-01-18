@@ -96,7 +96,6 @@ public class SpawnEnemy : MonoBehaviour
 			Time.timeScale = 0;
 			//TODO: Finish this off
 		}
-		Debug.Log ("6");
 	}
 
 	IEnumerator WaitCommitWaves()

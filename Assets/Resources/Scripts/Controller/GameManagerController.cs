@@ -23,11 +23,11 @@ public class GameManagerController : MonoBehaviour
 	public void UpdateTowerPrefabs(GameObject currentTower)
 	{
 		float tempMethodHolder = GamePreferences.GetBasicDamageIncrease ();
-		currentTower.GetComponent<BasicStatsTowers> ().damage = (((tempMethodHolder * 5) / 100) * 10) + 10;  //Set damage
+		currentTower.GetComponent<BasicStatsTowers> ().damage = (((tempMethodHolder * 0.05f) + 1) * 10);  //Set damage
 		tempMethodHolder = GamePreferences.GetBasicAttackSpeedIncrease();
-		currentTower.GetComponent<BasicStatsTowers> ().attackSpeed = (((tempMethodHolder * 5) / 100) * 10) + 10;
+		currentTower.GetComponent<BasicStatsTowers> ().attackSpeed = (((tempMethodHolder * 0.05f) + 1) * 10);
 		tempMethodHolder = GamePreferences.GetBasicRangeIncrease ();
-		currentTower.GetComponent<BasicStatsTowers>().range = (((tempMethodHolder * 5) / 100) * 2) + 2;
+		currentTower.GetComponent<BasicStatsTowers>().range = (((tempMethodHolder * 0.05f) + 1) * 2);
 		currentTower.GetComponent<CircleCollider2D> ().radius = currentTower.GetComponent<BasicStatsTowers> ().range;
 	}
 
@@ -40,7 +40,7 @@ public class GameManagerController : MonoBehaviour
 
 		if (tempNewCurrentXP >= experenceNeededToLevel) 
 		{
-			tempNewCurrentXP = tempCurrentXP - experenceNeededToLevel; //Take away the experence needed to level
+			tempNewCurrentXP = tempNewCurrentXP - experenceNeededToLevel; //Take away the experence needed to level
 			GamePreferences.SetPlayerLevel (GamePreferences.GetPlayerLevel () + 1); //Increase game level by 1
 			GamePreferences.SetLeftOverExperence (tempNewCurrentXP); //Set left over XP to the LeftOverExperence in GamePreferences
 			NeededXPToLevel(); //Set how much XP is now needed to level
