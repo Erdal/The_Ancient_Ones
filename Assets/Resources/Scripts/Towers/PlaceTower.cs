@@ -40,7 +40,7 @@ public class PlaceTower : MonoBehaviour
 			basicStatsTowers.towerLevel = 1; //Change level of tower to 1
 			gameManagerController.UpdateTowerPrefabs (tempChosenTower); //Update certain parts of the towers stats according to the current upgrades used
 			basicStatsTowers.currentTowerValue = 200; //Towers current value
-			basicStatsTowers.costOfUpgrade = 300; //Cost of next upgrade
+			basicStatsTowers.costOfUpgrade = 200 + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Cost of next upgrade
 			gamePlayManager.Blood = gamePlayManager.Blood - 200; //Take away 200 blood for building this tower
 			gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 			switchToUpgradeScript ();

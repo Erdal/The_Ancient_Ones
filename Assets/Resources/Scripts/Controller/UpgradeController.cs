@@ -21,7 +21,7 @@ public class UpgradeController : MonoBehaviour
 	
 	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
-	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease"}; //Used to store the names of our upgrades
+	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease", "FuseBloodCostDecrease"}; //Used to store the names of our upgrades
 	
 	// Use this for initialization
 	void Start () 
@@ -60,7 +60,7 @@ public class UpgradeController : MonoBehaviour
 	public void OnHoverObjectDescription(string objectName)
 	{
 		MethodInfo methodInfoGet = prefTypeHoverDescription.GetMethod ("Get" + objectName + "Description"); //Get this method by name
-
+		Debug.Log(objectName);
 		onHoverText.text = methodInfoGet.Invoke (null, null).ToString();
 		onHoverPanel.gameObject.SetActive (true);
 	}
@@ -89,6 +89,7 @@ public class UpgradeController : MonoBehaviour
 		} 
 		else 
 		{
+			Debug.Log ("nice");
 			StartCoroutine (StatusCoroutine ("Lowest level this upgrade can go, you cant downgrade anymore"));
 
 		}
@@ -96,10 +97,13 @@ public class UpgradeController : MonoBehaviour
 
 	public IEnumerator StatusCoroutine(string message)
 	{
+		Debug.Log ("nice1");
 		currentStatusLabel.text = message; //Change label text
 		currentStatusLabel.gameObject.SetActive(true); //Activate label
+		Debug.Log ("nice2");
 		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(1f)); //wait
 		currentStatusLabel.gameObject.SetActive(false); //Deactivate label
+		Debug.Log ("nice3");
 	}
 
 	void IncreaseDecreaseLevel(string objectName, bool isPositive)

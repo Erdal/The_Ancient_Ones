@@ -23,6 +23,7 @@ public static class GamePreferences
 	public static string BasicRangeIncrease = "BasicRangeIncrease";
 	public static string BloodIncrease = "BloodIncrease";
 	public static string BloodXpIncrease = "BloodXpIncrease";
+	public static string FuseBloodCostDecrease = "FuseBloodCostDecrease";
 
 	//Region/Map Won
 	//
@@ -163,6 +164,17 @@ public static class GamePreferences
 		return PlayerPrefs.GetInt (GamePreferences.BloodXpIncrease);
 	}
 
+	public static void SetFuseBloodCostDecrease(int fuseCost)
+	{
+		PlayerPrefs.SetInt (GamePreferences.FuseBloodCostDecrease, fuseCost);
+		HoverDescriptions.SetFuseBloodCostDecreaseDescription ();
+	}
+
+	public static int GetFuseBloodCostDecrease()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.FuseBloodCostDecrease);
+	}
+
 	//Region/Map Won Getters and Setters
 	//
 	public static void SetBoolMap1_1Won(int yesNo)
@@ -210,6 +222,7 @@ public static class GamePreferences
 		SetBasicRangeIncrease (0);
 		SetBloodIncrease (0);
 		SetBloodXpIncrease (0);
+		SetFuseBloodCostDecrease (0);
 
 		//Region/Map Won
 		//

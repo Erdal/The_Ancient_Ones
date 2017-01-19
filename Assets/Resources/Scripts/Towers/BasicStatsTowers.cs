@@ -16,7 +16,7 @@ public class BasicStatsTowers : MonoBehaviour
 
 	public void UpgradeTower()
 	{
-		costOfUpgrade = currentTowerValue + 100; //Set new cost of upgrade
+		costOfUpgrade = currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Set new cost of upgrade
 		currentTowerValue = currentTowerValue + costOfUpgrade; //Set new value of current tower
 		towerLevel++; //Increase tower level
 		damage = damage * 2; //Double tower damage

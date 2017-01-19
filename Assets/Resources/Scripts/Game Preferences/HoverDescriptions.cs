@@ -18,6 +18,7 @@ public static class HoverDescriptions
 	public static string BasicRangeIncreaseDescription = "BasicRangeIncreaseDescription";
 	public static string BloodIncreaseDescription = "BloodIncreaseDescription";
 	public static string BloodXpIncreaseDescription = "BloodXpIncreaseDescription";
+	public static string FuseBloodCostDecreaseDescription = "FuseBloodCostDecreaseDescription";
 
 	//All Purpose Descriptions Getters and Setters
 	//
@@ -111,6 +112,17 @@ public static class HoverDescriptions
 		return PlayerPrefs.GetString (HoverDescriptions.BloodXpIncreaseDescription);
 	}
 
+	public static void SetFuseBloodCostDecreaseDescription()
+	{
+		int tempCost = 150 - (GamePreferences.GetFuseBloodCostDecrease() * 5);
+		PlayerPrefs.SetString(HoverDescriptions.FuseBloodCostDecreaseDescription, "Everytime your tower is upgraded or fused it comes with a cost of 150 points of blood. This upgrade takes that cost down by 5 points each level up to a total of 20 levels. You currently pay " + tempCost);
+	}
+
+	public static string GetFuseBloodCostDecreaseDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.FuseBloodCostDecreaseDescription);
+	}
+
 	//Set all descriptions
 	public static void SetAllDescription()
 	{
@@ -129,5 +141,6 @@ public static class HoverDescriptions
 		SetBasicRangeIncreaseDescription();
 		SetBloodIncreaseDescription ();
 		SetBloodXpIncreaseDescription ();
+		SetFuseBloodCostDecreaseDescription ();
 	}
 }

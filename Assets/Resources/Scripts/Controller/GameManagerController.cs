@@ -41,7 +41,6 @@ public class GameManagerController : MonoBehaviour
 	public void CheckNewHighScore(float currentScore)
 	{
 		MethodInfo methodInfoGetGamePreferences = prefTypeGamePreferences.GetMethod ("Get" + nameOfCurrentMap + "Score"); //Get this method by name
-		Debug.Log(methodInfoGetGamePreferences.Invoke (null, null).ToString());
 		float tempHighScore = (float)methodInfoGetGamePreferences.Invoke (null, null);
 		if (currentScore > tempHighScore) 
 		{
@@ -49,7 +48,6 @@ public class GameManagerController : MonoBehaviour
 			object[] parameters = new object[] {currentScore}; //Our parameters that we plan to send
 			methodInfoSet.Invoke (null, parameters); //Call method and send parameter with it
 		}
-		Debug.Log(methodInfoGetGamePreferences.Invoke (null, null).ToString());
 	}
 
 	//Here we check if the user can level and level them if we can
