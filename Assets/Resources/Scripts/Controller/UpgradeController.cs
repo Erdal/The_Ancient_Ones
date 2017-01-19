@@ -35,8 +35,13 @@ public class UpgradeController : MonoBehaviour
 		prefTypeHoverDescription = typeof(HoverDescriptions); //Get type of class HoverDescriptions
 		UpgradeLevelLables(); //Set all our level tags so player knows what level each upgrade is at
 
+		SetStatsLabels ();
+	}
+
+	void SetStatsLabels()
+	{
 		unspentTonsLabel.text = GamePreferences.GetUnspentTons ().ToString ();; //Set our tag to show how many upgrade points are left
-		int tempBloodGained = GamePreferences.GetUnspentTons() * 5;
+		int tempBloodGained = GamePreferences.GetUnspentTons() * 10;
 		bloodGainedLabel.text = tempBloodGained.ToString();
 		currentLevelLabel.text = "Level: " + GamePreferences.GetPlayerLevel ().ToString ();
 	}
@@ -60,9 +65,8 @@ public class UpgradeController : MonoBehaviour
 	public void OnHoverObjectDescription(string objectName)
 	{
 		MethodInfo methodInfoGet = prefTypeHoverDescription.GetMethod ("Get" + objectName + "Description"); //Get this method by name
-		Debug.Log(objectName);
-		onHoverText.text = methodInfoGet.Invoke (null, null).ToString();
-		onHoverPanel.gameObject.SetActive (true);
+		onHoverText.text = methodInfoGet.Invoke (null, null).ToString(); //Invoke method and use its return as the text for onHoverText
+		onHoverPanel.gameObject.SetActive (true); //Turn on our panel
 	}
 
 	public void OffHoverObjectDescription()
@@ -73,7 +77,26 @@ public class UpgradeController : MonoBehaviour
 	//Increase level of selected upgrade
 	public void IncreaseLevel(string objectName)
 	{
-		IncreaseDecreaseLevel (objectName, true); //Increase level
+		MethodInfo methodInfoGetGamePreferences = prefTypeGamePreferences.GetMethod ("Get" + objectName); //Get this method by name
+		var tempValueHolder = methodInfoGetGamePreferences.Invoke (null, null); //Call method and chuck the return value into tempValueHolder
+
+		//If the user wishes to upgrade a level 0 upgrade and has more then 0 tons of blood
+		if ((int)tempValueHolder == 0 && GamePreferences.GetUnspentTons () > 0) 
+		{
+			IncreaseDecreaseLevel (objectName, true); //Increase level
+			GamePreferences.SetSpentTons (GamePreferences.GetSpentTons () + 1);
+		} 
+		else if ((int)tempValueHolder > 0 && GamePreferences.GetUnspentTons () >= (int)tempValueHolder) 
+		{
+			IncreaseDecreaseLevel (objectName, true); //Increase level
+			GamePreferences.SetSpentTons (GamePreferences.GetSpentTons () + (int)tempValueHolder);
+		} 
+		else 
+		{
+			StartCoroutine (StatusCoroutine ("You do not have the blood to upgrade, gather more from the killing fields"));
+		}
+		GamePreferences.SetUnspentTons ();
+		SetStatsLabels ();
 		OnHoverObjectDescription(objectName); //Show updated hover panel
 	}
 
@@ -82,14 +105,24 @@ public class UpgradeController : MonoBehaviour
 	{
 		MethodInfo methodInfoGetGamePreferences = prefTypeGamePreferences.GetMethod ("Get" + objectName); //Get this method by name
 		var tempValueHolder = methodInfoGetGamePreferences.Invoke (null, null); //Call method and chuck the return value into tempValueHolder
-		if (Convert.ToInt32 (tempValueHolder) > 0) 
+		if ((int)tempValueHolder > 0) 
 		{
-			IncreaseDecreaseLevel (objectName, false); //Decrease level
+			if ((int)tempValueHolder == 1) 
+			{
+				IncreaseDecreaseLevel (objectName, false); //Decrease level
+				GamePreferences.SetSpentTons (GamePreferences.GetSpentTons () - 1);
+			} 
+			else if ((int)tempValueHolder > 1) 
+			{
+				IncreaseDecreaseLevel (objectName, false); //Decrease level
+				GamePreferences.SetSpentTons (GamePreferences.GetSpentTons () - ((int)tempValueHolder - 1));
+			}
+			GamePreferences.SetUnspentTons ();
+			SetStatsLabels ();
 			OnHoverObjectDescription(objectName); //Show updated hover panel
 		} 
 		else 
 		{
-			Debug.Log ("nice");
 			StartCoroutine (StatusCoroutine ("Lowest level this upgrade can go, you cant downgrade anymore"));
 
 		}
@@ -97,13 +130,10 @@ public class UpgradeController : MonoBehaviour
 
 	public IEnumerator StatusCoroutine(string message)
 	{
-		Debug.Log ("nice1");
 		currentStatusLabel.text = message; //Change label text
 		currentStatusLabel.gameObject.SetActive(true); //Activate label
-		Debug.Log ("nice2");
-		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(1f)); //wait
+		yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(2f)); //wait
 		currentStatusLabel.gameObject.SetActive(false); //Deactivate label
-		Debug.Log ("nice3");
 	}
 
 	void IncreaseDecreaseLevel(string objectName, bool isPositive)

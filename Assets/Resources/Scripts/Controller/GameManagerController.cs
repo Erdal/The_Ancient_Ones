@@ -15,26 +15,25 @@ public class GameManagerController : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-		SetCompoinents ();
+		SetCompoinents (); //Set our varable compoinents
+		//GamePreferences.ResetGame();
+		//GamePreferences.SetPlayerLevel (10);
 	}
 
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		HoverDescriptions.SetAllDescription ();
+		HoverDescriptions.SetAllDescription (); //Set all hover descriptions for our objects 
 		prefTypeGamePreferences = typeof(GamePreferences); //Get type of class GamePreferences
 	}
 
 	//Update Tower prefab
 	public void UpdateTowerPrefabs(GameObject currentTower)
 	{
-		float tempMethodHolder = GamePreferences.GetBasicDamageIncrease ();
-		currentTower.GetComponent<BasicStatsTowers> ().damage = (((tempMethodHolder * 0.05f) + 1) * 10);  //Set damage
-		tempMethodHolder = GamePreferences.GetBasicAttackSpeedIncrease();
-		currentTower.GetComponent<BasicStatsTowers> ().attackSpeed = (((tempMethodHolder * 0.05f) + 1) * 10);
-		tempMethodHolder = GamePreferences.GetBasicRangeIncrease ();
-		currentTower.GetComponent<BasicStatsTowers>().range = (((tempMethodHolder * 0.05f) + 1) * 2);
-		currentTower.GetComponent<CircleCollider2D> ().radius = currentTower.GetComponent<BasicStatsTowers> ().range;
+		currentTower.GetComponent<BasicStatsTowers> ().damage = (((GamePreferences.GetBasicDamageIncrease () * 0.05f) + 1) * 10);  //Set damage
+		currentTower.GetComponent<BasicStatsTowers> ().attackSpeed = (((GamePreferences.GetBasicAttackSpeedIncrease() * 0.05f) + 1) * 10); //Set attack Speed
+		currentTower.GetComponent<BasicStatsTowers>().range = (((GamePreferences.GetBasicRangeIncrease () * 0.05f) + 1) * 2); //Set range
+		currentTower.GetComponent<CircleCollider2D> ().radius = currentTower.GetComponent<BasicStatsTowers> ().range; //Make CircleColliders2D radius that of our towers range
 	}
 
 	//Check to see if the user has a new highscore
@@ -42,8 +41,11 @@ public class GameManagerController : MonoBehaviour
 	{
 		MethodInfo methodInfoGetGamePreferences = prefTypeGamePreferences.GetMethod ("Get" + nameOfCurrentMap + "Score"); //Get this method by name
 		float tempHighScore = (float)methodInfoGetGamePreferences.Invoke (null, null);
+		//Only if current score on map is greater then the last high score on the map
 		if (currentScore > tempHighScore) 
 		{
+			CheckIfCanLevel (currentScore - tempHighScore); //Take the current score - the old score and what ever is left give to the user
+			
 			MethodInfo methodInfoSet = prefTypeGamePreferences.GetMethod ("Set" + nameOfCurrentMap + "Score"); //Get this method by name
 			object[] parameters = new object[] {currentScore}; //Our parameters that we plan to send
 			methodInfoSet.Invoke (null, parameters); //Call method and send parameter with it
@@ -57,11 +59,13 @@ public class GameManagerController : MonoBehaviour
 		float tempNewCurrentXP = tempCurrentXP + mapXP; //This is now how much xp the user has in total, mapXP is the xp they just gained from there last match
 		NeededXPToLevel(); //Set experence needed for next level
 
+		//Only if the current xp is greater or equal to the experence needed to level up
 		if (tempNewCurrentXP >= experenceNeededToLevel) 
 		{
 			tempNewCurrentXP = tempNewCurrentXP - experenceNeededToLevel; //Take away the experence needed to level
 			GamePreferences.SetPlayerLevel (GamePreferences.GetPlayerLevel () + 1); //Increase game level by 1
 			GamePreferences.SetLeftOverExperence (tempNewCurrentXP); //Set left over XP to the LeftOverExperence in GamePreferences
+			GamePreferences.SetUnspentTons(); //Set unspent points now that we have leveled again
 			NeededXPToLevel(); //Set how much XP is now needed to level
 			CheckIfCanLevel (0); //Call this method again to see if we are done leveling
 		} 

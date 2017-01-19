@@ -38,6 +38,7 @@ public static class HoverDescriptions
 	public static void SetUnspentTonsLabelDescription()
 	{
 		PlayerPrefs.SetString (HoverDescriptions.UnspentTonsLabelDescription, "You current have " + GamePreferences.GetUnspentTons () + " tons of blood to spend on upgrades, choose carfully");
+		SetBloodGainedLabelDescription ();
 	}
 
 	public static string GetUnspentTonsLabelDescription()
@@ -47,8 +48,8 @@ public static class HoverDescriptions
 
 	public static void SetBloodGainedLabelDescription()
 	{
-		int tempCalculater = (GamePreferences.GetUnspentTons() * 5);
-		PlayerPrefs.SetString (HoverDescriptions.BloodGainedLabelDescription, "You gain 5 points of blood for every unspent ton of blood you have at the begining of any map you play, with your current unspent points you will start with " + tempCalculater + " at the beggining of your next game!");
+		int tempCalculater = (GamePreferences.GetUnspentTons() * 10);
+		PlayerPrefs.SetString (HoverDescriptions.BloodGainedLabelDescription, "You gain 10 points of blood for every unspent ton of blood you have at the begining of any map you play, with your current unspent points you will start with " + tempCalculater + " at the beggining of your next game!");
 	}
 
 	public static string GetBloodGainedLabelDescription()

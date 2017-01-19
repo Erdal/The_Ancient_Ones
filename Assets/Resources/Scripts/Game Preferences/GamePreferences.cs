@@ -50,6 +50,7 @@ public static class GamePreferences
 	public static void SetPlayerLevel(int level)
 	{
 		PlayerPrefs.SetInt (GamePreferences.PlayerLevel, level);
+		SetUnspentTons ();
 		//TODO: Set new description here when description is created
 	}
 
@@ -231,5 +232,7 @@ public static class GamePreferences
 		//Region/Map Score
 		//
 		SetMap1_1Score(0);
+
+		HoverDescriptions.SetAllDescription ();
 	}
 }

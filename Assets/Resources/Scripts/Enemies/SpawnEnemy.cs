@@ -92,7 +92,6 @@ public class SpawnEnemy : MonoBehaviour
 		else
 		{
 			gameStatusPanel.SetActive (true);
-			GameObject.Find("GameManagerController").GetComponent<GameManagerController>().CheckIfCanLevel(GameObject.Find ("GamePlayController").GetComponent<GamePlayController> ().XpBlood);
 			GameObject.Find ("GameManagerController").GetComponent<GameManagerController> ().CheckNewHighScore(GameObject.Find ("GamePlayController").GetComponent<GamePlayController> ().XpBlood);
 			Time.timeScale = 0;
 			//TODO: Finish this off

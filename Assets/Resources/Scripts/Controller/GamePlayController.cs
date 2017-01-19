@@ -117,7 +117,7 @@ public class GamePlayController : MonoBehaviour
 	{
 		Blood = 500;
 		XpBlood = 0;
-		Lives = 10;
+		Lives = 25;
 		Wave = 0;
 	}
 
