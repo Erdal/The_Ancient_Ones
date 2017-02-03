@@ -7,6 +7,8 @@ public class SpawnEnemy : MonoBehaviour
 {
     public GameObject[] waypoints; //Waypoint array
     public int timeBetweenWaves = 5; //How much time inbetween waves
+	public float dangerRating; //Store the danger rating of the units for the first wave of this map
+	public int firstWaveUnits; //Stores how large the first wave on this map should be
 
     private EnemyPrefabs enemyPrefabs; //To connect to the EnemyPrefabs class that stores our enemy prefabs list
 	private GamePlayController gamePlayController; //Store GamePlayController script in here
@@ -26,7 +28,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
 		SetCompoinents ();
-        AddWaves(5, 500); //We want 5 random waves
+        AddWaves(5); //We want 5 random waves
 		CommitWaves();
     }
 
@@ -44,16 +46,19 @@ public class SpawnEnemy : MonoBehaviour
 
     int pick; //Used to store the enemy prefab of next wave
 	GameObject tempEnemyPrefab; //So we dont effect the actuelly prefab we will use this to create our enemys
-    void AddWaves(int numberOfWaves, int dangerRating)
+    void AddWaves(int numberOfWaves)
     {
-		gamePlayController.maxWaves = numberOfWaves;
+		gamePlayController.maxWaves = numberOfWaves; //Set the new max number of waves
+		Waves.dangerPoints = dangerRating; //Set the new danger rating in the wave class
         //Go through and build all the waves
         for(int i = 0; i < numberOfWaves; i++)
         {
             pick = Random.Range(0, enemyPrefabs.enemyPrefabList.Count); //Which enemy prefab is picked
-			tempEnemyPrefab = enemyPrefabs.enemyPrefabList[pick]; //Make our temp a compy of our chosen prefab
-			waves.Add(new Waves(tempEnemyPrefab, 2, 5, dangerRating)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units, danger rating
+			tempEnemyPrefab = (enemyPrefabs.enemyPrefabList[pick]); //Make our temp a compy of our chosen prefab
+			waves.Add(new Waves(tempEnemyPrefab, 2, firstWaveUnits)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units, danger rating
+			firstWaveUnits += 1; //Increase the amont of units for the next wave
         }
+		dangerRating = Waves.dangerPoints; //set the new danger rating in this class from the wave class
     }
 
 	void CommitWaves()
@@ -69,6 +74,11 @@ public class SpawnEnemy : MonoBehaviour
 			{
 				lastSpawnTime = Time.time; //Your about to spawn an emeny now so make it equell the current time
 				GameObject newEnemy = (GameObject)Instantiate (waves [currentWave]._enemyPrefab); //creating new enewmy for this wave
+				newEnemy.GetComponent<BasicStatsEnemies>().health = waves[currentWave]._unitHealth; //Set health of unit
+				newEnemy.GetComponent<BasicStatsEnemies>().speed = waves[currentWave]._unitSpeed; //Set speed of unit
+				newEnemy.GetComponent<BasicStatsEnemies>().armour = waves [currentWave]._unitArmour; //Set armour of unit
+				newEnemy.GetComponent<BasicStatsEnemies>().bloodValue = waves [currentWave]._unitBloodValue; //Set blood value of unit
+				newEnemy.GetComponent<BasicStatsEnemies>().xpBloodValue = waves [currentWave]._unitXpBloodValue; //Set xp blod value of unit
 				newEnemy.GetComponent<MoveEnemies> ().waypoints = waypoints; //Sets the correct waypoint to follow for new enemy
 				Animator anim = newEnemy.transform.GetChild (0).GetComponent<Animator> (); //store animator of the sprite of the new enemy
 				anim.SetBool ("Walk", true); //Set walk to true so enemy begins to walk

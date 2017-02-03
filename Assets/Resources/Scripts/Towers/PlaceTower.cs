@@ -45,7 +45,7 @@ public class PlaceTower : MonoBehaviour
 			gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 			switchToUpgradeScript ();
 		} 
-		else 
+		else if (gamePlayManager.Blood < 200 && gamePlayManager.chosenObjectsName == gameObject.name)
 		{
 			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Build TowerOne"));
 			//TODO: Mention reason you cant build this tower

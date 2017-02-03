@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyPrefabs : MonoBehaviour
 {
-    public List<GameObject> enemyPrefabList = new List<GameObject>(); //List of references to the Enemy prefabs
+	public List<GameObject> enemyPrefabList = new List<GameObject>(); //List of references to the Enemy prefabs
 
 
     void Start()

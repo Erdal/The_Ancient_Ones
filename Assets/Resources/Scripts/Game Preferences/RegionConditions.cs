@@ -17,9 +17,9 @@ public class RegionConditions : MonoBehaviour
 		enemyPrefabs = gameObject.GetComponent<EnemyPrefabs> (); //Store the EnemtPrefabs script from this object into this varable
 	}
 
-    public void RegionOne()
+	public void RegionOne()
     {
 		enemyPrefabs.ChooseEnemyList (2); //Set region one enemy list
-		enemyPrefabs.ChangeAllPrefabsStats(25, 3, 0); //Changing all prefabs stats
+		enemyPrefabs.ChangeAllPrefabsStats(5, 1, 0); //Changing all prefabs stats
     }
 }

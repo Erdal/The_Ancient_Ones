@@ -36,7 +36,7 @@ public class UpgradeTower : MonoBehaviour
 		} 
 		else if(gamePlayManager.Blood < basicStatsTowers.costOfUpgrade && gamePlayManager.chosenObjectsName == upgradeThisTowerOnCLick)
 		{
-			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Upgrade"));
+			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Upgrade 12"));
 		}
 	}
 
