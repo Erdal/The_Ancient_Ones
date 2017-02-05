@@ -39,6 +39,7 @@ public class Waves : MonoBehaviour
 		tempEnemyBasicStatsEnemies.xpBloodValue = 0;
     }
 
+	//Set this waves stats for the unit for this wave
 	void SetWaveStats()
 	{
 		//Set this wave postitions stats
@@ -48,7 +49,8 @@ public class Waves : MonoBehaviour
 		unitBloodValue = (tempEnemyBasicStatsEnemies.health + (tempEnemyBasicStatsEnemies.speed * 10) + (tempEnemyBasicStatsEnemies.armour * 5)) * ((GamePreferences.GetBloodIncrease() * 0.05f) + 1);
 		unitXpBloodValue = ((tempEnemyBasicStatsEnemies.health / 10) + (tempEnemyBasicStatsEnemies.speed) + (tempEnemyBasicStatsEnemies.armour / 2)) * ((GamePreferences.GetBloodXpIncrease() * 0.05f) + 1);
 	}
-		
+
+	//Spent danger points to change unit stats
 	void ChangingEnemyStats()
     {
 		float tempDangerPoints = dangerPoints;

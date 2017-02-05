@@ -15,6 +15,10 @@ public class GamePlayController : MonoBehaviour
 	public GameObject buildTowerPanel; //Store our BuildTowerPanel in here
 	public Button towerOneButton; //Store our TowerOneButton in here from our BuildTowerPanel
 
+	//WaveScrollView Components
+	public GameObject waveScrollView; //The WaveScrollView itself in gameplay scene
+	public Button openCloseWaveButton; //Store the button used to open and close our wave scroll view
+
 
 	//Game Status Panel Components
 	public GameObject gameStatusPanel; //Store our GameStatusPanel in here
@@ -34,6 +38,21 @@ public class GamePlayController : MonoBehaviour
 	public Text bloodLabel;//Stores a reference to the bloodlabel label in the center top part of the screen
 	public Text xpBloodLabel; //Stores a reference to the xpbloodlabel label
     public bool gameOver = false; //store whether the player has lost the game.
+
+	public void OpenOrCloseWaveScrollView()
+	{
+		if (waveScrollView.activeSelf == true) 
+		{
+			waveScrollView.SetActive (false);
+			openCloseWaveButton.GetComponentInChildren<Text> ().text = ">";
+		} 
+		else 
+		{
+			waveScrollView.SetActive (true);
+			openCloseWaveButton.GetComponentInChildren<Text> ().text = "<";
+		}
+
+	}
 
 	private float blood; //Store the current blood total
 	public float Blood
@@ -94,8 +113,38 @@ public class GamePlayController : MonoBehaviour
 				StartCoroutine(GameStatusCoroutine ("LAST WAVE"));
 				waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
 			}
+			SetWaveScrollView(); //Update scroll view
         }
     }
+
+	void SetWaveScrollView()
+	{
+		int setWaveButtons = 0; //Used to tell us how many wave buttons can be turned on
+		//Used to turn all of our wave buttons off
+		for (int i = 1; i < 11; i++) 
+		{
+			GameObject tempWaveButton = waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("WaveWaitingButton_" + i).gameObject;
+			tempWaveButton.SetActive (false);
+		}
+
+		if ((maxWaves - wave) > 10) 
+		{
+			setWaveButtons = 10; //Turn on all wave buttons
+		} 
+		else 
+		{
+			setWaveButtons = maxWaves - wave; //Turn on only the amount we need
+		}
+
+		for (int i = 1; i < setWaveButtons; i++) 
+		{
+			GameObject tempWaveButton = waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("WaveWaitingButton_" + i).gameObject; //Store this wave button as a gameobject
+			Text [] newText = tempWaveButton.transform.GetComponentsInChildren<Text>();
+			newText [0].text = "Wave: " + i.ToString();
+			newText [1].text = "Units: " + SpawnEnemy.waves [i]._maxEnemies.ToString ();
+			tempWaveButton.SetActive (true); //Turn the wave button on
+		}
+	}
 
 	//Complete our game status message to the player
 	public IEnumerator GameStatusCoroutine(string message)

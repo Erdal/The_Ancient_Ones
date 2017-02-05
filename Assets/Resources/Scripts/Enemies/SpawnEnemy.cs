@@ -22,7 +22,7 @@ public class SpawnEnemy : MonoBehaviour
 	private Text winLossLabel; //Store its label
 
 
-    List<Waves> waves = new List<Waves>();//Store all the waves we want
+    public static List<Waves> waves = new List<Waves>();//Store all the waves we want
 
     // Use this for initialization
     void Start()
