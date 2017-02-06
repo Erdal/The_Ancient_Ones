@@ -43,6 +43,7 @@ public class SpawnEnemy : MonoBehaviour
 		gameStatusPanel = gamePlayController.gameStatusPanel; //Store our GameStatusPanel here
 		worldMapButton = gamePlayController.worldMapButton; //Store WorldMapButton in here
 		winLossLabel = gamePlayController.winLossLabel; //Store WinLossLabel in here
+		firstWaveUnits = 5; //Make first wave start with 5 units
 	}
 
     int pick; //Used to store the enemy prefab of next wave
@@ -57,7 +58,7 @@ public class SpawnEnemy : MonoBehaviour
             pick = Random.Range(0, enemyPrefabs.enemyPrefabList.Count); //Which enemy prefab is picked
 			tempEnemyPrefab = (enemyPrefabs.enemyPrefabList[pick]); //Make our temp a compy of our chosen prefab
 			waves.Add(new Waves(tempEnemyPrefab, 2, firstWaveUnits)); //Create this wave. Enemy prefab, Spawn Interviel, max number of units, danger rating
-			firstWaveUnits += 1; //Increase the amont of units for the next wave
+			firstWaveUnits += 5; //Increase the amont of units for the next wave
         }
 		dangerRating = Waves.dangerPoints; //set the new danger rating in this class from the wave class
     }

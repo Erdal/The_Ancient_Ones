@@ -85,6 +85,7 @@ public class Waves : MonoBehaviour
 				//Debug.Log ("Speed " + tempDangerPoints);
 			}
 		}
+		dangerPoints = dangerPoints * 1.20f; //Increase the danger rate by 15% for the next match
     }
 
     //Getter and Setter

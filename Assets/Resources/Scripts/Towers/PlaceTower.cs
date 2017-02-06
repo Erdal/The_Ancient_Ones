@@ -20,7 +20,7 @@ public class PlaceTower : MonoBehaviour
 		gamePlayManager.towerUpgradePanel.SetActive(false); //Turn off the towerUpgradePanel if just incase it is open anywhere else
 		buildTowerPanel.SetActive (true); //Turn panel on
 		towerOneButton.onClick.AddListener(() => {OptionOne();}); //Add a onclick method to this button for the OptionOne method
-		towerOneButton.GetComponentInChildren<Text>().text = "Tower One"; //Set text
+		towerOneButton.GetComponentInChildren<Text>().text = "Tower One: 200"; //Set text
 	}
 
 	//Tower option one

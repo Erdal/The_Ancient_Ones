@@ -36,8 +36,9 @@ public class UpgradeTower : MonoBehaviour
 		} 
 		else if(gamePlayManager.Blood < basicStatsTowers.costOfUpgrade && gamePlayManager.chosenObjectsName == upgradeThisTowerOnCLick)
 		{
-			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Upgrade 12"));
+			StartCoroutine (gamePlayManager.GameStatusCoroutine ("CAN'T UPGRADE. You need " + basicStatsTowers.costOfUpgrade + " blood to upgrade"));
 		}
+		upgradeButton.GetComponentInChildren<Text>().text = "Upgrade: " + basicStatsTowers.costOfUpgrade.ToString(); //Show cost of next upgrade on upgrade button
 	}
 
 	// Use this for initialization
@@ -53,6 +54,7 @@ public class UpgradeTower : MonoBehaviour
 		basicStatsTowers = GameObject.Find(upgradeThisTowerOnCLick).GetComponent("BasicStatsTowers") as BasicStatsTowers; //We get the BasicStats script from this unit and attach it to our varable
 		towerUpgradePanel = gamePlayManager.towerUpgradePanel; //Sets towerUpgradePanel to the towerUpgradePanel in GamePlayController, which is connected to the TowerUpgradePanel in scene
 		upgradeButton = gamePlayManager.upgradeButton; //Sets upgradeButton to the upgradeButton in GamePlayController, which is connected to the upgradeButton in scene
+		upgradeButton.GetComponentInChildren<Text>().text = "Upgrade: " + basicStatsTowers.costOfUpgrade.ToString(); //Show cost of next upgrade on upgrade button
 		upgradeButton.onClick.AddListener(() => {UpgradeThisTower();}); //Add a onclick method to this button for the UpgradeThisTower method
 		fuseButton = gamePlayManager.fuseButton; //Sets fuseButton to the fuseButton in GamePlayController, which is connected to the fuseButton in scene
 		sellButton = gamePlayManager.sellButton; //Sets sellButton to the sellButton in GamePlayController, which is connected to the sellButton in scene

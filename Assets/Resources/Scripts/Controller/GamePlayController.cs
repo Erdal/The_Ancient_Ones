@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GamePlayController : MonoBehaviour
 {
@@ -60,7 +61,7 @@ public class GamePlayController : MonoBehaviour
 		get { return blood; }  //Return value
 		set
         {
-			blood = value; //Set blood amount
+			blood = (float)Math.Round(value);; //Set blood amount
 			bloodLabel.GetComponent<Text>().text = "BLOOD: " + blood; //Set the blood label
         }
     }
@@ -71,7 +72,7 @@ public class GamePlayController : MonoBehaviour
 		get{ return xpBlood; }
 		set
 		{
-			xpBlood = value; //Set value
+			xpBlood = (float)Math.Round(value); //Set value
 			xpBloodLabel.GetComponent<Text>().text = "XP Blood: " + xpBlood;
 		}
 	}
@@ -167,7 +168,7 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		Blood = 500 + ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()); //Here we add on the amount of extra blood the player gets for unspent upgrade tons
+		Blood = 300 + ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()); //Here we add on the amount of extra blood the player gets for unspent upgrade tons
 		XpBlood = 0;
 		Lives = 25;
 		Wave = 0;
