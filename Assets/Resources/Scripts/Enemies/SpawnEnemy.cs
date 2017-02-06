@@ -28,6 +28,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
 		SetCompoinents ();
+		waves.Clear (); //Destroy any waves left from any other map or attempt
         AddWaves(5); //We want 5 random waves
 		CommitWaves();
     }

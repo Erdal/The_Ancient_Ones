@@ -19,6 +19,7 @@ public static class HoverDescriptions
 	public static string BloodIncreaseDescription = "BloodIncreaseDescription";
 	public static string BloodXpIncreaseDescription = "BloodXpIncreaseDescription";
 	public static string FuseBloodCostDecreaseDescription = "FuseBloodCostDecreaseDescription";
+	public static string BloodGainedValueIncreaseDescription = "BloodGainedValueIncreaseDescription";
 
 	//All Purpose Descriptions Getters and Setters
 	//
@@ -48,8 +49,8 @@ public static class HoverDescriptions
 
 	public static void SetBloodGainedLabelDescription()
 	{
-		int tempCalculater = (GamePreferences.GetUnspentTons() * 10);
-		PlayerPrefs.SetString (HoverDescriptions.BloodGainedLabelDescription, "You gain 10 points of blood for every unspent ton of blood you have at the begining of any map you play, with your current unspent points you will start with " + tempCalculater + " at the beggining of your next game!");
+		int tempCalculater = GamePreferences.GetBloodGainedValueIncrease() + 5;
+		PlayerPrefs.SetString (HoverDescriptions.BloodGainedLabelDescription, "You gain " + tempCalculater + " points of blood for every unspent ton of blood you have at the begining of any map you play, with your current unspent points you will start with " + (tempCalculater * GamePreferences.GetUnspentTons()) + " at the beggining of your next game!");
 	}
 
 	public static string GetBloodGainedLabelDescription()
@@ -124,6 +125,16 @@ public static class HoverDescriptions
 		return PlayerPrefs.GetString (HoverDescriptions.FuseBloodCostDecreaseDescription);
 	}
 
+	public static void SetBloodGainedValueIncreaseDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.BloodGainedValueIncreaseDescription, "You currently gain " + (5 + GamePreferences.GetBloodGainedValueIncrease())+ " blood points from each unspent upgrade point, this upgrade gives an extra point of blood for each point every upgrade");
+	}
+
+	public static string GetBloodGainedValueIncreaseDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.BloodGainedValueIncreaseDescription);
+	}
+
 	//Set all descriptions
 	public static void SetAllDescription()
 	{
@@ -143,5 +154,6 @@ public static class HoverDescriptions
 		SetBloodIncreaseDescription ();
 		SetBloodXpIncreaseDescription ();
 		SetFuseBloodCostDecreaseDescription ();
+		SetBloodGainedValueIncreaseDescription ();
 	}
 }

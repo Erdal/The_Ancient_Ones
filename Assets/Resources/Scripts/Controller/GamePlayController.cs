@@ -120,6 +120,7 @@ public class GamePlayController : MonoBehaviour
 	void SetWaveScrollView()
 	{
 		int setWaveButtons = 0; //Used to tell us how many wave buttons can be turned on
+
 		//Used to turn all of our wave buttons off
 		for (int i = 1; i < 11; i++) 
 		{
@@ -127,6 +128,7 @@ public class GamePlayController : MonoBehaviour
 			tempWaveButton.SetActive (false);
 		}
 
+		//If there are more then 10 waves left
 		if ((maxWaves - wave) > 10) 
 		{
 			setWaveButtons = 10; //Turn on all wave buttons
@@ -136,12 +138,13 @@ public class GamePlayController : MonoBehaviour
 			setWaveButtons = maxWaves - wave; //Turn on only the amount we need
 		}
 
+		//Turn on wave buttons and set there components
 		for (int i = 1; i < setWaveButtons; i++) 
 		{
 			GameObject tempWaveButton = waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("WaveWaitingButton_" + i).gameObject; //Store this wave button as a gameobject
-			Text [] newText = tempWaveButton.transform.GetComponentsInChildren<Text>();
-			newText [0].text = "Wave: " + i.ToString();
-			newText [1].text = "Units: " + SpawnEnemy.waves [i]._maxEnemies.ToString ();
+			Text [] newText = tempWaveButton.transform.GetComponentsInChildren<Text>(); //Store our 2 text components
+			newText [0].text = "Wave: " + (wave + 1 + i); //Here we change the WaveText text field
+			newText [1].text = "Units: " + SpawnEnemy.waves [wave + i]._maxEnemies.ToString (); //Here we change the UnitText text field
 			tempWaveButton.SetActive (true); //Turn the wave button on
 		}
 	}
@@ -164,7 +167,7 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		Blood = 500;
+		Blood = 500 + ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()); //Here we add on the amount of extra blood the player gets for unspent upgrade tons
 		XpBlood = 0;
 		Lives = 25;
 		Wave = 0;

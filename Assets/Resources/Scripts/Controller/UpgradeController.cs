@@ -21,7 +21,7 @@ public class UpgradeController : MonoBehaviour
 	
 	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
-	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease", "FuseBloodCostDecrease"}; //Used to store the names of our upgrades
+	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease", "FuseBloodCostDecrease", "BloodGainedValueIncrease"}; //Used to store the names of our upgrades
 	
 	// Use this for initialization
 	void Start () 
@@ -40,9 +40,8 @@ public class UpgradeController : MonoBehaviour
 
 	void SetStatsLabels()
 	{
-		unspentTonsLabel.text = GamePreferences.GetUnspentTons ().ToString ();; //Set our tag to show how many upgrade points are left
-		int tempBloodGained = GamePreferences.GetUnspentTons() * 10;
-		bloodGainedLabel.text = tempBloodGained.ToString();
+		unspentTonsLabel.text = GamePreferences.GetUnspentTons ().ToString (); //Set our tag to show how many upgrade points are left
+		bloodGainedLabel.text = ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()).ToString();
 		currentLevelLabel.text = "Level: " + GamePreferences.GetPlayerLevel ().ToString ();
 	}
 

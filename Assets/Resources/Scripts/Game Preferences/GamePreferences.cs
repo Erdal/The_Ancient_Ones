@@ -10,11 +10,12 @@ public static class GamePreferences
 	public static string BoolMusic = "BoolMusic";
 
 	//Level
-	public static string PlayerLevel = "PlayerLevel";
-	public static string LeftOverExperence = "LeftOverExperence";
+	public static string PlayerLevel = "PlayerLevel"; //Keep track of players level
+	public static string LeftOverExperence = "LeftOverExperence"; //
 	public static string UnspentTons = "UnspentTons";
 	public static string SpentTons = "SpentTons";
 	public static string BloodTonsBought = "BloodTonsBought";
+	public static string BloodGainedValueIncrease = "BloodGainedValueIncrease";
 
 	//Upgrades
 	//
@@ -106,6 +107,18 @@ public static class GamePreferences
 	public static int GetBloodTonsBought()
 	{
 		return PlayerPrefs.GetInt (GamePreferences.BloodTonsBought);
+	}
+
+	public static void SetBloodGainedValueIncrease(int value)
+	{
+		PlayerPrefs.SetInt (GamePreferences.BloodGainedValueIncrease, value);
+		HoverDescriptions.SetBloodGainedValueIncreaseDescription ();
+		HoverDescriptions.SetBloodGainedLabelDescription ();
+	}
+
+	public static int GetBloodGainedValueIncrease()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.BloodGainedValueIncrease);
 	}
 
 	//Upgrade Getters and Setters
@@ -215,6 +228,7 @@ public static class GamePreferences
 		//SetBloodTonsBought (0); // Dont reset this
 		SetUnspentTons();
 		SetSpentTons (0);
+		SetBloodGainedValueIncrease (0);
 
 		//Upgrades
 		//
