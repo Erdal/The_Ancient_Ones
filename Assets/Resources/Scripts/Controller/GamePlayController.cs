@@ -34,22 +34,26 @@ public class GamePlayController : MonoBehaviour
 	public int currentNumberOfTowers = 0; //Used to help name tower clones so that they can be called differently
 
 	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
+	public Text unitsLeftLabel; // Store a reference to the UnitsLeftLabel on our gameplay scene
 	public Text gameStatusLabel; //Stores a reference to the game status label in the center of the screen
 	public Text livesLabel; //Stores a reference to the health label label in the right corner of the screen
 	public Text bloodLabel;//Stores a reference to the bloodlabel label in the center top part of the screen
 	public Text xpBloodLabel; //Stores a reference to the xpbloodlabel label
     public bool gameOver = false; //store whether the player has lost the game.
 
+	public int enemyUnitsLeft; //Store how many enemy units are left
+
+	//This method allows the user to open or close the scrollview with our future waves in it.
 	public void OpenOrCloseWaveScrollView()
 	{
 		if (waveScrollView.activeSelf == true) 
 		{
-			waveScrollView.SetActive (false);
+			waveScrollView.SetActive (false); //Turn off
 			openCloseWaveButton.GetComponentInChildren<Text> ().text = ">";
 		} 
 		else 
 		{
-			waveScrollView.SetActive (true);
+			waveScrollView.SetActive (true); //Turn on
 			openCloseWaveButton.GetComponentInChildren<Text> ().text = "<";
 		}
 
@@ -108,11 +112,15 @@ public class GamePlayController : MonoBehaviour
 			{
 				StartCoroutine (GameStatusCoroutine ("NEXT WAVE"));
 				waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
+				unitsLeftLabel.text = "Units " + SpawnEnemy.waves [wave]._maxEnemies.ToString (); //Set the current amount of units that will be in this wave
+				enemyUnitsLeft = SpawnEnemy.waves [wave]._maxEnemies; //Set how many units there are for this wave
 			} 
 			else if ((wave + 1) == maxWaves) //If last wave
 			{
 				StartCoroutine(GameStatusCoroutine ("LAST WAVE"));
 				waveLabel.text = "WAVE: " + (wave + 1); //Set new wave text
+				unitsLeftLabel.text = "Units " + SpawnEnemy.waves [wave]._maxEnemies.ToString (); //Set the current amount of units that will be in this wave
+				enemyUnitsLeft = SpawnEnemy.waves [wave]._maxEnemies; //Set how many units there are for this wave
 			}
 			SetWaveScrollView(); //Update scroll view
         }

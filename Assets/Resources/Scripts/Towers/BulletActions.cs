@@ -37,18 +37,21 @@ public class BulletActions : MonoBehaviour
 			if (target != null) 
 			{
 				HealthBar healthBar = target.transform.FindChild ("HealthBar").gameObject.GetComponent<HealthBar> ();
-				healthBar.currentHealth -= Mathf.Max (basicStatsTowers.damage, 0);
+				healthBar.currentHealth -= Mathf.Max ((basicStatsTowers.damage - target.GetComponent<BasicStatsEnemies>().armour), 0); //current unit health -= Tower damange - targets armour
 
+				//If the units health bar is now 0 or below
 				if (healthBar.currentHealth <= 0) 
 				{
-					Destroy (target);
+					Destroy (target); //Destroy target
 					AudioSource audioSource = target.GetComponent<AudioSource> ();
 					AudioSource.PlayClipAtPoint (audioSource.clip, transform.position);
 					gamePlayManager.Blood += target.GetComponent<BasicStatsEnemies>().bloodValue; //Add the blood value of the target killed to the total blood the player has in match
 					gamePlayManager.XpBlood += target.GetComponent<BasicStatsEnemies> ().xpBloodValue; //Add the xp blood value of the target killed to the total xp blood the player has in match
+					gamePlayManager.enemyUnitsLeft -= 1; //Take away a unit from the total
+					gamePlayManager.unitsLeftLabel.text = "Units " + gamePlayManager.enemyUnitsLeft; //Reset the unit label to display units that are left
 				}
 			}
-			Destroy (this.gameObject);
+			Destroy (this.gameObject); //Destroy bullet
 		}
 	}
 }

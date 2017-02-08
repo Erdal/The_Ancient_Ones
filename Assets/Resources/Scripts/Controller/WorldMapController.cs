@@ -27,7 +27,7 @@ public class WorldMapController : MonoBehaviour
 	{
 		gameManagerController = GameObject.Find ("GameManagerController"); //Store the GameManagerController in here
 		prefTypeGamePreferences = typeof(GamePreferences); //Get type of class GamePreferences
-		upgradeLabel.text = GamePreferences.GetPlayerLevel().ToString(); //Set the text of this label to be the value of the players current level
+		upgradeLabel.text = "Level: " + GamePreferences.GetPlayerLevel().ToString(); //Set the text of this label to be the value of the players current level
 		UpdateMapScores(); //Update all the map scores for the user to see
 	}
 
