@@ -20,7 +20,7 @@ public class UpgradeTower : MonoBehaviour
 			gamePlayManager.chosenObjectsName = upgradeThisTowerOnCLick; //Save the name of the newly selected BuildSpot
 			towerUpgradePanel.transform.position = GameObject.Find(gamePlayManager.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
 			gamePlayManager.buildTowerPanel.SetActive(false); //Turn off the build panel if active anywhere
-			upgradeButton.GetComponentInChildren<Text>().text = "Upgrade: " + basicStatsTowers.costOfUpgrade.ToString(); //Show cost of next upgrade on upgrade button
+			upgradeButton.GetComponentInChildren<Text>().text = "Level " + (basicStatsTowers.towerLevel + 1).ToString() + ": " + basicStatsTowers.costOfUpgrade.ToString(); //Show level and cost of next upgrade on upgrade button
 			towerUpgradePanel.SetActive (true); //Turn panel on
 		}
 	}
@@ -39,7 +39,7 @@ public class UpgradeTower : MonoBehaviour
 		{
 			StartCoroutine (gamePlayManager.GameStatusCoroutine ("CAN'T UPGRADE. You need " + basicStatsTowers.costOfUpgrade + " blood to upgrade"));
 		}
-		upgradeButton.GetComponentInChildren<Text>().text = "Upgrade: " + basicStatsTowers.costOfUpgrade.ToString(); //Show cost of next upgrade on upgrade button
+		upgradeButton.GetComponentInChildren<Text>().text = "Level " + (basicStatsTowers.towerLevel + 1).ToString() + ": " + basicStatsTowers.costOfUpgrade.ToString(); //Show level and cost of next upgrade on upgrade button
 	}
 
 	// Use this for initialization
