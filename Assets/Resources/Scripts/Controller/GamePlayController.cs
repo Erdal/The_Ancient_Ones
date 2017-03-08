@@ -7,23 +7,34 @@ using System;
 public class GamePlayController : MonoBehaviour
 {
 	//Tower Upgrade Panel Components
+	[HideInInspector] //Hide from unity inspector
 	public GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here
+	[HideInInspector] //Hide from unity inspector
 	public Button upgradeButton; //Store our UpgradeButton in here from our TowerUpgradePanel
+	[HideInInspector] //Hide from unity inspector
 	public Button fuseButton; //Store our FuseButton in here from our TowerUpgradePanel
+	[HideInInspector] //Hide from unity inspector
 	public Button sellButton; //Store our SellButton in here from our TowerUpgradePanel
 
 	//Build Tower Panel Components
+	[HideInInspector] //Hide from unity inspector
 	public GameObject buildTowerPanel; //Store our BuildTowerPanel in here
+	[HideInInspector] //Hide from unity inspector
 	public Button towerOneButton; //Store our TowerOneButton in here from our BuildTowerPanel
 
 	//WaveScrollView Components
+	[HideInInspector] //Hide from unity inspector
 	public GameObject waveScrollView; //The WaveScrollView itself in gameplay scene
+	[HideInInspector] //Hide from unity inspector
 	public Button openCloseWaveButton; //Store the button used to open and close our wave scroll view
 
 
 	//Game Status Panel Components
+	[HideInInspector] //Hide from unity inspector
 	public GameObject gameStatusPanel; //Store our GameStatusPanel in here
+	[HideInInspector] //Hide from unity inspector
 	public Button worldMapButton; //Store our WorldMapButton in here from our GameStatusPanel
+	[HideInInspector] //Hide from unity inspector
 	public Text winLossLabel; //Store our WinLossLabel in here from our GameStatusPanel
 
 	[HideInInspector] //Hide from unity inspector
@@ -33,14 +44,22 @@ public class GamePlayController : MonoBehaviour
 	[HideInInspector] //Hide from unity inspector
 	public int currentNumberOfTowers = 0; //Used to help name tower clones so that they can be called differently
 
+	[HideInInspector] //Hide from unity inspector
 	public Text waveLabel; //Stores a reference to the wave readout at the top Left corner of the screen
+	[HideInInspector] //Hide from unity inspector
 	public Text unitsLeftLabel; // Store a reference to the UnitsLeftLabel on our gameplay scene
+	[HideInInspector] //Hide from unity inspector
 	public Text gameStatusLabel; //Stores a reference to the game status label in the center of the screen
+	[HideInInspector] //Hide from unity inspector
 	public Text livesLabel; //Stores a reference to the health label label in the right corner of the screen
+	[HideInInspector] //Hide from unity inspector
 	public Text bloodLabel;//Stores a reference to the bloodlabel label in the center top part of the screen
+	[HideInInspector] //Hide from unity inspector
 	public Text xpBloodLabel; //Stores a reference to the xpbloodlabel label
+	[HideInInspector] //Hide from unity inspector
     public bool gameOver = false; //store whether the player has lost the game.
 
+	[HideInInspector] //Hide from unity inspector
 	public int enemyUnitsLeft; //Store how many enemy units are left
 
 	//This method allows the user to open or close the scrollview with our future waves in it.
@@ -176,6 +195,28 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
+
+		//Set Components (Decription up at top of class)
+		towerUpgradePanel = GameObject.Find ("Canvas").transform.Find("TowerUpgradePanel").gameObject;
+		buildTowerPanel = GameObject.Find ("Canvas").transform.Find("BuildTowerPanel").gameObject;
+		waveScrollView = GameObject.Find ("Canvas").transform.Find("WaveScrollView").gameObject;
+		gameStatusPanel = GameObject.Find ("Canvas").transform.Find("GameStatusPanel").gameObject;
+
+		bloodLabel =  GameObject.Find ("Canvas").transform.Find("BloodLabel").GetComponent<Text>();
+		waveLabel =  GameObject.Find ("Canvas").transform.Find("WaveLabel").GetComponent<Text>();
+		unitsLeftLabel =  GameObject.Find ("Canvas").transform.Find("UnitsLeftLabel").GetComponent<Text>();
+		gameStatusLabel =  GameObject.Find ("Canvas").transform.Find("GameStatusLabel").GetComponent<Text>();
+		livesLabel =  GameObject.Find ("Canvas").transform.Find("LivesLabel").GetComponent<Text>();
+		winLossLabel =  gameStatusPanel.transform.Find("WinLossLabel").GetComponent<Text>();
+
+		towerOneButton = buildTowerPanel.transform.Find ("TowerOneButton").GetComponent<Button> ();
+		upgradeButton = towerUpgradePanel.transform.Find ("UpgradeButton").GetComponent<Button> ();
+		fuseButton = towerUpgradePanel.transform.Find ("FuseButton").GetComponent<Button> ();
+		sellButton = towerUpgradePanel.transform.Find ("SellButton").GetComponent<Button> ();
+		openCloseWaveButton =  GameObject.Find ("Canvas").transform.Find ("OpenCloseWaveScrollViewButton").GetComponent<Button> ();
+		worldMapButton = gameStatusPanel.transform.Find ("WorldMapButton").GetComponent<Button> ();
+
+		//Set in game components
 		Blood = 300 + ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()); //Here we add on the amount of extra blood the player gets for unspent upgrade tons
 		XpBlood = 0;
 		Lives = 25;
