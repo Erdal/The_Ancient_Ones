@@ -6,6 +6,7 @@ public class BasicStatsTowers : MonoBehaviour
 { 
 	//Almost none of this is correct, this is being done for now just to get other elements of the game working
 
+	public string towerType; //Type of tower
 	public int towerLevel; //Level of tower
 	public float damage; //Towers damage
 	public float attackSpeed; //Towers attack speed

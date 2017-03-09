@@ -43,7 +43,6 @@ public class SpawnEnemy : MonoBehaviour
 		gameStatusPanel = gamePlayController.gameStatusPanel; //Store our GameStatusPanel here
 		worldMapButton = gamePlayController.worldMapButton; //Store WorldMapButton in here
 		winLossLabel = gamePlayController.winLossLabel; //Store WinLossLabel in here
-		//firstWaveUnits = 5; //Make first wave start with 5 units
 	}
 
     int pick; //Used to store the enemy prefab of next wave

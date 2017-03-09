@@ -21,6 +21,10 @@ public class GamePlayController : MonoBehaviour
 	public GameObject buildTowerPanel; //Store our BuildTowerPanel in here
 	[HideInInspector] //Hide from unity inspector
 	public Button towerOneButton; //Store our TowerOneButton in here from our BuildTowerPanel
+	[HideInInspector] //Hide from unity inspector
+	public Button towerTwoButton; //Store our TowerTwoButton in here from our BuildTowerPanel
+	[HideInInspector] //Hide from unity inspector
+	public Button towerThreeButton; //Store our TowerThreeButton in here from our BuildTowerPanel
 
 	//WaveScrollView Components
 	[HideInInspector] //Hide from unity inspector
@@ -210,6 +214,8 @@ public class GamePlayController : MonoBehaviour
 		winLossLabel =  gameStatusPanel.transform.Find("WinLossLabel").GetComponent<Text>();
 
 		towerOneButton = buildTowerPanel.transform.Find ("TowerOneButton").GetComponent<Button> ();
+		towerTwoButton = buildTowerPanel.transform.Find ("TowerTwoButton").GetComponent<Button> ();
+		towerThreeButton = buildTowerPanel.transform.Find ("TowerThreeButton").GetComponent<Button> ();
 		upgradeButton = towerUpgradePanel.transform.Find ("UpgradeButton").GetComponent<Button> ();
 		fuseButton = towerUpgradePanel.transform.Find ("FuseButton").GetComponent<Button> ();
 		sellButton = towerUpgradePanel.transform.Find ("SellButton").GetComponent<Button> ();
