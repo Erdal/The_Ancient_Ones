@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpgradeTower : MonoBehaviour 
 {
-	GamePlayController gamePlayManager; //Stores our GamePlayController
+	GamePlayController gamePlayController; //Stores our GamePlayController
 
 	private GameObject towerUpgradePanel; //Store our TowerUpgradePanel in here from the GamePlayController
 	private Button upgradeButton; //Store our upgradeButton in here from the GamePlayController
@@ -17,11 +17,18 @@ public class UpgradeTower : MonoBehaviour
 	{
 		if (gameObject.GetComponent<UpgradeTower>().enabled == true) 
 		{
-			gamePlayManager.chosenObjectsName = upgradeThisTowerOnCLick; //Save the name of the newly selected BuildSpot
-			towerUpgradePanel.transform.position = GameObject.Find(gamePlayManager.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
-			gamePlayManager.buildTowerPanel.SetActive(false); //Turn off the build panel if active anywhere
+			gamePlayController.chosenObjectsName = upgradeThisTowerOnCLick; //Save the name of the newly selected BuildSpot
+			towerUpgradePanel.transform.position = GameObject.Find(gamePlayController.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
+			gamePlayController.buildTowerPanel.SetActive(false); //Turn off the build panel if active anywhere
 			upgradeButton.GetComponentInChildren<Text>().text = "Level " + (basicStatsTowers.towerLevel + 1).ToString() + ": " + basicStatsTowers.costOfUpgrade.ToString(); //Show level and cost of next upgrade on upgrade button
+			sellButton.GetComponentInChildren<Text>().text =  basicStatsTowers.sellValueOfTower.ToString(); //We want to only have 80% of the cost of the tower to be refunded
 			towerUpgradePanel.SetActive (true); //Turn panel on
+
+			upgradeButton.onClick.RemoveAllListeners (); //Remove listeners
+			fuseButton.onClick.RemoveAllListeners (); //Remove listeners
+			sellButton.onClick.RemoveAllListeners (); //Remove listeners
+
+			SetCompoinents (); //Objects need to be reset
 		}
 	}
 
@@ -29,17 +36,41 @@ public class UpgradeTower : MonoBehaviour
 	void UpgradeThisTower()
 	{
 		//If user has enough blood and the script is connected to the right tower
-		if (gamePlayManager.Blood >= basicStatsTowers.costOfUpgrade && gamePlayManager.chosenObjectsName == upgradeThisTowerOnCLick) 
+		if (gamePlayController.Blood >= basicStatsTowers.costOfUpgrade && gamePlayController.chosenObjectsName == upgradeThisTowerOnCLick) 
 		{
-			gamePlayManager.Blood -= basicStatsTowers.costOfUpgrade;
+			gamePlayController.Blood -= basicStatsTowers.costOfUpgrade;
 			basicStatsTowers.UpgradeTower();
 			towerUpgradePanel.SetActive (false);
 		} 
-		else if(gamePlayManager.Blood < basicStatsTowers.costOfUpgrade && gamePlayManager.chosenObjectsName == upgradeThisTowerOnCLick)
+		else if(gamePlayController.Blood < basicStatsTowers.costOfUpgrade && gamePlayController.chosenObjectsName == upgradeThisTowerOnCLick)
 		{
-			StartCoroutine (gamePlayManager.GameStatusCoroutine ("CAN'T UPGRADE. You need " + basicStatsTowers.costOfUpgrade + " blood to upgrade"));
+			StartCoroutine (gamePlayController.GameStatusCoroutine ("CAN'T UPGRADE. You need " + basicStatsTowers.costOfUpgrade + " blood to upgrade"));
 		}
 		upgradeButton.GetComponentInChildren<Text>().text = "Level " + (basicStatsTowers.towerLevel + 1).ToString() + ": " + basicStatsTowers.costOfUpgrade.ToString(); //Show level and cost of next upgrade on upgrade button
+		sellButton.GetComponentInChildren<Text>().text =  basicStatsTowers.sellValueOfTower.ToString(); //We want to only have 80% of the cost of the tower to be refunded
+	}
+
+	//Fuse chosen tower
+	void FuseTower()
+	{
+		Debug.Log ("1");
+	}
+
+	//Sell chosen tower
+	void SellTower()
+	{
+		if (gamePlayController.chosenObjectsName == upgradeThisTowerOnCLick) 
+		{
+			gamePlayController.Blood += basicStatsTowers.sellValueOfTower; //Refund the sellValueTower to the player
+			Destroy(GameObject.Find(upgradeThisTowerOnCLick)); //Destroy sold tower
+			PlaceTower tempPlaceTower = gameObject.GetComponent<PlaceTower>(); //Store our PlaceTower script here
+			tempPlaceTower.enabled = true; //Turn on script
+			tempPlaceTower.chosenTower = null; //Delete the tower that was attached to this build spot
+			upgradeThisTowerOnCLick = null; //Delete the tower that was attrached to the upgrade script
+			gameObject.GetComponent<UpgradeTower>().enabled = false; //Turn off upgrade script
+			gameObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite>("Sprites/Openspot"); //Give our BuildSpot a sprite again
+			towerUpgradePanel.SetActive(false); //Turn off panel
+		}
 	}
 
 	// Use this for initialization
@@ -51,14 +82,17 @@ public class UpgradeTower : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
-		gamePlayManager = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
+		gamePlayController = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Access to GamePlayController script
 		basicStatsTowers = GameObject.Find(upgradeThisTowerOnCLick).GetComponent("BasicStatsTowers") as BasicStatsTowers; //We get the BasicStats script from this unit and attach it to our varable
-		towerUpgradePanel = gamePlayManager.towerUpgradePanel; //Sets towerUpgradePanel to the towerUpgradePanel in GamePlayController, which is connected to the TowerUpgradePanel in scene
-		upgradeButton = gamePlayManager.upgradeButton; //Sets upgradeButton to the upgradeButton in GamePlayController, which is connected to the upgradeButton in scene
+		towerUpgradePanel = gamePlayController.towerUpgradePanel; //Sets towerUpgradePanel to the towerUpgradePanel in GamePlayController, which is connected to the TowerUpgradePanel in scene
+		upgradeButton = gamePlayController.upgradeButton; //Sets upgradeButton to the upgradeButton in GamePlayController, which is connected to the upgradeButton in scene
 		upgradeButton.GetComponentInChildren<Text>().text = "Upgrade: " + basicStatsTowers.costOfUpgrade.ToString(); //Show cost of next upgrade on upgrade button
 		upgradeButton.onClick.AddListener(() => {UpgradeThisTower();}); //Add a onclick method to this button for the UpgradeThisTower method
-		fuseButton = gamePlayManager.fuseButton; //Sets fuseButton to the fuseButton in GamePlayController, which is connected to the fuseButton in scene
-		sellButton = gamePlayManager.sellButton; //Sets sellButton to the sellButton in GamePlayController, which is connected to the sellButton in scene
+		fuseButton = gamePlayController.fuseButton; //Sets fuseButton to the fuseButton in GamePlayController, which is connected to the fuseButton in scene
+		fuseButton.onClick.AddListener(() => {FuseTower();}); //Add a onclick method to this button for the FuseTower method
+		sellButton = gamePlayController.sellButton; //Sets sellButton to the sellButton in GamePlayController, which is connected to the sellButton in scene
+		sellButton.GetComponentInChildren<Text>().text =  basicStatsTowers.sellValueOfTower.ToString(); //We want to only have 80% of the cost of the tower to be refunded
+		sellButton.onClick.AddListener(() => {SellTower();}); //Add a onclick method to this button for the SellTower method
 	}
 
 

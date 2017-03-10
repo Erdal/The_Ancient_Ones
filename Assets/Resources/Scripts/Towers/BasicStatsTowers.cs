@@ -14,11 +14,13 @@ public class BasicStatsTowers : MonoBehaviour
 
 	public float currentTowerValue; //Store current money spent on tower
 	public float costOfUpgrade; //Store the price of next tower upgrade
+	public float sellValueOfTower; //Store the current sell value of tower
 
 	public void UpgradeTower()
 	{
 		costOfUpgrade = currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Set new cost of upgrade
 		currentTowerValue = currentTowerValue + costOfUpgrade; //Set new value of current tower
+		sellValueOfTower = currentTowerValue * 0.8f; //Only want the sell value to be 80% of the towers current value
 		towerLevel++; //Increase tower level
 		damage = damage * 2; //Double tower damage
 		attackSpeed = attackSpeed * 2; //Double tower attack speed

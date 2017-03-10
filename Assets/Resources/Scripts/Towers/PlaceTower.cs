@@ -11,7 +11,7 @@ public class PlaceTower : MonoBehaviour
 	private Button towerOneButton; //Store our towerOneButton in here from the GamePlayController
 	private Button towerTwoButton; //Store our towerTwoButton in here from the GamePlayController
 	private Button towerThreeButton; //Store our towerThreeButton in here from the GamePlayController
-	GameObject chosenTower; //Used to store the tower the user chooses
+	public GameObject chosenTower; //Used to store the tower the user chooses
 	BasicStatsTowers basicStatsTowers; //Store the BasicStatsTowers script here to access towers stats
 
 	int clicksCounted; //Used for hack solution, preventing the auto click of a tower when place tower panel opens
@@ -19,11 +19,13 @@ public class PlaceTower : MonoBehaviour
 	//Called when object is clicked
 	void OnMouseDown()
 	{
-		clicksCounted = 0; //Set to 0 since user has opened it again for the first time
 		gamePlayManager.chosenObjectsName = gameObject.name; //Save the name of the newly selected BuildSpot
 		buildTowerPanel.transform.position = GameObject.Find(gamePlayManager.chosenObjectsName).transform.position; //Moves our upgrade panel to the center of this object
 		gamePlayManager.towerUpgradePanel.SetActive(false); //Turn off the towerUpgradePanel if just incase it is open anywhere else
 		buildTowerPanel.SetActive (true); //Turn panel on
+		towerOneButton.onClick.RemoveAllListeners(); //Remove listeners
+		towerTwoButton.onClick.RemoveAllListeners(); //Remove listeners
+		towerThreeButton.onClick.RemoveAllListeners(); //Remove listeners
 		towerOneButton.onClick.AddListener(() => {OptionOne();}); //Add a onclick method to this button for the OptionOne method
 		towerOneButton.GetComponentInChildren<Text>().text = "Tower One: 200"; //Set text
 		towerTwoButton.onClick.AddListener(() => {OptionTwo();}); //Add a onclick method to this button for the OptionTwo method
@@ -50,17 +52,23 @@ public class PlaceTower : MonoBehaviour
 			basicStatsTowers.towerLevel = 1; //Change level of tower to 1
 			gameManagerController.UpdateTowerPrefabs (tempChosenTower); //Update certain parts of the towers stats according to the current upgrades used
 			basicStatsTowers.currentTowerValue = 200; //Towers current value
-			basicStatsTowers.costOfUpgrade = 200 + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Cost of next upgrade
+			basicStatsTowers.sellValueOfTower = 160; //Towers refund value
+			basicStatsTowers.costOfUpgrade = 200 + (150 - (GamePreferences.GetFuseBloodCostDecrease () * 5)); //Cost of next upgrade
 			gamePlayManager.Blood = gamePlayManager.Blood - 200; //Take away 200 blood for building this tower
 			gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 			switchToUpgradeScript ();
+			clicksCounted = 0;
 		} 
-		else if (gamePlayManager.Blood < 200 && gamePlayManager.chosenObjectsName == gameObject.name && clicksCounted > 0)
+		else if (gamePlayManager.Blood < 200 && gamePlayManager.chosenObjectsName == gameObject.name && clicksCounted > 0) 
 		{
 			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Build TowerOne"));
+			clicksCounted = 0;
 			//TODO: Mention reason you cant build this tower
+		} 
+		else 
+		{
+			clicksCounted++; //Increase by 1
 		}
-		clicksCounted++; //Increase by 1
 	}
 
 	//Tower option two
@@ -81,18 +89,24 @@ public class PlaceTower : MonoBehaviour
 			basicStatsTowers.towerLevel = 1; //Change level of tower to 1
 			gameManagerController.UpdateTowerPrefabs (tempChosenTower); //Update certain parts of the towers stats according to the current upgrades used
 			basicStatsTowers.currentTowerValue = 250; //Towers current value
+			basicStatsTowers.sellValueOfTower = 200; //Towers refund value
 			basicStatsTowers.costOfUpgrade = 250 + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Cost of next upgrade
 			gamePlayManager.Blood = gamePlayManager.Blood - 250; //Take away 200 blood for building this tower
 			gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 			switchToUpgradeScript ();
+			clicksCounted = 0;
 		} 
 		else if (gamePlayManager.Blood < 250 && gamePlayManager.chosenObjectsName == gameObject.name && clicksCounted > 0)
 		{
 			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Build TowerTwo"));
+			clicksCounted = 0;
 			//TODO: Mention reason you cant build this tower
 		}
-
-		clicksCounted++; //Increase by 1
+		else 
+		{
+			clicksCounted++; //Increase by 1
+		}
+			
 	}
 
 	//Tower option three
@@ -113,17 +127,23 @@ public class PlaceTower : MonoBehaviour
 			basicStatsTowers.towerLevel = 1; //Change level of tower to 1
 			gameManagerController.UpdateTowerPrefabs (tempChosenTower); //Update certain parts of the towers stats according to the current upgrades used
 			basicStatsTowers.currentTowerValue = 300; //Towers current value
+			basicStatsTowers.sellValueOfTower = 240; //Towers refund value
 			basicStatsTowers.costOfUpgrade = 300 + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Cost of next upgrade
 			gamePlayManager.Blood = gamePlayManager.Blood - 300; //Take away 200 blood for building this tower
 			gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 			switchToUpgradeScript ();
+			clicksCounted = 0;
 		} 
 		else if (gamePlayManager.Blood < 300 && gamePlayManager.chosenObjectsName == gameObject.name && clicksCounted > 0)
 		{
 			StartCoroutine (gamePlayManager.GameStatusCoroutine ("Can't Build TowerThree"));
+			clicksCounted = 0;
 			//TODO: Mention reason you cant build this tower
 		}
-		clicksCounted++; //Increase by 1
+		else 
+		{
+			clicksCounted++; //Increase by 1
+		}
 	}
 
 	//Turn off "PlaceTower" script and turn on "UpgradeTower" script

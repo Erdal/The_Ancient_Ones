@@ -223,7 +223,7 @@ public class GamePlayController : MonoBehaviour
 		worldMapButton = gameStatusPanel.transform.Find ("WorldMapButton").GetComponent<Button> ();
 
 		//Set in game components
-		Blood = 300 + ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()); //Here we add on the amount of extra blood the player gets for unspent upgrade tons
+		Blood = 3000 + ((GamePreferences.GetBloodGainedValueIncrease() + 5) * GamePreferences.GetUnspentTons()); //Here we add on the amount of extra blood the player gets for unspent upgrade tons
 		XpBlood = 0;
 		Lives = 25;
 		Wave = 0;
