@@ -23,6 +23,7 @@ public class BasicStatsTowers : MonoBehaviour
 		{
 			costOfUpgrade = currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Set new cost of upgrade
 		}
+
 		currentTowerValue += costOfUpgrade; //Set new value of current tower
 		costOfUpgrade = currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Set new cost of upgrade
 		sellValueOfTower = currentTowerValue * 0.8f; //Only want the sell value to be 80% of the towers current value

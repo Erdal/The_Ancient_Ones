@@ -21,6 +21,15 @@ public static class HoverDescriptions
 	public static string FuseBloodCostDecreaseDescription = "FuseBloodCostDecreaseDescription";
 	public static string BloodGainedValueIncreaseDescription = "BloodGainedValueIncreaseDescription";
 
+	//GamePlay Scene Description
+	//
+	//Basic
+	public static string BloodLabelDescription = "BloodLabelDescription";
+	public static string XPBloodLabelDescription = "XPBloodLabelDescription";
+	public static string WaveLabelDescription = "WaveLabelDescription";
+	public static string UnitsLeftLabelDescription = "UnitsLeftLabelDescription";
+	public static string LivesLabelDescription = "LivesLabelDescription";
+
 	//All Purpose Descriptions Getters and Setters
 	//
 	public static void SetWorldMapButtonDescription()
@@ -135,6 +144,59 @@ public static class HoverDescriptions
 		return PlayerPrefs.GetString (HoverDescriptions.BloodGainedValueIncreaseDescription);
 	}
 
+	//GamePlay Scene Description Getters and Setters
+	//
+	//Basic
+	public static void SetBloodLabelDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.BloodLabelDescription, "BloodLabelDescription");
+	}
+
+	public static string GetBloodLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.BloodLabelDescription);
+	}
+
+	public static void SetXPBloodLabelDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.XPBloodLabelDescription, "XPBloodLabelDescription");
+	}
+
+	public static string GetXPBloodLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.XPBloodLabelDescription);
+	}
+
+	public static void SetWaveLabelDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.WaveLabelDescription, "WaveLabelDescription");
+	}
+
+	public static string GetWaveLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.WaveLabelDescription);
+	}
+
+	public static void SetUnitsLeftLabelDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.UnitsLeftLabelDescription, "UnitsLeftLabelDescription");
+	}
+
+	public static string GetUnitsLeftLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.UnitsLeftLabelDescription);
+	}
+
+	public static void SetLivesLabelDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.LivesLabelDescription, "LivesLabelDescription");
+	}
+
+	public static string GetLivesLabelDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.LivesLabelDescription);
+	}
+
 	//Set all descriptions
 	public static void SetAllDescription()
 	{
@@ -155,5 +217,14 @@ public static class HoverDescriptions
 		SetBloodXpIncreaseDescription ();
 		SetFuseBloodCostDecreaseDescription ();
 		SetBloodGainedValueIncreaseDescription ();
+
+		//GamePlay Scene Description
+		//
+		//Basic
+		SetBloodLabelDescription();
+		SetXPBloodLabelDescription ();
+		SetWaveLabelDescription ();
+		SetUnitsLeftLabelDescription ();
+		SetLivesLabelDescription ();
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using System.Reflection;
 
 public class GamePlayController : MonoBehaviour
 {
@@ -63,8 +64,16 @@ public class GamePlayController : MonoBehaviour
 	[HideInInspector] //Hide from unity inspector
     public bool gameOver = false; //store whether the player has lost the game.
 
+	//OnHoverPanel
+	[HideInInspector] //Hide from unity inspector
+	public GameObject onHoverPanel; //Store our OnHoverPanel here
+	[HideInInspector] //Hide from unity inspector
+	public Text onHoverText; //Store our OnHoverText from our OnHoverPanel here
+
 	[HideInInspector] //Hide from unity inspector
 	public int enemyUnitsLeft; //Store how many enemy units are left
+
+	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
 
 	//This method allows the user to open or close the scrollview with our future waves in it.
 	public void OpenOrCloseWaveScrollView()
@@ -199,12 +208,14 @@ public class GamePlayController : MonoBehaviour
 	//Set our varable compoinents
 	void SetCompoinents()
 	{
+		prefTypeHoverDescription = typeof(HoverDescriptions); //Get type of class HoverDescriptions
 
 		//Set Components (Decription up at top of class)
 		towerUpgradePanel = GameObject.Find ("Canvas").transform.Find("TowerUpgradePanel").gameObject;
 		buildTowerPanel = GameObject.Find ("Canvas").transform.Find("BuildTowerPanel").gameObject;
 		waveScrollView = GameObject.Find ("Canvas").transform.Find("WaveScrollView").gameObject;
 		gameStatusPanel = GameObject.Find ("Canvas").transform.Find("GameStatusPanel").gameObject;
+		onHoverPanel = GameObject.Find ("Canvas").transform.Find ("OnHoverPanel").gameObject;
 
 		bloodLabel =  GameObject.Find ("Canvas").transform.Find("BloodLabel").GetComponent<Text>();
 		waveLabel =  GameObject.Find ("Canvas").transform.Find("WaveLabel").GetComponent<Text>();
@@ -212,6 +223,7 @@ public class GamePlayController : MonoBehaviour
 		gameStatusLabel =  GameObject.Find ("Canvas").transform.Find("GameStatusLabel").GetComponent<Text>();
 		livesLabel =  GameObject.Find ("Canvas").transform.Find("LivesLabel").GetComponent<Text>();
 		winLossLabel =  gameStatusPanel.transform.Find("WinLossLabel").GetComponent<Text>();
+		onHoverText =  onHoverPanel.transform.Find("OnHoverText").GetComponent<Text>();
 
 		towerOneButton = buildTowerPanel.transform.Find ("TowerOneButton").GetComponent<Button> ();
 		towerTwoButton = buildTowerPanel.transform.Find ("TowerTwoButton").GetComponent<Button> ();
@@ -239,5 +251,17 @@ public class GamePlayController : MonoBehaviour
 	void Update()
     {
 	
+	}
+
+	public void OnHoverObjectDescription(string objectName)
+	{
+		MethodInfo methodInfoGet = prefTypeHoverDescription.GetMethod ("Get" + objectName + "Description"); //Get this method by name
+		onHoverText.text = methodInfoGet.Invoke (null, null).ToString(); //Invoke method and use its return as the text for onHoverText
+		onHoverPanel.gameObject.SetActive (true); //Turn on our panel
+	}
+
+	public void OffHoverObjectDescription()
+	{
+		onHoverPanel.gameObject.SetActive (false);
 	}
 }
