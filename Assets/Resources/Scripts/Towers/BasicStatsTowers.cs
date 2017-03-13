@@ -18,8 +18,13 @@ public class BasicStatsTowers : MonoBehaviour
 
 	public void UpgradeTower()
 	{
+		//If the cost of the next upgrade is incorrect (This should never happen. but its a fall back if it does)
+		if(costOfUpgrade != (currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5))))
+		{
+			costOfUpgrade = currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Set new cost of upgrade
+		}
+		currentTowerValue += costOfUpgrade; //Set new value of current tower
 		costOfUpgrade = currentTowerValue + (150 - (GamePreferences.GetFuseBloodCostDecrease() * 5)); //Set new cost of upgrade
-		currentTowerValue = currentTowerValue + costOfUpgrade; //Set new value of current tower
 		sellValueOfTower = currentTowerValue * 0.8f; //Only want the sell value to be 80% of the towers current value
 		towerLevel++; //Increase tower level
 		damage = damage * 2; //Double tower damage
