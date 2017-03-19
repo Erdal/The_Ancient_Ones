@@ -187,6 +187,9 @@ public class GamePlayController : MonoBehaviour
 			newText [0].text = "Wave: " + (wave + 1 + i); //Here we change the WaveText text field
 			newText [1].text = "Units: " + SpawnEnemy.waves [wave + i]._maxEnemies.ToString (); //Here we change the UnitText text field
 			tempWaveButton.SetActive (true); //Turn the wave button on
+
+			GameObject tempBreedButton =  waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("BreedWaitingWaveButton_" + i).gameObject; //Store this breed button as a gameobject
+			tempBreedButton.SetActive (true); //Turn the breed button on
 		}
 	}
 

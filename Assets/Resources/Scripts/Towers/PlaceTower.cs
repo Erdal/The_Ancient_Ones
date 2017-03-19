@@ -34,6 +34,11 @@ public class PlaceTower : MonoBehaviour
 		towerThreeButton.GetComponentInChildren<Text>().text = "Tower Three: 300"; //Set text
 	}
 
+	void OnMouseExit()
+	{
+		clicksCounted = 0;
+	}
+
 	//Tower option one
 	void OptionOne()
 	{
