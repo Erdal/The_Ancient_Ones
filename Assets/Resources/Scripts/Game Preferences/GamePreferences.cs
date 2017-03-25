@@ -25,6 +25,7 @@ public static class GamePreferences
 	public static string BloodIncrease = "BloodIncrease";
 	public static string BloodXpIncrease = "BloodXpIncrease";
 	public static string FuseBloodCostDecrease = "FuseBloodCostDecrease";
+	public static string BreedUnitAmountIncrease = "BreedUnitAmountIncrease";
 
 	//Region/Map Won
 	//
@@ -189,6 +190,17 @@ public static class GamePreferences
 		return PlayerPrefs.GetInt (GamePreferences.FuseBloodCostDecrease);
 	}
 
+	public static void SetBreedUnitAmountIncrease(int level)
+	{
+		PlayerPrefs.SetInt (GamePreferences.BreedUnitAmountIncrease, level);
+		HoverDescriptions.SetBreedUnitAmountIncreaseDescription ();
+	}
+
+	public static int GetBreedUnitAmountIncrease()
+	{
+		return PlayerPrefs.GetInt (GamePreferences.BreedUnitAmountIncrease);
+	}
+
 	//Region/Map Won Getters and Setters
 	//
 	public static void SetBoolMap1_1Won(int yesNo)
@@ -238,6 +250,7 @@ public static class GamePreferences
 		SetBloodIncrease (0);
 		SetBloodXpIncrease (0);
 		SetFuseBloodCostDecrease (0);
+		SetBreedUnitAmountIncrease (0);
 
 		//Region/Map Won
 		//

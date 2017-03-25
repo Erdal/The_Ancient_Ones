@@ -18,7 +18,7 @@ public class BreedButtonScript : MonoBehaviour
 	//Calculate cost
 	void CalculateCostOfBreeding()
 	{
-		amountToBreedBy = 1;
+		amountToBreedBy = 1 + GamePreferences.GetBreedUnitAmountIncrease (); //Here we add 1 plus the level of this upgrade to determine how many units the wave we are breeding will increase by
 		//TODO: Add an upgrade to effect the cost of CostOfBreeding then connect it to the line of code below (Maybe)
 		costOfBreeding = amountToBreedBy * SpawnEnemy.waves [waveNumber]._unitBloodValue; //Cost of breeding will be the amount we can breed by mulitiplied by the blood value of a single unit in this wave
 	}

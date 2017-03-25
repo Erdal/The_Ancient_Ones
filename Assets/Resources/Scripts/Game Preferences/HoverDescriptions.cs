@@ -20,6 +20,7 @@ public static class HoverDescriptions
 	public static string BloodXpIncreaseDescription = "BloodXpIncreaseDescription";
 	public static string FuseBloodCostDecreaseDescription = "FuseBloodCostDecreaseDescription";
 	public static string BloodGainedValueIncreaseDescription = "BloodGainedValueIncreaseDescription";
+	public static string BreedUnitAmountIncreaseDescription = "BreedUnitAmountIncreaseDescription";
 
 	//GamePlay Scene Description
 	//
@@ -144,6 +145,16 @@ public static class HoverDescriptions
 		return PlayerPrefs.GetString (HoverDescriptions.BloodGainedValueIncreaseDescription);
 	}
 
+	public static void SetBreedUnitAmountIncreaseDescription()
+	{
+		PlayerPrefs.SetString (HoverDescriptions.BreedUnitAmountIncreaseDescription, "Each upgrade increase the amount in which the units of a wave will increase everytime you breed it by 1. Every time you breed a wave it will add " + (1 + GamePreferences.GetBreedUnitAmountIncrease())+ " units to that wave as well as increase its stats." );
+	}
+
+	public static string GetBreedUnitAmountIncreaseDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.BreedUnitAmountIncreaseDescription);
+	}
+
 	//GamePlay Scene Description Getters and Setters
 	//
 	//Basic
@@ -217,6 +228,7 @@ public static class HoverDescriptions
 		SetBloodXpIncreaseDescription ();
 		SetFuseBloodCostDecreaseDescription ();
 		SetBloodGainedValueIncreaseDescription ();
+		SetBreedUnitAmountIncreaseDescription ();
 
 		//GamePlay Scene Description
 		//

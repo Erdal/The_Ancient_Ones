@@ -21,7 +21,7 @@ public class UpgradeController : MonoBehaviour
 	
 	Type prefTypeGamePreferences; //Used to store the GamePreferences class we wish to connect to using MethodInfo class
 	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
-	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease", "FuseBloodCostDecrease", "BloodGainedValueIncrease"}; //Used to store the names of our upgrades
+	string[] namesOfUpgrades = {"BasicDamageIncrease", "BasicAttackSpeedIncrease", "BasicRangeIncrease", "BloodIncrease", "BloodXpIncrease", "FuseBloodCostDecrease", "BloodGainedValueIncrease", "BreedUnitAmountIncrease"}; //Used to store the names of our upgrades
 	
 	// Use this for initialization
 	void Start () 
