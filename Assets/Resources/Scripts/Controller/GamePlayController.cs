@@ -158,7 +158,7 @@ public class GamePlayController : MonoBehaviour
         }
     }
 
-	void SetWaveScrollView()
+	public void SetWaveScrollView()
 	{
 		int setBreedAndWaveButtons = 0; //Used to tell us how many wave buttons and breed buttons can be turned on
 

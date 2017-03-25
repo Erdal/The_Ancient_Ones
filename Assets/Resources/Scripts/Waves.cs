@@ -65,7 +65,6 @@ public class Waves : MonoBehaviour
 	//Spent danger points to change unit stats
 	void ChangingNewEnemyStats()
     {
-		Debug.Log (dangerPoints.ToString ());
 		ChangingStats(true);
 		dangerPoints = dangerPoints * 1.20f; //Increase the danger rate by 20% for the next match
 		SetWaveStats ();
@@ -94,7 +93,7 @@ public class Waves : MonoBehaviour
 	void ChangingStats(bool NewWave)
 	{
 		float tempDangerPoints = dangerPoints;
-		Debug.Log (tempDangerPoints.ToString () + " Nice");
+
 		if (NewWave == true) 
 		{
 			enemyPrefabs = GameObject.Find("GameManagerController").GetComponent<EnemyPrefabs> (); //Store the EnemtPrefabs script from this object into this varable

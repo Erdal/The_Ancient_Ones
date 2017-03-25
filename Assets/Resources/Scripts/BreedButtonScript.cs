@@ -13,14 +13,12 @@ public class BreedButtonScript : MonoBehaviour
 	void Start()
 	{
 		gamePlayController = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
-
-		//TODO: Connect the amountToBreedBy varable with an upgrade
-		CalculateCostOfBreeding(); //Calculate cost
 	}
 
 	//Calculate cost
 	void CalculateCostOfBreeding()
 	{
+		amountToBreedBy = 1;
 		//TODO: Add an upgrade to effect the cost of CostOfBreeding then connect it to the line of code below (Maybe)
 		costOfBreeding = amountToBreedBy * SpawnEnemy.waves [waveNumber]._unitBloodValue; //Cost of breeding will be the amount we can breed by mulitiplied by the blood value of a single unit in this wave
 	}
@@ -28,6 +26,9 @@ public class BreedButtonScript : MonoBehaviour
 	//Adding units if there is enough blood
 	public void IncreaseUnitsInWave()
 	{
+		//TODO: Connect the amountToBreedBy varable with an upgrade
+		CalculateCostOfBreeding(); //Calculate cost
+
 		//If user has enough blood
 		if (gamePlayController.Blood >= costOfBreeding) 
 		{
@@ -35,9 +36,11 @@ public class BreedButtonScript : MonoBehaviour
 			SpawnEnemy.waves [waveNumber]._maxEnemies += amountToBreedBy; //Increase wave units total
 			float tempExtraDangerRating = SpawnEnemy.waves [waveNumber]._unitBloodValue * 0.2f; //So here we want to grab 20% of the current danger rating (Danger rating should be the same number as blood value)
 			Waves.instance.ChangingOldEnemyStats (waveNumber, tempExtraDangerRating); //We send through the unit we want to change and the extra damage rating we are adding
-		} else 
+			gamePlayController.SetWaveScrollView(); //Re-set the buttons in our wave scroll view
+		} 
+		else 
 		{
-			//TODO: If user does not have enough blood
+			StartCoroutine (gamePlayController.GameStatusCoroutine ("Can't afford to breed")); //Let the user know they couldnt breed the wave
 		}
 	}
 
