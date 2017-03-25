@@ -160,27 +160,30 @@ public class GamePlayController : MonoBehaviour
 
 	void SetWaveScrollView()
 	{
-		int setWaveButtons = 0; //Used to tell us how many wave buttons can be turned on
+		int setBreedAndWaveButtons = 0; //Used to tell us how many wave buttons and breed buttons can be turned on
 
-		//Used to turn all of our wave buttons off
+		//Used to turn all of our wave and breed buttons off
 		for (int i = 1; i < 11; i++) 
 		{
 			GameObject tempWaveButton = waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("WaveWaitingButton_" + i).gameObject;
 			tempWaveButton.SetActive (false);
+
+			GameObject tempBreedButton = waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("BreedWaitingWaveButton_" + i).gameObject;
+			tempBreedButton.SetActive (false);
 		}
 
 		//If there are more then 10 waves left
 		if ((maxWaves - wave) > 10) 
 		{
-			setWaveButtons = 10; //Turn on all wave buttons
+			setBreedAndWaveButtons = 10; //Turn on all wave buttons
 		} 
 		else 
 		{
-			setWaveButtons = maxWaves - wave; //Turn on only the amount we need
+			setBreedAndWaveButtons = maxWaves - wave; //Turn on only the amount we need
 		}
 
 		//Turn on wave buttons and set there components
-		for (int i = 1; i < setWaveButtons; i++) 
+		for (int i = 1; i < setBreedAndWaveButtons; i++) 
 		{
 			GameObject tempWaveButton = waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("WaveWaitingButton_" + i).gameObject; //Store this wave button as a gameobject
 			Text [] newText = tempWaveButton.transform.GetComponentsInChildren<Text>(); //Store our 2 text components
@@ -189,6 +192,7 @@ public class GamePlayController : MonoBehaviour
 			tempWaveButton.SetActive (true); //Turn the wave button on
 
 			GameObject tempBreedButton =  waveScrollView.transform.FindChild ("Viewport").transform.FindChild ("Content").transform.FindChild ("BreedWaitingWaveButton_" + i).gameObject; //Store this breed button as a gameobject
+			tempBreedButton.GetComponent<BreedButtonScript>().waveNumber = wave + i; //Save the wave this breed button will now belong too
 			tempBreedButton.SetActive (true); //Turn the breed button on
 		}
 	}

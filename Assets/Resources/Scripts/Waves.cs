@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Waves : MonoBehaviour
 {
+	public static Waves instance;
+	
 	protected GameObject enemyPrefab; //Here we store the enemy prefab for this wave
 	BasicStatsEnemies tempEnemyBasicStatsEnemies;
     protected float spawnInterval; //The time between enemies in the wave in seconds
@@ -20,24 +22,34 @@ public class Waves : MonoBehaviour
     private int speedCost = 10; //Cost of speed
     private int armourCost = 5; //Cost of armour
 
+	private EnemyPrefabs enemyPrefabs; //To Store the EnemyPrefabs class
+
 	public Waves(GameObject EnemyPrefab, float SpawnInterval, int MaxEnemies)
     {
+		MakeInstance ();
+
 		enemyPrefab = EnemyPrefab;
         spawnInterval = SpawnInterval;
         maxEnemies = MaxEnemies;
 
 		tempEnemyBasicStatsEnemies = enemyPrefab.GetComponent<BasicStatsEnemies> ();
 
-		ChangingEnemyStats ();
-		SetWaveStats ();
-
-		//Reset to basic stats for next generated wave
-		tempEnemyBasicStatsEnemies.health = 5;
-		tempEnemyBasicStatsEnemies.speed = 1;
-		tempEnemyBasicStatsEnemies.armour = 0;
-		tempEnemyBasicStatsEnemies.bloodValue = 0;
-		tempEnemyBasicStatsEnemies.xpBloodValue = 0;
+		ChangingNewEnemyStats ();
+		//SetWaveStats ();
     }
+
+	void Awake()
+	{
+		MakeInstance ();
+	}
+
+	void MakeInstance()
+	{
+		if (instance == null) 
+		{
+			instance = this;
+		}
+	}
 
 	//Set this waves stats for the unit for this wave
 	void SetWaveStats()
@@ -51,9 +63,45 @@ public class Waves : MonoBehaviour
 	}
 
 	//Spent danger points to change unit stats
-	void ChangingEnemyStats()
+	void ChangingNewEnemyStats()
     {
+		Debug.Log (dangerPoints.ToString ());
+		ChangingStats(true);
+		dangerPoints = dangerPoints * 1.20f; //Increase the danger rate by 20% for the next match
+		SetWaveStats ();
+    }
+
+	public void ChangingOldEnemyStats(int WaveNumber, float DangerRating)
+	{
+		enemyPrefab = SpawnEnemy.waves[WaveNumber]._enemyPrefab; //Make this the new enemy prefab
+		dangerPoints = DangerRating; //Make this the new dangerPoints to spend
+		tempEnemyBasicStatsEnemies = enemyPrefab.GetComponent<BasicStatsEnemies> (); //Grab the correct script to change
+		tempEnemyBasicStatsEnemies.health = SpawnEnemy.waves[WaveNumber]._unitHealth; //Set the current health of this unit
+		tempEnemyBasicStatsEnemies.speed = SpawnEnemy.waves[WaveNumber]._unitSpeed; //Set the current speed of this unit
+		tempEnemyBasicStatsEnemies.armour = SpawnEnemy.waves[WaveNumber]._unitArmour;  //Set the current armour of this unit
+		tempEnemyBasicStatsEnemies.bloodValue = SpawnEnemy.waves[WaveNumber]._unitBloodValue;  //Set the current bloodValue of this unit
+		tempEnemyBasicStatsEnemies.xpBloodValue = SpawnEnemy.waves[WaveNumber]._unitXpBloodValue;  //Set the current xpBloodValue of this unit
+		ChangingStats (false);
+
+		//Set this wave new stats
+		SpawnEnemy.waves[WaveNumber]._unitHealth = tempEnemyBasicStatsEnemies.health;
+		SpawnEnemy.waves[WaveNumber]._unitSpeed = tempEnemyBasicStatsEnemies.speed;
+		SpawnEnemy.waves[WaveNumber]._unitArmour = tempEnemyBasicStatsEnemies.armour;
+		SpawnEnemy.waves[WaveNumber]._unitBloodValue = (tempEnemyBasicStatsEnemies.health + (tempEnemyBasicStatsEnemies.speed * 10) + (tempEnemyBasicStatsEnemies.armour * 5)) * ((GamePreferences.GetBloodIncrease() * 0.05f) + 1);
+		SpawnEnemy.waves[WaveNumber]._unitXpBloodValue = ((tempEnemyBasicStatsEnemies.health / 10) + (tempEnemyBasicStatsEnemies.speed) + (tempEnemyBasicStatsEnemies.armour / 2)) * ((GamePreferences.GetBloodXpIncrease() * 0.05f) + 1);
+	}
+
+	void ChangingStats(bool NewWave)
+	{
 		float tempDangerPoints = dangerPoints;
+		Debug.Log (tempDangerPoints.ToString () + " Nice");
+		if (NewWave == true) 
+		{
+			enemyPrefabs = GameObject.Find("GameManagerController").GetComponent<EnemyPrefabs> (); //Store the EnemtPrefabs script from this object into this varable
+			enemyPrefabs.ChangeAllPrefabsStats(5, 1, 0); //Changing all prefabs stats
+			tempDangerPoints -= 15; //Take away points
+		}
+
 		while (tempDangerPoints > 0) 
 		{
 			int tempPick = Random.Range(0, 4); //Choose a stat to change
@@ -85,8 +133,7 @@ public class Waves : MonoBehaviour
 				//Debug.Log ("Speed " + tempDangerPoints);
 			}
 		}
-		dangerPoints = dangerPoints * 1.20f; //Increase the danger rate by 15% for the next match
-    }
+	}
 
     //Getter and Setter
     public GameObject _enemyPrefab

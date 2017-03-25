@@ -16,8 +16,8 @@ public class GameManagerController : MonoBehaviour
 	void Start() 
 	{
 		SetCompoinents (); //Set our varable compoinents
-		GamePreferences.ResetGame();
-		GamePreferences.SetPlayerLevel (10);
+		GamePreferences.ResetGame(); //TODO: Delete later
+		GamePreferences.SetPlayerLevel (10); //TODO: Delete later
 	}
 
 	//Set our varable compoinents

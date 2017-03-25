@@ -53,7 +53,10 @@ public class UpgradeTower : MonoBehaviour
 	//Fuse chosen tower
 	void FuseTower()
 	{
-		Debug.Log ("1");
+		if (gamePlayController.chosenObjectsName == upgradeThisTowerOnCLick) 
+		{
+			Debug.Log ("1");
+		}
 	}
 
 	//Sell chosen tower

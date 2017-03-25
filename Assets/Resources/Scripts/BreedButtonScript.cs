@@ -3,35 +3,53 @@ using System.Collections;
 
 public class BreedButtonScript : MonoBehaviour 
 {
-	// Use this for initialization
-	void Start () 
+	public int waveNumber; //Store the wave this breed button works for
+	int amountToBreedBy; //Store the amount of units we will breed for an enemy wave
+	float costOfBreeding; //Store the cost of breeding the wave connected to this button
+
+	private GamePlayController gamePlayController; //Store GamePlayController script in here
+
+	//On start up this is called
+	void Start()
 	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
+		gamePlayController = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+
+		//TODO: Connect the amountToBreedBy varable with an upgrade
+		CalculateCostOfBreeding(); //Calculate cost
 	}
 
-	void OnMouseEnter()
+	//Calculate cost
+	void CalculateCostOfBreeding()
 	{
-		Debug.Log ("ENTER");
+		//TODO: Add an upgrade to effect the cost of CostOfBreeding then connect it to the line of code below (Maybe)
+		costOfBreeding = amountToBreedBy * SpawnEnemy.waves [waveNumber]._unitBloodValue; //Cost of breeding will be the amount we can breed by mulitiplied by the blood value of a single unit in this wave
 	}
 
-	void OnMouseExit()
+	//Adding units if there is enough blood
+	public void IncreaseUnitsInWave()
 	{
-		Debug.Log ("EXIT");
+		//If user has enough blood
+		if (gamePlayController.Blood >= costOfBreeding) 
+		{
+			gamePlayController.Blood -= costOfBreeding; //Take away the cost of breeding from users blood
+			SpawnEnemy.waves [waveNumber]._maxEnemies += amountToBreedBy; //Increase wave units total
+			float tempExtraDangerRating = SpawnEnemy.waves [waveNumber]._unitBloodValue * 0.2f; //So here we want to grab 20% of the current danger rating (Danger rating should be the same number as blood value)
+			Waves.instance.ChangingOldEnemyStats (waveNumber, tempExtraDangerRating); //We send through the unit we want to change and the extra damage rating we are adding
+		} else 
+		{
+			//TODO: If user does not have enough blood
+		}
 	}
 
-	void OnMouseDown()
+	//On hover for breed buttons
+	public void OnHoverObjectDescription(string objectName)
 	{
-		Debug.Log ("DOWN");
+		//TODO: connect this hover description for our breed buttons
 	}
 
-	void OnMouseUp()
+	//Off hover for breed buttons
+	public void OffHoverObjectDescription()
 	{
-		Debug.Log ("UP");
+		//TODO: Turn off our hover panel
 	}
 }
