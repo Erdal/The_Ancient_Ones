@@ -1,18 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Reflection;
+using UnityEngine.UI;
 
 public class BreedButtonScript : MonoBehaviour 
 {
+	//OnHoverPanel
+	public GameObject onHoverPanel; //Store our OnHoverPanel here
+	public Text onHoverText; //Store our OnHoverText from our OnHoverPanel here
+	
 	public int waveNumber; //Store the wave this breed button works for
 	int amountToBreedBy; //Store the amount of units we will breed for an enemy wave
 	float costOfBreeding; //Store the cost of breeding the wave connected to this button
 
 	private GamePlayController gamePlayController; //Store GamePlayController script in here
+	Type prefTypeHoverDescription; //Used to store the HoverDescriptions class we wish to connect to using MethodInfo class
 
 	//On start up this is called
 	void Start()
 	{
 		gamePlayController = GameObject.Find("GamePlayController").GetComponent<GamePlayController>(); //Connecting the gameManager to the GamePlayController component
+		prefTypeHoverDescription = typeof(HoverDescriptions); //Get type of class HoverDescriptions
+		onHoverPanel = gamePlayController.onHoverPanel;
+		onHoverText = gamePlayController.onHoverText;
 	}
 
 	//Calculate cost
@@ -37,6 +48,7 @@ public class BreedButtonScript : MonoBehaviour
 			float tempExtraDangerRating = SpawnEnemy.waves [waveNumber]._unitBloodValue * 0.2f; //So here we want to grab 20% of the current danger rating (Danger rating should be the same number as blood value)
 			Waves.instance.ChangingOldEnemyStats (waveNumber, tempExtraDangerRating); //We send through the unit we want to change and the extra damage rating we are adding
 			gamePlayController.SetWaveScrollView(); //Re-set the buttons in our wave scroll view
+			OnHoverObjectDescription("BreedButton"); //Update the on hover that will currently be open
 		} 
 		else 
 		{
@@ -47,12 +59,15 @@ public class BreedButtonScript : MonoBehaviour
 	//On hover for breed buttons
 	public void OnHoverObjectDescription(string objectName)
 	{
-		//TODO: connect this hover description for our breed buttons
+		HoverDescriptions.SetBreedButtonDescription (waveNumber); //Update description
+		MethodInfo methodInfoGet = prefTypeHoverDescription.GetMethod ("Get" + objectName + "Description"); //Get this method by name
+		onHoverText.text = methodInfoGet.Invoke (null, null).ToString(); //Invoke method and use its return as the text for onHoverText
+		onHoverPanel.gameObject.SetActive (true); //Turn on our panel
 	}
 
 	//Off hover for breed buttons
 	public void OffHoverObjectDescription()
 	{
-		//TODO: Turn off our hover panel
+		onHoverPanel.gameObject.SetActive (false); //Turn panel off
 	}
 }

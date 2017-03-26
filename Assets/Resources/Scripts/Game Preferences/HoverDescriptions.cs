@@ -31,6 +31,10 @@ public static class HoverDescriptions
 	public static string UnitsLeftLabelDescription = "UnitsLeftLabelDescription";
 	public static string LivesLabelDescription = "LivesLabelDescription";
 
+	//Wave ScrollView
+	//
+	public static string BreedButtonDescription = "BreedButtonDescription";
+
 	//All Purpose Descriptions Getters and Setters
 	//
 	public static void SetWorldMapButtonDescription()
@@ -160,7 +164,7 @@ public static class HoverDescriptions
 	//Basic
 	public static void SetBloodLabelDescription()
 	{
-		PlayerPrefs.SetString (HoverDescriptions.BloodLabelDescription, "BloodLabelDescription");
+		PlayerPrefs.SetString (HoverDescriptions.BloodLabelDescription, "This is the blood you have that you can spend in this game, buy towers, breed units, no matter what you do make sure to spend your money carfully");
 	}
 
 	public static string GetBloodLabelDescription()
@@ -170,7 +174,7 @@ public static class HoverDescriptions
 
 	public static void SetXPBloodLabelDescription()
 	{
-		PlayerPrefs.SetString (HoverDescriptions.XPBloodLabelDescription, "XPBloodLabelDescription");
+		PlayerPrefs.SetString (HoverDescriptions.XPBloodLabelDescription, "This is the amount of blood you get to keep after this game, it will go towards you leveling up");
 	}
 
 	public static string GetXPBloodLabelDescription()
@@ -180,7 +184,7 @@ public static class HoverDescriptions
 
 	public static void SetWaveLabelDescription()
 	{
-		PlayerPrefs.SetString (HoverDescriptions.WaveLabelDescription, "WaveLabelDescription");
+		PlayerPrefs.SetString (HoverDescriptions.WaveLabelDescription, "This is the current wave you are fighting, keep going and see how far you can go!");
 	}
 
 	public static string GetWaveLabelDescription()
@@ -190,7 +194,7 @@ public static class HoverDescriptions
 
 	public static void SetUnitsLeftLabelDescription()
 	{
-		PlayerPrefs.SetString (HoverDescriptions.UnitsLeftLabelDescription, "UnitsLeftLabelDescription");
+		PlayerPrefs.SetString (HoverDescriptions.UnitsLeftLabelDescription, "This is how many units are left in this wave, kill them all before they kill you and your bretheren");
 	}
 
 	public static string GetUnitsLeftLabelDescription()
@@ -200,12 +204,26 @@ public static class HoverDescriptions
 
 	public static void SetLivesLabelDescription()
 	{
-		PlayerPrefs.SetString (HoverDescriptions.LivesLabelDescription, "LivesLabelDescription");
+		PlayerPrefs.SetString (HoverDescriptions.LivesLabelDescription, "This is how many lives you have left, if you lose all your lives you will lose the game");
 	}
 
 	public static string GetLivesLabelDescription()
 	{
 		return PlayerPrefs.GetString (HoverDescriptions.LivesLabelDescription);
+	}
+
+	//Wave ScrollView
+	//
+	public static void SetBreedButtonDescription(int waveNumber)
+	{
+		float tempBattleRating = SpawnEnemy.waves [waveNumber]._unitBloodValue;
+		float tempNewBattleRating = (tempBattleRating * 0.2f) + tempBattleRating;
+		PlayerPrefs.SetString (HoverDescriptions.BreedButtonDescription, "You can breed wave " + (waveNumber + 1) + " for " + (tempBattleRating * (GamePreferences.GetBreedUnitAmountIncrease() + 1)) + " blood. If you breed this wave you will increase its forces from " + SpawnEnemy.waves [waveNumber]._maxEnemies + " to " + (SpawnEnemy.waves [waveNumber]._maxEnemies + (GamePreferences.GetBreedUnitAmountIncrease() + 1)) + " and increase its battle rating from " + tempBattleRating + " to " + tempNewBattleRating);
+	}
+
+	public static string GetBreedButtonDescription()
+	{
+		return PlayerPrefs.GetString (HoverDescriptions.BreedButtonDescription);
 	}
 
 	//Set all descriptions
@@ -238,5 +256,9 @@ public static class HoverDescriptions
 		SetWaveLabelDescription ();
 		SetUnitsLeftLabelDescription ();
 		SetLivesLabelDescription ();
+
+		//Wave ScrollView
+		//
+		//SetBreedButtonDescription(); //I Dont think this needs to be reset?
 	}
 }
